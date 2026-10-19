@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sahil Builds</title>
+<meta name="description" content="Custom rewards and affiliate websites for casino and gaming streamers: live leaderboards, Discord login, coin economies, admin panels and games.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a streamer's broadcast night. Deep violet ground, prize-gold accent, a live leaderboard as the hero. Single deliberate dark look. */
+:root{
+  --bg:#110D1F; --bg-2:#171229; --surface:#1D1733; --surface-2:#241C3F; --line:#2D2549;
+  --fg:#F3F0FA; --muted:#ABA3C4; --dim:#80789B;
+  --gold:#F5BE4F; --gold-hi:#FFD98A; --gold-ink:#1A1206; --coral:#FF7A66; --violet:#8B6CFF;
+  --discord:#5865F2; --discord-hi:#6D78F5;
+  --display:'Bricolage Grotesque', 'Trebuchet MS', sans-serif;
+  --body:'Figtree', 'Segoe UI', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+a{color:var(--gold);text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:10px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;color:var(--fg)}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.band{border-top:1px solid var(--line);position:relative}
+.band.alt{background:var(--bg-2)}
+.section{padding-block:104px}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:currentColor}
+.h2{font-weight:800;font-size:clamp(30px,4.2vw,50px);line-height:1.06;letter-spacing:-.02em;margin-top:14px;max-width:780px}
+.lede{color:var(--muted);font-size:19px;max-width:620px;margin-top:18px}
+.head{margin-bottom:56px}
+
+/* progress bar */
+.progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--violet),var(--gold));z-index:40}
+
+/* buttons */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border-radius:999px;font-weight:700;font-size:16px;border:1px solid transparent;cursor:pointer;font-family:var(--body);transition:transform .25s var(--ease), background .2s ease, border-color .2s ease, box-shadow .25s ease;overflow:hidden;isolation:isolate}
+.btn-gold{background:var(--gold);color:var(--gold-ink)}
+.btn-gold::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);animation:sheen 4.5s ease-in-out infinite}
+@keyframes sheen{0%,62%{transform:translateX(-120%)}82%,100%{transform:translateX(120%)}}
+.btn-gold:hover{background:var(--gold-hi);color:var(--gold-ink);box-shadow:0 10px 30px -8px rgba(245,190,79,.6)}
+.btn-ghost{border-color:var(--line);color:var(--fg);background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:var(--muted);color:var(--fg);background:rgba(255,255,255,.05)}
+.btn-discord{background:var(--discord);color:#fff}
+.btn-discord:hover{background:var(--discord-hi);color:#fff;box-shadow:0 10px 30px -8px rgba(88,101,242,.7)}
+.btn svg{flex-shrink:0}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:25;background:rgba(17,13,31,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:background .3s ease,border-color .3s ease}
+.nav.scrolled{background:rgba(17,13,31,.92);border-bottom-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px;transition:min-height .3s ease}
+.nav.scrolled .wrap{min-height:62px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:21px;color:var(--fg);letter-spacing:-.01em}
+.logo-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),var(--coral));color:var(--gold-ink);font-size:15px;transition:transform .5s var(--ease)}
+.logo:hover .logo-mark{transform:rotate(-12deg) scale(1.08)}
+.logo span.dot{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a.link{position:relative;color:var(--muted);font-weight:600;font-size:15px;padding:10px 14px}
+.nav-links a.link::after{content:"";position:absolute;left:14px;right:14px;bottom:6px;height:2px;border-radius:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav-links a.link:hover{color:var(--fg)}
+.nav-links a.link:hover::after,.nav-links a.link.active::after{transform:scaleX(1)}
+.nav-links a.link.active{color:var(--fg)}
+.nav .btn{min-height:42px;padding:0 18px;font-size:15px}
+@media (max-width:760px){.nav-links a.link{display:none}}
+
+/* hero */
+.hero-band{position:relative;overflow:hidden}
+.hero-band canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;opacity:.55}
+.glow.a{width:520px;height:520px;max-width:90vw;background:radial-gradient(circle,rgba(139,108,255,.55),transparent 65%);top:-160px;left:-120px;animation:driftA 18s ease-in-out infinite alternate}
+.glow.b{width:460px;height:460px;max-width:80vw;background:radial-gradient(circle,rgba(245,190,79,.32),transparent 65%);bottom:-180px;right:-80px;animation:driftB 22s ease-in-out infinite alternate}
+@keyframes driftA{to{transform:translate(120px,80px) scale(1.15)}}
+@keyframes driftB{to{transform:translate(-140px,-60px) scale(1.1)}}
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:center;padding-block:88px 96px}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr);gap:48px;padding-block:56px 72px}}
+.avail{display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 10px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:14px;color:var(--muted)}
+.avail i{position:relative;width:9px;height:9px;border-radius:50%;background:#4ADE80}
+.avail i::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid #4ADE80;animation:ring 2s ease-out infinite}
+@keyframes ring{from{transform:scale(.5);opacity:1}to{transform:scale(1.6);opacity:0}}
+.hero h1{font-weight:800;font-size:clamp(42px,6.2vw,80px);line-height:1.02;letter-spacing:-.035em;margin-top:22px}
+.hero h1 .line{display:block}
+.rot{position:relative;display:inline-grid;vertical-align:bottom;color:var(--gold)}
+.rot span{grid-area:1/1;white-space:nowrap;opacity:0;transform:translateY(60%);transition:opacity .45s var(--ease),transform .55s var(--ease)}
+.rot span.on{opacity:1;transform:none}
+.rot span.off{opacity:0;transform:translateY(-60%)}
+.hero .lede{font-size:20px;margin-top:26px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.proof{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:40px;color:var(--dim);font-size:14.5px}
+.proof div{display:flex;align-items:baseline;gap:8px}
+.proof b{font-family:var(--display);color:var(--fg);font-weight:800;font-size:24px;font-variant-numeric:tabular-nums}
+
+/* load sequence */
+.load{animation:rise .9s var(--ease) both}
+.load.d1{animation-delay:.08s}.load.d2{animation-delay:.18s}.load.d3{animation-delay:.3s}.load.d4{animation-delay:.42s}.load.d5{animation-delay:.55s}.load.d6{animation-delay:.3s}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* leaderboard widget */
+.tilt{transform-style:preserve-3d;transition:transform .5s var(--ease)}
+.lb{position:relative;background:linear-gradient(180deg,#251D42 0%,#1B1530 60%,#181229 100%);border:1px solid var(--line);border-radius:26px;padding:22px;box-shadow:0 50px 100px -40px rgba(245,190,79,.38),0 1px 0 rgba(255,255,255,.06) inset;font-family:var(--body)}
+.lb::before{content:"";position:absolute;inset:-1px;border-radius:26px;padding:1px;background:conic-gradient(from var(--ang,0deg),transparent 0 70%,rgba(245,190,79,.85) 80%,transparent 90%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 6s linear infinite;pointer-events:none}
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes spin{to{--ang:360deg}}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.lb-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.lb-title{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.01em}
+.lb-title svg{color:var(--gold)}
+.live{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;background:rgba(255,122,102,.12);font-weight:700;font-size:11px;letter-spacing:.12em;color:var(--coral);text-transform:uppercase}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--coral);animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.3;transform:scale(.75)}}
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;margin-top:16px;padding:4px;border-radius:14px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.04)}
+.seg .thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:10px;background:linear-gradient(180deg,var(--gold-hi),var(--gold));box-shadow:0 6px 18px -6px rgba(245,190,79,.7);transition:transform .45s var(--ease)}
+.seg[data-i="1"] .thumb{transform:translateX(100%)}
+.seg button{position:relative;z-index:1;min-height:38px;border:0;background:none;color:var(--muted);font:700 14px var(--body);cursor:pointer;border-radius:10px;transition:color .3s ease}
+.seg button.on{color:var(--gold-ink)}
+.seg button:not(.on):hover{color:var(--fg)}
+.timer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+.timer .lbl{font-size:13px;color:var(--muted);line-height:1.3}
+.timer .lbl b{display:block;color:var(--fg);font-size:15px;font-weight:700}
+.clock{display:flex;gap:6px}
+.clock div{min-width:46px;padding:6px 4px 5px;border-radius:10px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.05);text-align:center}
+.clock strong{display:block;font-family:var(--display);font-weight:700;font-size:19px;line-height:1.1;color:var(--fg)}
+.clock span{display:block;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.podium{display:grid;grid-template-columns:1fr 1.12fr 1fr;align-items:end;gap:8px;margin-top:18px}
+.pod{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;min-width:0}
+.pod .av{position:relative;border:0;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:17px;color:#fff;padding:2.5px;background:var(--ring)}
+.pod .av span{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;background:var(--avbg)}
+.pod.p1 .av{width:62px;height:62px;font-size:21px;box-shadow:0 0 28px -4px rgba(245,190,79,.75)}
+.crown{position:absolute;top:-19px;left:50%;transform:translateX(-50%);color:var(--gold);filter:drop-shadow(0 2px 6px rgba(245,190,79,.6));animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translate(-50%,-3px)}}
+.pod .nm{margin-top:8px;max-width:100%;font-weight:700;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pod .wg{font-size:12.5px;color:var(--muted)}
+.pod .base{width:100%;margin-top:10px;border-radius:14px 14px 6px 6px;padding:10px 6px 9px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.06);border-bottom:0}
+.pod.p1 .base{padding-top:20px;background:linear-gradient(180deg,rgba(245,190,79,.24),rgba(245,190,79,.03));border-color:rgba(245,190,79,.3)}
+.pod.p2 .base{padding-top:13px}
+.pod .place{font-family:var(--display);font-weight:800;font-size:13px;color:var(--dim)}
+.pod.p1 .place{color:var(--gold)}
+.pod .pz{margin-top:2px;font-family:var(--display);font-weight:800;font-size:17px;color:var(--fg)}
+.pod.p1 .pz{font-size:20px;color:var(--gold-hi)}
+.pod.swap{animation:pop .6s var(--ease)}
+@keyframes pop{0%{transform:scale(.9);opacity:.4}60%{transform:scale(1.04)}100%{transform:none;opacity:1}}
+.p1{--ring:linear-gradient(135deg,#FFE7A3,#F5BE4F 45%,#B9832A);--avbg:linear-gradient(135deg,#6B4A12,#3A2808)}
+.p2{--ring:linear-gradient(135deg,#F2F4FA,#AEB4C8 50%,#6E7590);--avbg:linear-gradient(135deg,#4B4F63,#2B2D3B)}
+.p3{--ring:linear-gradient(135deg,#FFC9A1,#D9824A 50%,#8A4A22);--avbg:linear-gradient(135deg,#5C3218,#33190A)}
+.lb-rows{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;position:relative}
+.lb-row{display:grid;grid-template-columns:22px 30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 12px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.03);transition:background .5s ease,border-color .5s ease}
+.lb-row.up{background:rgba(74,222,128,.1);border-color:rgba(74,222,128,.25)}
+.lb-row .rk{font-family:var(--display);font-weight:800;font-size:14px;color:var(--dim);text-align:center}
+.lb-row .mini{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:12px;color:var(--fg);background:var(--c,#3A3058)}
+.lb-row .mid{min-width:0}
+.lb-row .nm{display:block;font-weight:700;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-row .bar{display:block;height:4px;margin-top:5px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden}
+.lb-row .bar i{display:block;height:100%;width:var(--w,40%);border-radius:4px;background:linear-gradient(90deg,var(--violet),var(--gold));transition:width .9s var(--ease)}
+.lb-row .rt{text-align:right;line-height:1.25}
+.lb-row .wg{display:block;font-size:13px;color:var(--muted)}
+.lb-row.up .wg{color:#86EFAC}
+.lb-row .pz{display:block;font-family:var(--display);font-weight:800;font-size:14.5px;color:var(--gold)}
+.feed{margin-top:12px;height:42px;overflow:hidden;position:relative;border-radius:12px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04)}
+.feed p{position:absolute;inset:0;display:flex;align-items:center;gap:10px;padding:0 12px;font-size:13.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:transform .5s var(--ease),opacity .5s ease}
+.feed p b{color:var(--fg);font-weight:700}
+.feed p em{font-style:normal;font-weight:700;color:var(--gold)}
+.feed p .t{margin-left:auto;font-size:11.5px;color:var(--dim)}
+.feed .coin{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--gold-hi),var(--gold) 55%,#B9832A);box-shadow:0 0 12px rgba(245,190,79,.6)}
+.lb-foot{margin-top:12px;font-size:12px;color:var(--dim);text-align:center}
+@media (max-width:420px){.lb{padding:16px}.clock div{min-width:40px}.pod .av{width:44px;height:44px}.pod.p1 .av{width:54px;height:54px}.timer .lbl{display:none}.timer{justify-content:center}}
+
+/* screenshots, calculator mock, quotes */
+.vouch-shot{position:relative;margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#2B2A21}
+.vouch-shot img{display:block;width:100%;height:auto}
+.vouch-shot.tall{max-height:300px;background:#1A1A1E}
+.vouch-shot.tall::after{content:"";position:absolute;inset:auto 0 0;height:90px;background:linear-gradient(transparent,var(--surface))}
+.price.quote{font-size:28px;color:var(--gold)}
+.calc{background:radial-gradient(circle at 70% 20%,rgba(139,108,255,.25),transparent 55%),radial-gradient(circle at 20% 90%,rgba(245,190,79,.18),transparent 50%),var(--bg-2)}
+.calc-ui{width:min(340px,100%);display:flex;flex-direction:column;gap:10px;text-align:left}
+.calc-h{font-family:var(--display);font-weight:800;font-size:18px;color:var(--fg)}
+.calc-f{display:flex;justify-content:space-between;gap:12px;padding:11px 14px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--muted)}
+.calc-f b{color:var(--fg)}
+.calc-out{padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(245,190,79,.22),rgba(245,190,79,.05));border:1px solid rgba(245,190,79,.35);display:flex;flex-direction:column}
+.calc-out span{font-size:13px;color:var(--muted)}
+.calc-out b{font-family:var(--display);font-weight:800;font-size:32px;color:var(--gold-hi);line-height:1.15}
+.calc-out i{font-style:normal;font-size:11.5px;color:var(--dim)}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-2);overflow:hidden;padding-block:18px}
+.marquee-track{display:flex;width:max-content;animation:scroll 38s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:var(--display);font-weight:700;font-size:22px;color:var(--muted);white-space:nowrap}
+.marquee-track span::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* reveal on scroll (visible by default; animates as it enters) */
+.reveal.in{animation:rise .85s var(--ease) both}
+.reveal.in.s1{animation-delay:.08s}.reveal.in.s2{animation-delay:.16s}.reveal.in.s3{animation-delay:.24s}
+
+/* case studies */
+.cases{display:flex;flex-direction:column;gap:28px}
+.case{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center;padding:36px;background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.case::before{content:"";position:absolute;inset:0;background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(245,190,79,.07),transparent 45%);opacity:0;transition:opacity .4s ease;pointer-events:none}
+.case:hover::before{opacity:1}
+.case.flip .shot{order:2}
+@media (max-width:900px){.case{grid-template-columns:minmax(0,1fr);gap:32px;padding:22px}.case.flip .shot{order:0}}
+.shot{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--bg-2);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.shot-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:rgba(0,0,0,.2)}
+.shot-bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.shot-bar i:nth-child(1){background:#FF6B6B}.shot-bar i:nth-child(2){background:#FFC24B}.shot-bar i:nth-child(3){background:#4ADE80}
+.shot-bar span{margin-left:10px;font-family:var(--mono);font-size:12px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.shot-body{position:relative;aspect-ratio:16/10;max-width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;color:var(--dim);font-size:14.5px;background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(255,255,255,.018) 14px 28px)}
+.shot-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s var(--ease)}
+.case:hover .shot-body img{transform:scale(1.04)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:6px 11px;border-radius:999px;background:var(--bg-2);color:var(--muted);border:1px solid var(--line)}
+.tag.own{color:var(--gold);border-color:rgba(245,190,79,.4)}
+.case h3{font-weight:800;font-size:clamp(28px,3vw,36px);letter-spacing:-.02em;margin-top:18px}
+.case p{color:var(--muted);margin-top:12px;max-width:58ch}
+.ticks{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ticks li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:12px;font-size:16px}
+.ticks svg{margin-top:4px;color:var(--gold)}
+.visit{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-weight:700;padding-bottom:4px;color:var(--fg);background:linear-gradient(var(--gold),var(--gold)) 0 100%/100% 2px no-repeat;transition:background-size .35s var(--ease),color .2s ease}
+.visit:hover{color:var(--gold)}
+.visit .arr{display:inline-block;transition:transform .3s var(--ease)}
+.visit:hover .arr{transform:translate(3px,-3px)}
+
+/* features */
+.features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+@media (max-width:1000px){.features{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:540px){.features{grid-template-columns:minmax(0,1fr)}}
+.feat{position:relative;padding:26px;border-radius:20px;background:var(--surface);border:1px solid var(--line);overflow:hidden;transition:transform .35s var(--ease),border-color .3s ease}
+.feat::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(245,190,79,.14),transparent 60%);opacity:0;transition:opacity .3s ease;pointer-events:none}
+.feat:hover{transform:translateY(-5px);border-color:rgba(245,190,79,.45)}
+.feat:hover::before{opacity:1}
+.feat .ic{position:relative;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:rgba(245,190,79,.12);color:var(--gold);transition:transform .45s var(--ease),background .3s ease}
+.feat:hover .ic{transform:rotate(-8deg) scale(1.1);background:rgba(245,190,79,.22)}
+.feat h3{position:relative;font-family:var(--body);font-weight:700;font-size:18px;margin-top:18px}
+.feat p{position:relative;color:var(--muted);font-size:15px;margin-top:6px}
+
+/* process */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;counter-reset:s}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:540px){.steps{grid-template-columns:minmax(0,1fr)}}
+.steps li{position:relative;padding-top:24px;counter-increment:s}
+.steps li::before{content:"Step " counter(s);font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.steps li::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--line)}
+.steps li .fill{position:absolute;top:0;left:0;height:2px;width:100%;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 1s var(--ease);z-index:1}
+.steps.in li .fill{transform:scaleX(1)}
+.steps.in li:nth-child(2) .fill{transition-delay:.35s}.steps.in li:nth-child(3) .fill{transition-delay:.7s}.steps.in li:nth-child(4) .fill{transition-delay:1.05s}
+.steps h3{font-family:var(--body);font-weight:700;font-size:20px;margin-top:10px}
+.steps p{color:var(--muted);font-size:15px;margin-top:6px}
+
+/* packages */
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+@media (max-width:960px){.plans{grid-template-columns:minmax(0,1fr)}}
+.plan{position:relative;display:flex;flex-direction:column;gap:20px;padding:32px;border-radius:24px;background:var(--surface);border:1px solid var(--line);transition:transform .35s var(--ease),border-color .3s ease}
+.plan:hover{transform:translateY(-6px);border-color:var(--muted)}
+.plan.best{border-color:transparent;background:linear-gradient(180deg,rgba(245,190,79,.09),var(--surface) 45%)}
+.plan.best::before{content:"";position:absolute;inset:-2px;border-radius:26px;padding:2px;background:conic-gradient(from var(--ang,0deg),var(--gold),var(--coral),var(--violet),var(--gold));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 5s linear infinite;pointer-events:none}
+.plan.best:hover{border-color:transparent}
+.plan-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.plan h3{font-weight:800;font-size:24px}
+.badge{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--gold-ink);padding:5px 10px;border-radius:999px}
+.plan .for{color:var(--muted);font-size:15px;margin-top:-10px}
+.price{font-family:var(--display);font-weight:800;font-size:36px;letter-spacing:-.02em}
+.price small{font-family:var(--body);font-weight:500;font-size:14px;color:var(--dim);margin-left:6px}
+.plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;flex-grow:1;font-size:15.5px}
+.plan li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px}
+.plan li svg{margin-top:5px;color:var(--gold)}
+.care{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 28px;padding:26px 32px;border-radius:24px;border:1px dashed var(--line);transition:border-color .3s ease}
+.care:hover{border-color:var(--gold)}
+.care h3{font-family:var(--body);font-weight:700;font-size:19px}
+.care p{color:var(--muted);font-size:15px;margin-top:4px;max-width:60ch}
+.care .price{font-size:28px}
+
+/* why */
+.why{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+@media (max-width:900px){.why{grid-template-columns:minmax(0,1fr)}}
+.reasons{display:flex;flex-direction:column;gap:22px;margin-top:36px}
+.reason{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px}
+.reason .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(139,108,255,.14);color:#B7A6FF}
+.reasons h3{font-family:var(--body);font-weight:700;font-size:18px}
+.reasons p{color:var(--muted);font-size:15.5px;margin-top:4px;max-width:52ch}
+.vouches{display:flex;flex-direction:column;gap:16px}
+.vouch{border-radius:20px;border:1px solid var(--line);background:var(--surface);padding:24px;transition:transform .35s var(--ease)}
+.vouch:hover{transform:translateY(-4px) rotate(-.4deg)}
+.vouch-head{display:flex;align-items:center;gap:12px}
+.av{width:40px;height:40px;border-radius:50%;background:var(--bg-2);border:1px solid var(--line);display:grid;place-items:center;font-weight:700;color:var(--gold)}
+.vouch-head b{display:block;font-size:15px}
+.vouch-head span{font-size:13px;color:var(--dim)}
+.vouch-body{position:relative;margin-top:16px;min-height:150px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--dim);font-size:14.5px;padding:20px;background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(255,255,255,.018) 14px 28px);border:1px dashed var(--line);overflow:hidden}
+.vouch-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+
+/* contact */
+.contact-band{overflow:hidden}
+.contact{position:relative;text-align:center;padding-block:120px}
+.coin3d{width:96px;height:96px;margin:0 auto 34px;perspective:600px}
+.coin3d div{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:38px;color:var(--gold-ink);background:radial-gradient(circle at 32% 30%,var(--gold-hi),var(--gold) 50%,#B9832A 100%);box-shadow:0 0 0 6px rgba(245,190,79,.18),0 20px 60px -10px rgba(245,190,79,.6);animation:flip 3.6s var(--ease) infinite}
+@keyframes flip{0%,30%{transform:rotateY(0) translateY(0)}50%{transform:rotateY(180deg) translateY(-14px)}80%,100%{transform:rotateY(360deg) translateY(0)}}
+.contact h2{font-weight:800;font-size:clamp(36px,5.4vw,68px);line-height:1.02;letter-spacing:-.03em;max-width:880px;margin:0 auto}
+.contact .lede{margin:22px auto 0}
+.dc-card{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:40px}
+.handle{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:8px 8px 8px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line);max-width:100%}
+.handle .dc-ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--discord);color:#fff;flex-shrink:0}
+.handle code{font-family:var(--mono);font-size:16px;color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;user-select:all;min-width:0}
+.handle .btn{min-height:40px;padding:0 16px;font-size:14px}
+.contact .cta-row{justify-content:center;margin-top:20px}
+.status{display:block;min-height:22px;margin-top:12px;font-size:13.5px;color:var(--muted)}
+
+/* floating Discord pill */
+.float-dc{position:fixed;right:max(18px,calc(env(safe-area-inset-right,0px) + 18px));bottom:calc(env(safe-area-inset-bottom,0px) + 18px);z-index:35;transform:translateY(140%);opacity:0;transition:transform .5s var(--ease),opacity .4s ease;box-shadow:0 16px 40px -10px rgba(88,101,242,.7)}
+.float-dc.show{transform:none;opacity:1}
+@media (max-width:480px){.float-dc .txt{display:none}.float-dc{width:56px;height:56px;padding:0}}
+
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-block:28px;color:var(--dim);font-size:14px}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rot span.on{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true">S</span>sahil<span class="dot">.</span>builds</a>
+    <nav class="nav-links" aria-label="Main">
+      <a class="link" href="#work">Work</a>
+      <a class="link" href="#features">Features</a>
+      <a class="link" href="#packages">Packages</a>
+      <a class="btn btn-gold" href="#contact">Free demo</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero-band">
+    <div class="glow a" aria-hidden="true"></div>
+    <div class="glow b" aria-hidden="true"></div>
+    <canvas id="coins" aria-hidden="true"></canvas>
+    <div class="wrap hero">
+      <div>
+        <div class="avail load d1"><i></i>Taking new streamer projects</div>
+        <h1 class="load d2">
+          <span class="line">Rewards sites</span>
+          <span class="line"><span class="rot" id="rot" aria-hidden="true"><span class="on">your chat</span><span>your viewers</span><span>your Discord</span><span>your community</span></span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">your community</span></span>
+          <span class="line">actually comes back to.</span>
+        </h1>
+        <p class="lede load d3">I build custom affiliate and rewards platforms for streamers: live casino leaderboards, Discord login, coin economies with real payouts, admin panels and original games.</p>
+        <div class="cta-row load d4">
+          <a class="btn btn-gold magnet" href="#contact">Get a free branded demo</a>
+          <a class="btn btn-discord magnet js-dc" href="#contact">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.6 5.3A16.7 16.7 0 0 0 15.5 4l-.5 1a15.4 15.4 0 0 0-6 0l-.5-1a16.7 16.7 0 0 0-4.1 1.3C1.8 9.2 1.1 13 1.4 16.7a16.8 16.8 0 0 0 5.1 2.6l1.1-1.7a10.9 10.9 0 0 1-1.7-.8l.4-.3a12 12 0 0 0 11.4 0l.4.3a10.9 10.9 0 0 1-1.7.8l1.1 1.7a16.8 16.8 0 0 0 5.1-2.6c.4-4.3-.6-8.1-3-11.4zM8.7 14.4c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/></svg>
+            Message on Discord
+          </a>
+        </div>
+        <div class="proof load d5">
+          <div><b data-count="3">3</b>live sites shipped</div>
+          <div><b data-count="4" data-suffix="+">4+</b>casino APIs integrated</div>
+          <div><b data-count="8">8</b>features in the toolkit</div>
+        </div>
+      </div>
+
+      <aside class="lb tilt load d6" id="lb" aria-label="Example live leaderboard">
+        <div class="lb-top">
+          <div class="lb-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>Wager Leaderboard</div>
+          <span class="live"><i></i>Live</span>
+        </div>
+        <div class="seg" id="seg" data-i="0" role="group" aria-label="Leaderboard period">
+          <span class="thumb" aria-hidden="true"></span>
+          <button class="on" type="button" data-k="monthly">Monthly</button>
+          <button type="button" data-k="weekly">Weekly</button>
+        </div>
+        <div class="timer">
+          <div class="lbl">Prize pool<b class="num" id="pool">$5,000</b></div>
+          <div class="clock num" id="clock" aria-label="Time left">
+            <div><strong id="cdD">00</strong><span>Days</span></div>
+            <div><strong id="cdH">00</strong><span>Hrs</span></div>
+            <div><strong id="cdM">00</strong><span>Min</span></div>
+            <div><strong id="cdS">00</strong><span>Sec</span></div>
+          </div>
+        </div>
+        <div class="podium" id="podium">
+          <div class="pod p2" data-slot="1"><div class="av"><span class="ini"></span></div><div class="nm"></div><div class="wg num"></div><div class="base"><div class="place">2nd</div><div class="pz num"></div></div></div>
+          <div class="pod p1" data-slot="0"><svg class="crown" width="26" height="20" viewBox="0 0 26 20" fill="currentColor" aria-hidden="true"><path d="M2 6l5.5 4.5L13 2l5.5 8.5L24 6l-2.5 12h-17z"/></svg><div class="av"><span class="ini"></span></div><div class="nm"></div><div class="wg num"></div><div class="base"><div class="place">1st</div><div class="pz num"></div></div></div>
+          <div class="pod p3" data-slot="2"><div class="av"><span class="ini"></span></div><div class="nm"></div><div class="wg num"></div><div class="base"><div class="place">3rd</div><div class="pz num"></div></div></div>
+        </div>
+        <ol class="lb-rows" id="rows" start="4"></ol>
+        <div class="feed" id="feed"></div>
+        <p class="lb-foot">Example data. Yours updates live from your casino partners.</p>
+      </aside>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Live leaderboards</span><span>Discord login</span><span>Coin economy</span><span>Crypto payouts</span><span>Admin dashboard</span><span>Community vault</span><span>Blackjack · Mines · Plinko</span><span>Kick bot</span>
+      <span>Live leaderboards</span><span>Discord login</span><span>Coin economy</span><span>Crypto payouts</span><span>Admin dashboard</span><span>Community vault</span><span>Blackjack · Mines · Plinko</span><span>Kick bot</span>
+    </div>
+  </div>
+
+  <section class="band" id="work" style="border-top:0">
+    <div class="wrap section">
+      <div class="head reveal">
+        <div class="eyebrow">Client work</div>
+        <h2 class="h2">Built for real streamers, running live.</h2>
+      </div>
+      <div class="cases">
+        <article class="case reveal spot">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>jakerewards.com</span></div>
+            <div class="shot-body"><img src="images/jake-site.webp" alt="jakerewards.com homepage: Stake affiliate code JAKE, $75,000 monthly leaderboard" width="1440" height="900" loading="lazy"></div>
+          </div>
+          <div>
+            <div class="tags"><span class="tag">Full redesign</span><span class="tag">Monthly care</span></div>
+            <h3>Jake Rewards</h3>
+            <p>An eight-page rewards site for streamer Jake, built to beat his old site and kept fresh week to week.</p>
+            <ul class="ticks">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Live leaderboard with a timezone-correct countdown and monthly rollover</span></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Weekly Multiplier Challenge with a prize podium and bracket scoring</span></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Referral tiers, rank rewards and bonus pages</span></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Moved to Cloudflare Pages, with a staging copy so changes never break the live site</span></li>
+            </ul>
+            <a class="visit" href="https://jakerewards.com" target="_blank" rel="noopener">Visit jakerewards.com <span class="arr" aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="case flip reveal spot">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>jammmyrewards.com</span></div>
+            <div class="shot-body"><img src="images/jammy-site.webp" alt="jammmyrewards.com homepage with Discord login, coin balance and partner offers" width="1440" height="900" loading="lazy"></div>
+          </div>
+          <div>
+            <div class="tags"><span class="tag">Full platform</span><span class="tag">Accounts + backend</span></div>
+            <h3>Jammmy Rewards</h3>
+            <p>A full community platform for streamer Jammy. Viewers log in, earn coins, link their casino accounts and cash out, while Jammy runs it all from his own dashboard.</p>
+            <ul class="ticks">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Discord login with real user accounts and profiles</span></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Coin economy with daily claims and crypto payouts (BSC, ETH, SOL)</span></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Admin dashboard for the vault, users, payouts and analytics</span></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Casino leaderboards through a secure proxy, so API keys are never exposed</span></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Coming next: a Kick + Discord bot and in-house coin games</span></li>
+            </ul>
+            <a class="visit" href="https://jammmyrewards.com" target="_blank" rel="noopener">Visit jammmyrewards.com <span class="arr" aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="case reveal spot">
+          <div class="shot tilt">
+            <div class="shot-bar"><i></i><i></i><i></i><span>stakebonuscalculator.online</span></div>
+            <div class="shot-body calc" aria-label="Preview of the VIP bonus calculator">
+              <div class="calc-ui">
+                <div class="calc-h">VIP Bonus Calculator</div>
+                <div class="calc-f"><span>VIP rank</span><b>Platinum IV</b></div>
+                <div class="calc-f"><span>Monthly wager</span><b class="num">$250,000</b></div>
+                <div class="calc-out"><span>Estimated monthly bonus</span><b class="num" id="calcOut">$1,240</b><i>Example estimate</i></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="tags"><span class="tag own">My own site</span><span class="tag">Tools + SEO</span></div>
+            <h3>Degen Rewards</h3>
+            <p>My own Stake affiliate site, built from scratch. It shows I understand the business side too: tools that bring players in, and pages that rank on Google.</p>
+            <ul class="ticks">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>VIP bonus calculator built by reverse-engineering Stake's bonus formulas</span></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Bonus-drop predictions, rank-up rewards and leaderboard</span></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Full SEO setup: schema markup, sitemap, Search Console</span></li>
+            </ul>
+            <a class="visit" href="https://stakebonuscalculator.online" target="_blank" rel="noopener">Visit stakebonuscalculator.online <span class="arr" aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="features">
+    <div class="wrap section">
+      <div class="head reveal">
+        <div class="eyebrow">What I build</div>
+        <h2 class="h2">Everything your community needs, in one place.</h2>
+      </div>
+      <div class="features">
+        <div class="feat reveal spot"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></div><h3>Live leaderboards</h3><p>Real-time standings from your casino partners, with countdowns and prize podiums.</p></div>
+        <div class="feat reveal spot s1"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div><h3>Discord login</h3><p>Viewers sign in with Discord and get an account linked to their casino username.</p></div>
+        <div class="feat reveal spot s2"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div><h3>Coin economy</h3><p>Daily claims, balances and crypto payouts your community can actually cash out.</p></div>
+        <div class="feat reveal spot s3"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></div><h3>Admin dashboard</h3><p>Manage users, payouts, the vault and partners yourself, with no developer needed.</p></div>
+        <div class="feat reveal spot"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M12 8.5V7M15.5 12H17"/></svg></div><h3>Community vault</h3><p>A shared prize pool with a live progress bar that fills as your community wagers.</p></div>
+        <div class="feat reveal spot s1"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="16" rx="2"/><path d="M19 7l1.5.5a1.5 1.5 0 0 1 .9 1.9L18 20"/><path d="M10 8l2 3-2 3-2-3z"/></svg></div><h3>Original games</h3><p>Blackjack, mines, plinko and hi-lo, played with your site coins.</p></div>
+        <div class="feat reveal spot s2"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 7V4M9 12v1M15 12v1M9 16h6"/></svg></div><h3>Kick + Discord bot</h3><p>One bot for your stream chat and your Discord, connected to your site.</p></div>
+        <div class="feat reveal spot s3"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Analytics</h3><p>Visitors, top pages and countries, so you see what your community uses.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap section">
+      <div class="head reveal">
+        <div class="eyebrow">How it works</div>
+        <h2 class="h2">See your site before you pay for it.</h2>
+      </div>
+      <ol class="steps" id="steps">
+        <li><span class="fill"></span><h3>Free demo</h3><p>I mock up your homepage with your name, colors and casino partners so you see the result first.</p></li>
+        <li><span class="fill"></span><h3>Build</h3><p>We agree on scope, you pay a 50% deposit, and I build with regular previews you can steer.</p></li>
+        <li><span class="fill"></span><h3>Launch</h3><p>Your domain connected, leaderboards wired to your casinos, tested on desktop and phones.</p></li>
+        <li><span class="fill"></span><h3>Ongoing care</h3><p>New partners, weekly challenges and fixes, tested on a staging copy before going live.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band alt" id="packages">
+    <div class="wrap section">
+      <div class="head reveal">
+        <div class="eyebrow">Packages</div>
+        <h2 class="h2">Start simple. Add more when you're ready.</h2>
+      </div>
+      <div class="plans">
+        <div class="plan reveal">
+          <h3>Starter</h3>
+          <p class="for">A sharp, fast site to send viewers to.</p>
+          <div class="price quote">Custom quote</div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Custom branded design</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Live leaderboard for 1–2 casinos</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Bonuses and partner pages</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Mobile-first, on your own domain</span></li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Get a demo</a>
+        </div>
+        <div class="plan best reveal s1">
+          <div class="plan-top"><h3>Pro</h3><span class="badge">Most popular</span></div>
+          <p class="for">Turn viewers into a logged-in community.</p>
+          <div class="price quote">Custom quote</div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Everything in Starter</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Discord login and user profiles</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Coin system with payouts</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Community vault</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Admin dashboard and analytics</span></li>
+          </ul>
+          <a class="btn btn-gold" href="#contact">Get a demo</a>
+        </div>
+        <div class="plan reveal s2">
+          <h3>Full Platform</h3>
+          <p class="for">The complete experience, built around your stream.</p>
+          <div class="price quote">Custom quote</div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Everything in Pro</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Coin games: blackjack, mines, plinko, hi-lo</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Kick + Discord bot</span></li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Wager-based rank system with Discord roles</span></li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Get a demo</a>
+        </div>
+      </div>
+      <div class="care reveal">
+        <div>
+          <h3>Monthly care plan</h3>
+          <p>Updates, new casino partners, weekly challenge changes and priority fixes. Add it to any package.</p>
+        </div>
+        <a class="btn btn-ghost" href="#contact">Ask about care plans</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap section why">
+      <div class="reveal">
+        <div class="eyebrow">Why work with me</div>
+        <h2 class="h2">The details template sites get wrong.</h2>
+        <div class="reasons">
+          <div class="reason"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><div><h3>Your API keys stay private</h3><p>Casino keys live on the server as secrets, never in page source where anyone could copy them.</p></div></div>
+          <div class="reason"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><div><h3>Smooth on every phone</h3><p>Animations tuned with real performance traces, and layouts tested at phone width, where most of your viewers are.</p></div></div>
+          <div class="reason"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><div><h3>Nothing breaks live</h3><p>Changes go to a staging copy first, so your community never lands on a broken page.</p></div></div>
+        </div>
+      </div>
+      <div class="vouches">
+        <div class="vouch reveal s1">
+          <div class="vouch-head"><div class="av" aria-hidden="true">J</div><div><b>itsJake</b><span>Announcement in Jake's Discord · jakerewards.com</span></div></div>
+          <div class="vouch-shot"><img src="images/jake-vouch.webp" alt="itsJake on Discord: New website is LIVE and it looks damn good. Shout out @SAHIL for creating it for me without me even asking." width="1200" height="286" loading="lazy"></div>
+        </div>
+        <div class="vouch reveal s2">
+          <div class="vouch-head"><div class="av" aria-hidden="true">J</div><div><b>JammmyRewards launch</b><span>The site channel I run in Jammy's Discord</span></div></div>
+          <div class="vouch-shot tall"><img src="images/jammy-launch.webp" alt="Launch post for JammmyRewards in Jammy's Discord: daily coin rewards, wager and earn, leaderboards, slot and battle requests" width="1200" height="752" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt contact-band" id="contact">
+    <div class="wrap contact">
+      <div class="coin3d reveal" aria-hidden="true"><div>$</div></div>
+      <h2 class="reveal">Want to see your site first?</h2>
+      <p class="lede reveal s1">Send me your stream link and casino partners on Discord. I'll make you a free branded demo, no commitment.</p>
+      <div class="dc-card reveal s2">
+        <div class="handle">
+          <span class="dc-ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 5.3A16.7 16.7 0 0 0 15.5 4l-.5 1a15.4 15.4 0 0 0-6 0l-.5-1a16.7 16.7 0 0 0-4.1 1.3C1.8 9.2 1.1 13 1.4 16.7a16.8 16.8 0 0 0 5.1 2.6l1.1-1.7a10.9 10.9 0 0 1-1.7-.8l.4-.3a12 12 0 0 0 11.4 0l.4.3a10.9 10.9 0 0 1-1.7.8l1.1 1.7a16.8 16.8 0 0 0 5.1-2.6c.4-4.3-.6-8.1-3-11.4zM8.7 14.4c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/></svg></span>
+          <code id="handle">sahil2603</code>
+          <button class="btn btn-gold" id="copy" type="button">Copy</button>
+        </div>
+        <a class="btn btn-discord magnet js-dc" id="dcOpen" href="https://discord.com/app" target="_blank" rel="noopener">Open Discord</a>
+      </div>
+      <span class="status" id="status" role="status" aria-live="polite"></span>
+      <div class="cta-row reveal s3">
+        <a class="btn btn-ghost" href="https://x.com/sahilku36220794" target="_blank" rel="noopener">X / Twitter</a>
+        <a class="btn btn-ghost" href="https://github.com/sahil2603" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<a class="btn btn-discord float-dc" id="floatDc" href="#contact" aria-label="Message me on Discord">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.6 5.3A16.7 16.7 0 0 0 15.5 4l-.5 1a15.4 15.4 0 0 0-6 0l-.5-1a16.7 16.7 0 0 0-4.1 1.3C1.8 9.2 1.1 13 1.4 16.7a16.8 16.8 0 0 0 5.1 2.6l1.1-1.7a10.9 10.9 0 0 1-1.7-.8l.4-.3a12 12 0 0 0 11.4 0l.4.3a10.9 10.9 0 0 1-1.7.8l1.1 1.7a16.8 16.8 0 0 0 5.1-2.6c.4-4.3-.6-8.1-3-11.4zM8.7 14.4c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/></svg>
+  <span class="txt">Message me</span>
+</a>
+
+<footer class="band">
+  <div class="wrap">
+    <span>© 2026 Sahil · Freelance web developer, New Delhi</span>
+    <span>Discord <b style="color:var(--fg)">sahil2603</b> · <a href="https://x.com/sahilku36220794" target="_blank" rel="noopener">X @sahilku36220794</a> · Payments in USDC and crypto</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- SETTINGS: edit these ---------- */
+  var DISCORD_USERNAME = 'sahil2603';
+  var DISCORD_LINK = '';                   // optional: 'https://discord.com/users/<your user id>' or a server invite
+  /* ------------------------------------------ */
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // Discord wiring
+  document.getElementById('handle').textContent = DISCORD_USERNAME;
+  if (DISCORD_LINK) {
+    document.getElementById('dcOpen').href = DISCORD_LINK;
+    document.querySelectorAll('.js-dc').forEach(function(a){ a.href = DISCORD_LINK; a.target = '_blank'; a.rel = 'noopener'; });
+  }
+
+  // Copy handle
+  var btn=document.getElementById('copy'),code=document.getElementById('handle'),st=document.getElementById('status');
+  function selectIt(){var r=document.createRange();r.selectNodeContents(code);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}
+  btn.addEventListener('click',function(){
+    var text=code.textContent.trim();
+    var done=function(){st.textContent='Copied. Add me as a friend on Discord and say hi.';btn.textContent='Copied ✓';setTimeout(function(){btn.textContent='Copy'},2000);};
+    var fail=function(){selectIt();st.textContent='Username selected. Press Ctrl+C or Cmd+C to copy.';};
+    try{ navigator.clipboard.writeText(text).then(done,fail); }catch(e){ fail(); }
+  });
+
+  // Nav state + progress bar + floating Discord
+  var nav=document.getElementById('nav'),bar=document.getElementById('progress'),fl=document.getElementById('floatDc'),contact=document.getElementById('contact');
+  function onScroll(){
+    var y=window.scrollY,h=document.documentElement.scrollHeight-innerHeight;
+    nav.classList.toggle('scrolled',y>20);
+    bar.style.transform='scaleX('+(h>0?Math.min(1,y/h):0)+')';
+    var cTop=contact.getBoundingClientRect().top;
+    fl.classList.toggle('show',y>innerHeight*.7 && cTop>innerHeight*.6);
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Active nav link
+  var links=[].slice.call(document.querySelectorAll('.nav-links a.link'));
+  if('IntersectionObserver' in window){
+    var secIO=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-45% 0px -50% 0px'});
+    ['work','features','packages'].forEach(function(id){var el=document.getElementById(id);if(el)secIO.observe(el)});
+  }
+
+  // Scroll reveals (content is visible by default; animation plays as it enters)
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      var r=e.boundingClientRect;
+      if(e.isIntersecting){ if(r.top>innerHeight*.15) e.target.classList.add('in'); io.unobserve(e.target); }
+    })},{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+    var steps=document.getElementById('steps');
+    var sio=new IntersectionObserver(function(es){if(es[0].isIntersecting){steps.classList.add('in');sio.disconnect();}},{threshold:.4});
+    sio.observe(steps);
+  } else { document.getElementById('steps').classList.add('in'); }
+
+  // Rotating headline word
+  var words=[].slice.call(document.querySelectorAll('#rot span')),wi=0;
+  if(!reduce){setInterval(function(){
+    var cur=words[wi];cur.classList.remove('on');cur.classList.add('off');
+    wi=(wi+1)%words.length;var nx=words[wi];nx.classList.remove('off');
+    void nx.offsetWidth;nx.classList.add('on');
+    setTimeout(function(){cur.classList.remove('off')},600);
+  },2600);}
+
+  // Count-up numbers
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    if(reduce)return;var n=+el.dataset.count,suf=el.dataset.suffix||'',t0=null;
+    el.textContent='0'+suf;
+    function step(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/1400),e=1-Math.pow(1-p,3);el.textContent=Math.round(n*e)+suf;if(p<1)requestAnimationFrame(step);}
+    setTimeout(function(){requestAnimationFrame(step)},700);
+  });
+
+  // Spotlight follow on cards
+  if(fine){document.querySelectorAll('.spot').forEach(function(el){
+    el.addEventListener('pointermove',function(ev){var r=el.getBoundingClientRect();el.style.setProperty('--mx',(ev.clientX-r.left)+'px');el.style.setProperty('--my',(ev.clientY-r.top)+'px');});
+  });}
+
+  // 3D tilt
+  if(fine && !reduce){document.querySelectorAll('.tilt').forEach(function(el){
+    el.addEventListener('pointermove',function(ev){var r=el.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width-.5,y=(ev.clientY-r.top)/r.height-.5;el.style.transition='transform .12s ease-out';el.style.transform='perspective(1000px) rotateY('+(x*8)+'deg) rotateX('+(-y*8)+'deg)';});
+    el.addEventListener('pointerleave',function(){el.style.transition='';el.style.transform='';});
+  });}
+
+  // Magnetic buttons
+  if(fine && !reduce){document.querySelectorAll('.magnet').forEach(function(el){
+    el.addEventListener('pointermove',function(ev){var r=el.getBoundingClientRect(),x=ev.clientX-r.left-r.width/2,y=ev.clientY-r.top-r.height/2;el.style.transform='translate('+x*.18+'px,'+y*.28+'px)';});
+    el.addEventListener('pointerleave',function(){el.style.transform='';});
+  });}
+
+  // ---------- Example leaderboard ----------
+  var BOARDS={
+    monthly:{prizes:[2000,1200,750,500,300,150,100],start:[184220,141905,98410,76034,52661,31240,18905],ends:function(n){return new Date(n.getFullYear(),n.getMonth()+1,1)}},
+    weekly:{prizes:[800,450,300,200,125,75,50],start:[46310,39880,27415,19060,12740,8210,5390],ends:function(n){var d=new Date(n.getFullYear(),n.getMonth(),n.getDate()+((8-n.getDay())%7||7));return d}}
+  };
+  var NAMES=['sp1nqueen','degen_dave','lowrollr','maxwinmo','bonusbuyer','jackpotjess','hi_roll3r'];
+  var COLORS=['#5B3FA8','#2F6F8F','#8F3F6B','#3F7F55','#8A5A2B','#4B4FA8','#7A3FA0'];
+  var board='monthly',players=[],podium=[];
+  var rowsEl=document.getElementById('rows'),poolEl=document.getElementById('pool');
+  var slots=[].slice.call(document.querySelectorAll('.pod')).sort(function(a,b){return a.dataset.slot-b.dataset.slot});
+  function money(n){return '$'+Math.round(n).toLocaleString('en-US')}
+  function ini(n){return n.replace(/[^a-z]/gi,'').slice(0,2).toUpperCase()}
+  function make(){
+    var B=BOARDS[board];
+    poolEl.textContent=money(B.prizes.reduce(function(a,b){return a+b},0));
+    rowsEl.innerHTML='';
+    players=NAMES.map(function(nm,i){
+      var li=document.createElement('li');li.className='lb-row';
+      li.innerHTML='<span class="rk"></span><span class="mini"></span><span class="mid"><span class="nm"></span><span class="bar"><i></i></span></span><span class="rt"><span class="pz num"></span><span class="wg num"></span></span>';
+      li.querySelector('.mini').textContent=ini(nm);li.querySelector('.mini').style.setProperty('--c',COLORS[i]);
+      li.querySelector('.nm').textContent=nm;
+      return {name:nm,wager:B.start[i],shown:B.start[i],el:li};
+    });
+    podium=[];paint(false);
+  }
+  function paint(animate){
+    var B=BOARDS[board],first={};
+    if(animate)players.forEach(function(p){if(p.el.isConnected)first[p.name]=p.el.getBoundingClientRect().top});
+    players.sort(function(a,b){return b.wager-a.wager});
+    var lead=players[0].wager;
+    // podium
+    players.slice(0,3).forEach(function(p,i){
+      var s=slots[i];
+      if(podium[i]!==p.name){
+        s.querySelector('.ini').textContent=ini(p.name);s.querySelector('.nm').textContent=p.name;
+        if(animate&&!reduce){s.classList.remove('swap');void s.offsetWidth;s.classList.add('swap');}
+        podium[i]=p.name;
+      }
+      s.querySelector('.pz').textContent=money(B.prizes[i]);
+      s.querySelector('.wg').textContent=money(p.shown);
+    });
+    // list (4th and below)
+    var rest=players.slice(3);
+    players.slice(0,3).forEach(function(p){if(p.el.isConnected)p.el.remove()});
+    rest.forEach(function(p,i){
+      rowsEl.appendChild(p.el);
+      p.el.querySelector('.rk').textContent=i+4;
+      p.el.querySelector('.pz').textContent=money(B.prizes[i+3]);
+      p.el.querySelector('.wg').textContent=money(p.shown);
+      p.el.querySelector('.bar i').style.setProperty('--w',Math.max(6,Math.round(p.wager/lead*100))+'%');
+    });
+    if(animate&&!reduce){rest.forEach(function(p){
+      var now=p.el.getBoundingClientRect().top;
+      if(first[p.name]===undefined){p.el.animate([{opacity:0,transform:'translateY(-14px)'},{opacity:1,transform:'none'}],{duration:550,easing:'cubic-bezier(.2,.8,.2,1)'});}
+      else{var dy=first[p.name]-now;if(dy)p.el.animate([{transform:'translateY('+dy+'px)'},{transform:'none'}],{duration:650,easing:'cubic-bezier(.2,.8,.2,1)'});}
+    });}
+  }
+  function showWager(p){
+    var i=players.indexOf(p);
+    if(i>-1&&i<3)slots[i].querySelector('.wg').textContent=money(p.shown);
+    else p.el.querySelector('.wg').textContent=money(p.shown);
+  }
+  function countTo(p,done){
+    var from=p.shown,to=p.wager,t0=null;
+    function s(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/900),e=1-Math.pow(1-k,3);p.shown=from+(to-from)*e;showWager(p);if(k<1)requestAnimationFrame(s);else if(done)done();}
+    requestAnimationFrame(s);
+  }
+  function bump(){
+    // mostly lower ranks move; sometimes someone overtakes
+    var idx=Math.random()<.7?3+Math.floor(Math.random()*(players.length-3)):Math.floor(Math.random()*players.length);
+    var p=players[idx],gap=idx>0?players[idx-1].wager-p.wager:0;
+    var overtake=idx>0&&Math.random()<.4;
+    p.wager+=overtake?gap+300+Math.random()*2500:250+Math.random()*(idx<3?1800:1200);
+    if(idx>=3){p.el.classList.add('up');setTimeout(function(){p.el.classList.remove('up')},1300);}
+    countTo(p,function(){paint(true)});
+  }
+  var seg=document.getElementById('seg');
+  [].slice.call(seg.querySelectorAll('button')).forEach(function(b,i){
+    b.addEventListener('click',function(){
+      if(board===b.dataset.k)return;
+      seg.dataset.i=i;seg.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});
+      board=b.dataset.k;make();tick();
+      if(!reduce){[document.getElementById('podium'),rowsEl].forEach(function(el){el.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:450,easing:'ease-out'})});}
+    });
+  });
+
+  // Countdown
+  var cdD=document.getElementById('cdD'),cdH=document.getElementById('cdH'),cdM=document.getElementById('cdM'),cdS=document.getElementById('cdS');
+  function pad(n){return String(n).padStart(2,'0')}
+  function tick(){var now=new Date(),s=Math.max(0,Math.floor((BOARDS[board].ends(now)-now)/1000)),d=Math.floor(s/86400);s%=86400;
+    cdD.textContent=pad(d);cdH.textContent=pad(Math.floor(s/3600));cdM.textContent=pad(Math.floor(s%3600/60));cdS.textContent=pad(s%60);}
+  make();tick();setInterval(tick,1000);
+  if(!reduce)setInterval(function(){if(!document.hidden)bump()},2800);
+
+  // Activity feed
+  var feed=document.getElementById('feed');
+  var events=[
+    ['degen_dave','claimed','50 coins'],['lowrollr','cashed out','$10 in SOL'],['maxwinmo','ranked up to','Gold'],
+    ['sp1nqueen','won','2,400 coins in Mines'],['bonusbuyer','linked','a casino account'],['jackpotjess','joined','with Discord']
+  ];
+  var fi=0,curP=null;
+  function showEvent(){
+    var e=events[fi%events.length];fi++;
+    var p=document.createElement('p');
+    p.innerHTML='<span class="coin"></span><span><b></b> <span class="v"></span> <em></em></span><span class="t">just now</span>';
+    p.querySelector('b').textContent=e[0];p.querySelector('.v').textContent=e[1];p.querySelector('em').textContent=e[2];
+    p.style.transform=reduce?'none':'translateY(100%)';p.style.opacity=reduce?'1':'0';
+    feed.appendChild(p);
+    requestAnimationFrame(function(){requestAnimationFrame(function(){p.style.transform='none';p.style.opacity='1';})});
+    if(curP){var old=curP;if(!reduce){old.style.transform='translateY(-100%)';old.style.opacity='0';}setTimeout(function(){old.remove()},reduce?0:550);}
+    curP=p;
+  }
+  showEvent();if(!reduce)setInterval(function(){if(!document.hidden)showEvent()},3400);
+
+  // Floating coins canvas in the hero
+  var cv=document.getElementById('coins'),ctx=cv.getContext('2d'),W=0,H=0,dpr=1,coins=[],mx=0,my=0,tmx=0,tmy=0,running=true;
+  function size(){var r=cv.getBoundingClientRect();dpr=Math.min(2,window.devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
+  function spawn(init){var z=.35+Math.random()*.9;return{x:Math.random()*W,y:init?Math.random()*H:H+30,r:(5+Math.random()*9)*z,z:z,vy:(.18+Math.random()*.35)*z,vx:(Math.random()-.5)*.15,a:Math.random()*Math.PI*2,va:.01+Math.random()*.03};}
+  function setup(){size();var n=Math.round(Math.min(34,W/38));coins=[];for(var i=0;i<n;i++)coins.push(spawn(true));}
+  function draw(){
+    if(!running)return;
+    ctx.clearRect(0,0,W,H);
+    mx+=(tmx-mx)*.05;my+=(tmy-my)*.05;
+    for(var i=0;i<coins.length;i++){
+      var c=coins[i];c.y-=c.vy;c.x+=c.vx;c.a+=c.va;
+      if(c.y<-30){coins[i]=spawn(false);continue;}
+      var px=c.x+mx*28*c.z,py=c.y+my*18*c.z,sx=Math.abs(Math.cos(c.a));
+      ctx.save();ctx.translate(px,py);ctx.globalAlpha=.25+.45*c.z;
+      var g=ctx.createRadialGradient(-c.r*.3,-c.r*.3,c.r*.1,0,0,c.r);
+      g.addColorStop(0,'#FFE6A6');g.addColorStop(.55,'#F5BE4F');g.addColorStop(1,'#A8741F');
+      ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(0,0,Math.max(.8,c.r*sx),c.r,0,0,Math.PI*2);ctx.fill();
+      ctx.restore();
+    }
+    requestAnimationFrame(draw);
+  }
+  setup();
+  if(reduce){draw();running=false;}
+  else{
+    requestAnimationFrame(draw);
+    addEventListener('resize',function(){setup()});
+    if(fine)addEventListener('pointermove',function(e){tmx=e.clientX/innerWidth-.5;tmy=e.clientY/innerHeight-.5;},{passive:true});
+    if('IntersectionObserver' in window){new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v&&!running){running=true;requestAnimationFrame(draw);}else if(!v)running=false;}).observe(cv);}
+  }
+})();
+</script>
+
+</body>
+</html>
