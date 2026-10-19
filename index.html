@@ -24,7 +24,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:radial-gradient(1400px 800px at 50% -15%,rgba(255,107,66,.09),transparent 60%) fixed,radial-gradient(900px 700px at 100% 110%,rgba(121,229,188,.05),transparent 60%) fixed,var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg)}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:8px}
@@ -66,7 +66,7 @@ img{max-width:100%;display:block}
 @media (max-width:820px){.links a.l{display:none}}
 
 /* hero */
-.hero-band{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-band{position:relative;overflow:hidden}
 .hero-band::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(239,241,234,.07) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 30%,transparent 75%);pointer-events:none}
 .hero-band::after{content:"";position:absolute;width:760px;height:760px;max-width:120vw;right:-220px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,66,.16),transparent 62%);pointer-events:none;animation:breathe 9s ease-in-out infinite alternate}
 @keyframes breathe{to{transform:translate(-60px,40px) scale(1.12);opacity:.75}}
@@ -163,7 +163,7 @@ img{max-width:100%;display:block}
 @media (max-width:440px){.lb{padding:14px}.clock div{min-width:38px}.pod .av{width:40px;height:40px}.pod.p1 .av{width:50px;height:50px}.seg{min-width:0;flex:1}}
 
 /* ticker */
-.ticker{overflow:hidden;border-bottom:1px solid var(--line);padding-block:16px;background:var(--bg-2)}
+.ticker{overflow:hidden;border-block:1px solid var(--line);padding-block:16px;background:transparent}
 .ticker-track{display:flex;width:max-content;animation:tick 40s linear infinite}
 .ticker:hover .ticker-track{animation-play-state:paused}
 .ticker span{display:inline-flex;align-items:center;gap:24px;padding-right:24px;font-family:var(--display);font-stretch:118%;font-weight:700;font-size:17px;color:var(--dim);white-space:nowrap;text-transform:uppercase;letter-spacing:.02em}
@@ -292,143 +292,11 @@ img{max-width:100%;display:block}
 .feat h3{margin-top:16px;font-family:var(--body);font-stretch:100%;font-weight:700;font-size:17px}
 .feat p{margin-top:6px;font-size:14.5px;color:var(--muted)}
 
-/* originals arcade */
-.arcade{border-radius:22px;border:1px solid var(--line-2);background:var(--surface);overflow:hidden}
-.picker{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-bottom:1px solid var(--line)}
-@media (max-width:860px){.picker{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.pick{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:18px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--muted);font:inherit;text-align:left;cursor:pointer;transition:background .25s ease,color .25s ease}
-.pick:last-child{border-right:0}
-@media (max-width:860px){.pick:nth-child(3){border-right:0}.pick:nth-child(-n+3){border-bottom:1px solid var(--line)}}
-.pick:hover{background:rgba(255,255,255,.02);color:var(--ink)}
-.pick .gi{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--bg-2);border:1px solid var(--line-2);color:var(--muted);transition:all .25s ease}
-.pick b{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:16px;color:inherit}
-.pick small{display:block;font-size:12.5px;color:var(--dim);margin-top:-6px}
-.pick::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--coral);transform:scaleX(0);transition:transform .35s var(--ease)}
-.pick.on{color:var(--ink);background:var(--surface-2)}
-.pick.on .gi{background:var(--coral);border-color:var(--coral);color:var(--coral-ink)}
-.pick.on::after{transform:scaleX(1)}
-@media (max-width:480px){.pick{padding:14px 12px}.pick small{display:none}}
-.gbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--bg-2)}
-.gbal{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
-.gbal b{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:20px;color:var(--ink)}
-.gbal .cn{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#B6F5DC,var(--mint) 55%,#3E9C78);box-shadow:0 0 12px rgba(121,229,188,.5)}
-.gbar .note{font-size:12.5px;color:var(--dim)}
-.gbar button{min-height:36px;padding:0 14px;border-radius:8px;border:1px solid var(--line-2);background:transparent;color:var(--ink);font:600 13.5px var(--body);cursor:pointer}
-.gbar button:hover{border-color:var(--muted)}
-.game{display:none;grid-template-columns:300px minmax(0,1fr);min-height:480px}
-.game.on{display:grid;animation:fade .45s var(--ease) both}
-@media (max-width:860px){.game{grid-template-columns:minmax(0,1fr)}}
-.ctrl{display:flex;flex-direction:column;gap:14px;padding:22px;border-right:1px solid var(--line);background:rgba(0,0,0,.14)}
-@media (max-width:860px){.ctrl{border-right:0;border-bottom:1px solid var(--line);order:2}}
-.fld label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:6px}
-.betrow{display:grid;grid-template-columns:minmax(0,1fr) 44px 44px;gap:6px}
-.betrow input,.fld select{width:100%;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--line-2);background:var(--bg);color:var(--ink);font:600 15px var(--body);font-variant-numeric:tabular-nums}
-.betrow input:focus,.fld select:focus{outline:2px solid var(--coral);outline-offset:1px}
-.betrow button,.mini-btn{min-height:44px;border-radius:10px;border:1px solid var(--line-2);background:var(--surface-2);color:var(--ink);font:700 13px var(--body);cursor:pointer}
-.betrow button:hover,.mini-btn:hover{border-color:var(--muted)}
-.go{min-height:50px;border-radius:12px;border:0;background:var(--coral);color:var(--coral-ink);font:800 16px var(--body);cursor:pointer;transition:background .2s ease,transform .15s ease}
-.go:hover{background:var(--coral-hi)}
-.go:active{transform:scale(.98)}
-.go:disabled,.alt:disabled,.mini-btn:disabled{opacity:.4;cursor:not-allowed}
-.go.cash{background:var(--mint);color:#06231A}
-.alt{min-height:46px;border-radius:12px;border:1px solid var(--line-2);background:var(--surface-2);color:var(--ink);font:700 15px var(--body);cursor:pointer}
-.alt:hover:not(:disabled){border-color:var(--muted)}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.stat{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:10px;background:var(--bg);border:1px solid var(--line);font-size:13.5px;color:var(--muted)}
-.stat b{color:var(--ink);font-variant-numeric:tabular-nums}
-.gmsg{min-height:24px;font-size:14.5px;font-weight:700;color:var(--muted)}
-.gmsg.win{color:var(--mint)}.gmsg.lose{color:var(--coral)}
-.play{position:relative;display:flex;align-items:center;justify-content:center;padding:28px;min-width:0;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,rgba(121,229,188,.06),transparent 60%)}
-@media (max-width:860px){.play{order:1;padding:22px 14px}}
-
-/* cards (blackjack, hilo) */
-.pc{position:relative;width:72px;height:102px;border-radius:9px;background:#F6F3EA;color:#14201B;box-shadow:0 10px 24px -10px rgba(0,0,0,.8);display:flex;flex-direction:column;justify-content:space-between;padding:7px 8px;font-family:var(--display);font-stretch:105%;font-weight:800;flex-shrink:0;animation:deal .35s var(--ease) both}
-.pc.red{color:#C8402A}
-.pc .r{font-size:19px;line-height:1}
-.pc .s{align-self:flex-end;font-size:22px;line-height:1}
-.pc .c{position:absolute;inset:0;display:grid;place-items:center;font-size:34px;opacity:.9;pointer-events:none}
-.pc.back{background:repeating-linear-gradient(45deg,var(--coral) 0 6px,#E25A35 6px 12px);border:4px solid #F6F3EA}
-.pc.back *{display:none}
-@keyframes deal{from{opacity:0;transform:translateY(-24px) rotate(-6deg)}to{opacity:1;transform:none}}
-@media (max-width:480px){.pc{width:58px;height:84px}.pc .c{font-size:26px}.pc .r{font-size:16px}}
-
-.table{width:100%;max-width:560px;min-height:380px;border-radius:200px 200px 24px 24px;padding:34px 20px 26px;background:radial-gradient(ellipse at 50% 0%,#1E4A3A,#13342A 55%,#0E271F);border:1px solid #2B5A48;box-shadow:inset 0 0 60px rgba(0,0,0,.45);display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:18px}
-@media (max-width:480px){.table{border-radius:120px 120px 18px 18px;min-height:330px}}
-.hand{display:flex;flex-direction:column;align-items:center;gap:10px;min-height:136px}
-.hand .lb{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(239,241,234,.6)}
-.hand .lb b{display:inline-block;min-width:30px;margin-left:6px;padding:2px 8px;border-radius:6px;background:rgba(0,0,0,.35);color:var(--ink);font-weight:500}
-.cards{display:flex;gap:0;justify-content:center;min-height:102px}
-.cards .pc+.pc{margin-left:-16px}
-.felt-note{font-family:var(--display);font-stretch:118%;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,195,91,.55);text-align:center}
-
-/* mines */
-.mgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;width:100%;max-width:400px}
-.tile{aspect-ratio:1;border-radius:10px;border:0;background:linear-gradient(180deg,#22352E,#1A2A24);box-shadow:inset 0 -4px 0 rgba(0,0,0,.35);cursor:pointer;display:grid;place-items:center;transition:transform .15s ease,background .2s ease}
-.tile:hover:not(:disabled){transform:translateY(-2px);background:linear-gradient(180deg,#2A4239,#203430)}
-.tile:disabled{cursor:default}
-.tile.gem{background:linear-gradient(180deg,#1F4D3D,#173B2F);animation:flipin .35s var(--ease)}
-.tile.bomb{background:linear-gradient(180deg,#5A2318,#3F170F);animation:flipin .35s var(--ease)}
-.tile.dim{opacity:.45}
-.tile svg{width:56%;height:56%}
-@keyframes flipin{from{transform:rotateY(90deg) scale(.9)}to{transform:none}}
-
-/* plinko */
-.plinko{width:100%;max-width:560px}
-.plinko canvas{display:block;width:100%;height:auto;aspect-ratio:1.18}
-.buckets{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:3px;margin-top:4px;padding:0 6.667%}
-.bk{padding:7px 0;border-radius:6px;text-align:center;font-family:var(--display);font-stretch:100%;font-weight:800;font-size:11px;color:#0B1210;transition:transform .2s ease}
-.bk.hit{animation:bkhit .45s var(--ease)}
-@keyframes bkhit{40%{transform:translateY(6px)}}
-@media (max-width:480px){.bk{font-size:8.5px;padding:6px 0}}
-
-/* hilo */
-.hilo{display:flex;flex-direction:column;align-items:center;gap:22px;width:100%}
-.hilo .big .pc{width:110px;height:156px;padding:10px 12px}
-.hilo .big .pc .r{font-size:28px}.hilo .big .pc .s{font-size:30px}.hilo .big .pc .c{font-size:54px}
-.hist{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;min-height:52px;max-width:100%}
-.hist .pc{width:36px;height:50px;padding:4px 5px;animation:none}
-.hist .pc .r{font-size:12px}.hist .pc .s{font-size:12px}.hist .pc .c{display:none}
-.hist .pc.ok{outline:2px solid var(--mint);outline-offset:2px}
-.hilo .mult{font-family:var(--display);font-stretch:118%;font-weight:800;font-size:34px}
-
-/* keno */
-.kgrid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;width:100%;max-width:520px}
-.kt{aspect-ratio:1;border-radius:9px;border:1px solid var(--line-2);background:var(--bg-2);color:var(--muted);font:800 15px var(--display);font-stretch:105%;cursor:pointer;transition:background .2s ease,color .2s ease,transform .15s ease;position:relative}
-.kt:hover:not(:disabled){color:var(--ink);transform:translateY(-1px)}
-.kt.sel{background:var(--surface-2);border-color:var(--coral);color:var(--ink)}
-.kt.drawn{background:#1B2A25;color:var(--ink);border-color:var(--line-2);animation:pop .35s var(--ease)}
-.kt.hit{background:var(--mint);border-color:var(--mint);color:#06231A;animation:pop .35s var(--ease)}
-.kt:disabled{cursor:default}
-@media (max-width:480px){.kt{font-size:12px;border-radius:7px}}
-.ktable{display:grid;grid-template-columns:repeat(auto-fit,minmax(44px,1fr));gap:4px;margin-top:14px;width:100%;max-width:520px}
-.ktable div{padding:6px 2px;border-radius:8px;background:var(--bg);border:1px solid var(--line);text-align:center;font-size:11px;color:var(--dim);min-width:0}
-.ktable div b{display:block;color:var(--ink);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ktable div.hot{border-color:var(--mint)}
-.kwrap{display:flex;flex-direction:column;align-items:center;width:100%}
-
-/* dice */
-.dice{width:100%;max-width:560px;display:flex;flex-direction:column;gap:26px}
-.droll{text-align:center;font-family:var(--display);font-stretch:118%;font-weight:850;font-size:clamp(56px,9vw,88px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-.droll.win{color:var(--mint)}.droll.lose{color:var(--coral)}
-.track{position:relative;padding:22px 0 6px}
-.track .lane{position:relative;height:12px;border-radius:999px;overflow:hidden;display:flex}
-.track .lane i{height:100%}
-.track .lane .lo{background:var(--coral)}
-.track .lane .hi{background:var(--mint)}
-.track input[type=range]{position:absolute;left:0;right:0;top:15px;width:100%;height:26px;margin:0;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer}
-.track input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:8px;background:var(--ink);border:4px solid var(--bg);box-shadow:0 4px 12px rgba(0,0,0,.6)}
-.track input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:8px;background:var(--ink);border:4px solid var(--bg)}
-.marker{position:absolute;top:-8px;transform:translateX(-50%);transition:left .5s var(--ease);padding:4px 8px;border-radius:7px;background:var(--ink);color:var(--bg);font:800 12.5px var(--body);font-variant-numeric:tabular-nums;white-space:nowrap}
-.marker::after{content:"";position:absolute;left:50%;bottom:-5px;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--ink);border-bottom:0}
-.ticks{display:flex;justify-content:space-between;margin-top:10px;font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
-.dstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.dstats div{padding:12px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
-.dstats>div>span{display:block;font-size:12px;color:var(--dim)}
-.dstats b{font-family:var(--display);font-stretch:110%;font-weight:800;font-size:18px;font-variant-numeric:tabular-nums}
-.dstats button{width:100%;min-height:30px;margin-top:2px;border:0;background:none;color:var(--ink);font:800 18px var(--display);text-align:left;cursor:pointer;padding:0}
-.dstats button:hover{color:var(--coral)}
-.orig-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:20px;font-size:14px;color:var(--dim)}
-.orig-foot b{color:var(--ink)}
+/* originals embed */
+.og-frame{position:relative;height:min(880px,calc(100vh - 120px));min-height:680px;border-radius:22px;overflow:hidden;border:1px solid var(--line-2);background:var(--bg);box-shadow:0 60px 120px -60px rgba(0,0,0,.9)}
+.og-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:var(--bg)}
+@media (max-width:700px){.og-frame{height:860px;min-height:0;border-radius:16px}}
+.og-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;margin-top:18px;font-size:14.5px;color:var(--dim)}
 
 /* packages */
 .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
@@ -450,7 +318,7 @@ img{max-width:100%;display:block}
 .care p{color:var(--muted);font-size:15px;margin-top:4px;max-width:60ch}
 
 /* contact */
-.contact{position:relative;overflow:hidden;border-top:1px solid var(--line)}
+.contact{position:relative;overflow:hidden}
 .contact::before{content:"";position:absolute;width:900px;height:900px;max-width:150vw;left:50%;top:-200px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,107,66,.14),transparent 60%);pointer-events:none}
 .contact .wrap{position:relative;text-align:center;padding-block:128px}
 .contact h2{font-weight:850;font-size:clamp(38px,6vw,80px);line-height:.98;letter-spacing:-.035em;max-width:900px;margin:0 auto}
@@ -625,7 +493,7 @@ footer a:hover{color:var(--ink)}
     </div>
   </section>
 
-  <section id="process" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <section id="process">
     <div class="wrap section">
       <div class="head rv">
         <div>
@@ -711,133 +579,17 @@ footer a:hover{color:var(--ink)}
     </div>
   </section>
 
-  <section id="originals" style="background:var(--bg-2);border-top:1px solid var(--line)">
+  <section id="originals">
     <div class="wrap section">
       <div class="head rv">
         <div>
           <div class="kicker">Demo originals</div>
           <h2 class="h2">Play the casino games I build.</h2>
         </div>
-        <p class="lede" style="margin-top:0;max-width:400px">Six originals coded from scratch for streamer sites. Try them with 1,000 demo coins. Nothing here uses real money.</p>
+        <p class="lede" style="margin-top:0;max-width:420px">Blackjack, Mines, Plinko, HiLo, Keno and Dice, coded from scratch. Provably fair, with sound, auto-bet and session stats. Try them with demo coins.</p>
       </div>
-
-      <div class="arcade rv" id="arcade">
-        <div class="picker" role="tablist" aria-label="Choose a game">
-          <button class="pick on" type="button" role="tab" aria-selected="true" data-g="bj"><span class="gi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="11" height="15" rx="2"/><path d="M10 4.5 17 3a2 2 0 0 1 2.3 1.6l2 10.8a2 2 0 0 1-1.6 2.3L17 18.5"/></svg></span><b>Blackjack</b><small>Pays 3:2</small></button>
-          <button class="pick" type="button" role="tab" aria-selected="false" data-g="mn"><span class="gi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M12 21 8 9l4-6 4 6-4 12"/></svg></span><b>Mines</b><small>Find the gems</small></button>
-          <button class="pick" type="button" role="tab" aria-selected="false" data-g="pl"><span class="gi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="4" r="1.6"/><circle cx="8" cy="9" r="1.6"/><circle cx="16" cy="9" r="1.6"/><circle cx="4" cy="14" r="1.6"/><circle cx="12" cy="14" r="1.6"/><circle cx="20" cy="14" r="1.6"/><rect x="2" y="19" width="20" height="3" rx="1"/></svg></span><b>Plinko</b><small>Up to 33×</small></button>
-          <button class="pick" type="button" role="tab" aria-selected="false" data-g="hl"><span class="gi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 10l4-5 4 5M8 14l4 5 4-5"/></svg></span><b>HiLo</b><small>Higher or lower</small></button>
-          <button class="pick" type="button" role="tab" aria-selected="false" data-g="kn"><span class="gi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.5"/><circle cx="8.5" cy="15.5" r="1.5"/><circle cx="15.5" cy="15.5" r="1.5" fill="currentColor"/></svg></span><b>Keno</b><small>Pick up to 10</small></button>
-          <button class="pick" type="button" role="tab" aria-selected="false" data-g="dc"><span class="gi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="16" cy="16" r="1.3" fill="currentColor"/></svg></span><b>Dice</b><small>Set your odds</small></button>
-        </div>
-
-        <div class="gbar">
-          <div class="gbal"><span class="cn" aria-hidden="true"></span>Demo balance <b class="num" id="gBal">1,000.00</b></div>
-          <span class="note">Play money only. Your site uses your own coins.</span>
-          <button type="button" id="gReset">Reset balance</button>
-        </div>
-
-        <!-- Blackjack -->
-        <div class="game on" data-g="bj" role="tabpanel" aria-label="Blackjack">
-          <div class="ctrl">
-            <div class="betslot" data-g="bj"></div>
-            <button class="go" type="button" id="bjDeal">Deal</button>
-            <div class="duo"><button class="alt" type="button" id="bjHit" disabled>Hit</button><button class="alt" type="button" id="bjStand" disabled>Stand</button></div>
-            <button class="alt" type="button" id="bjDouble" disabled>Double</button>
-            <p class="gmsg" id="bjMsg" role="status">Blackjack pays 3:2. Dealer stands on 17.</p>
-          </div>
-          <div class="play">
-            <div class="table">
-              <div class="hand"><span class="lb">Dealer <b id="bjDT">–</b></span><div class="cards" id="bjD"></div></div>
-              <div class="felt-note">Blackjack pays 3 to 2 · Dealer stands on 17</div>
-              <div class="hand"><div class="cards" id="bjP"></div><span class="lb">You <b id="bjPT">–</b></span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mines -->
-        <div class="game" data-g="mn" role="tabpanel" aria-label="Mines">
-          <div class="ctrl">
-            <div class="betslot" data-g="mn"></div>
-            <div class="fld"><label for="mnCount">Mines</label><select id="mnCount"><option>1</option><option selected>3</option><option>5</option><option>10</option><option>20</option></select></div>
-            <button class="go" type="button" id="mnGo">Start</button>
-            <div class="stat"><span>Multiplier</span><b id="mnMult">1.00×</b></div>
-            <div class="stat"><span>Next gem</span><b id="mnNext">–</b></div>
-            <p class="gmsg" id="mnMsg" role="status">Pick tiles. Cash out before you hit a mine.</p>
-          </div>
-          <div class="play"><div class="mgrid" id="mnGrid"></div></div>
-        </div>
-
-        <!-- Plinko -->
-        <div class="game" data-g="pl" role="tabpanel" aria-label="Plinko">
-          <div class="ctrl">
-            <div class="betslot" data-g="pl"></div>
-            <button class="go" type="button" id="plGo">Drop ball</button>
-            <div class="stat"><span>Rows</span><b>12</b></div>
-            <div class="stat"><span>Last win</span><b id="plLast">–</b></div>
-            <p class="gmsg" id="plMsg" role="status">Drop as many balls as you like.</p>
-          </div>
-          <div class="play"><div class="plinko"><canvas id="plCv" width="560" height="475" aria-label="Plinko board"></canvas><div class="buckets" id="plB"></div></div></div>
-        </div>
-
-        <!-- HiLo -->
-        <div class="game" data-g="hl" role="tabpanel" aria-label="HiLo">
-          <div class="ctrl">
-            <div class="betslot" data-g="hl"></div>
-            <button class="go" type="button" id="hlGo">Start</button>
-            <button class="alt" type="button" id="hlHi" disabled>Higher or same</button>
-            <button class="alt" type="button" id="hlLo" disabled>Lower or same</button>
-            <button class="go cash" type="button" id="hlCash" disabled>Cash out</button>
-            <p class="gmsg" id="hlMsg" role="status">Guess if the next card is higher or lower.</p>
-          </div>
-          <div class="play">
-            <div class="hilo">
-              <div class="big" id="hlCard"><div class="pc back"><span class="r"></span><span class="s"></span></div></div>
-              <div class="mult num" id="hlMult">1.00×</div>
-              <div class="hist" id="hlHist" aria-label="Card history"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Keno -->
-        <div class="game" data-g="kn" role="tabpanel" aria-label="Keno">
-          <div class="ctrl">
-            <div class="betslot" data-g="kn"></div>
-            <div class="duo"><button class="alt" type="button" id="knAuto">Auto pick</button><button class="alt" type="button" id="knClear">Clear</button></div>
-            <button class="go" type="button" id="knGo" disabled>Pick numbers first</button>
-            <div class="stat"><span>Picked</span><b id="knPicked">0 / 10</b></div>
-            <p class="gmsg" id="knMsg" role="status">Pick 1 to 10 numbers. 10 are drawn.</p>
-          </div>
-          <div class="play"><div class="kwrap"><div class="kgrid" id="knGrid"></div><div class="ktable" id="knTable"></div></div></div>
-        </div>
-
-        <!-- Dice -->
-        <div class="game" data-g="dc" role="tabpanel" aria-label="Dice">
-          <div class="ctrl">
-            <div class="betslot" data-g="dc"></div>
-            <button class="go" type="button" id="dcGo">Roll</button>
-            <div class="stat"><span>Profit on win</span><b id="dcProfit">0.00</b></div>
-            <p class="gmsg" id="dcMsg" role="status">Drag the slider to set your odds.</p>
-          </div>
-          <div class="play">
-            <div class="dice">
-              <div class="droll num" id="dcRoll">50.00</div>
-              <div class="track">
-                <span class="marker" id="dcMark" style="left:50%">50.00</span>
-                <div class="lane"><i class="lo" id="dcLo" style="width:50%"></i><i class="hi" id="dcHi" style="width:50%"></i></div>
-                <input type="range" id="dcRange" min="2" max="98" step="1" value="50" aria-label="Target number">
-                <div class="ticks"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
-              </div>
-              <div class="dstats">
-                <div><span>Multiplier</span><b id="dcMult">1.98×</b></div>
-                <div><span>Roll <em id="dcModeL" style="font-style:normal">over</em></span><button type="button" id="dcMode" aria-label="Switch between roll over and roll under"><span id="dcTarget">50</span> ⇄</button></div>
-                <div><span>Win chance</span><b id="dcChance">50%</b></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="orig-foot"><span>Built with HTML canvas and JavaScript. <b>Your version gets your branding, your coins and your rules.</b></span><span>House edge and payouts are set to your spec.</span></div>
+      <div class="og-frame rv"><iframe src="originals.html" title="Sahil Originals: six playable demo casino games" loading="lazy" allow="autoplay"></iframe></div>
+      <div class="og-foot rv"><span>Demo coins only. Your version runs on your coins, your branding and your rules.</span><a class="btn btn-line" href="originals.html" target="_blank" rel="noopener">Open full screen <span class="arr" aria-hidden="true">↗</span></a></div>
     </div>
   </section>
 
@@ -880,7 +632,7 @@ footer a:hover{color:var(--ink)}
     </div>
   </section>
 
-  <section id="features" style="border-top:1px solid var(--line)">
+  <section id="features">
     <div class="wrap section">
       <div class="head rv">
         <div>
@@ -901,7 +653,7 @@ footer a:hover{color:var(--ink)}
     </div>
   </section>
 
-  <section id="packages" style="background:var(--bg-2);border-top:1px solid var(--line)">
+  <section id="packages">
     <div class="wrap section">
       <div class="head rv">
         <div>
@@ -1139,250 +891,6 @@ footer a:hover{color:var(--ink)}
   }
   showEvent();if(!reduce)setInterval(function(){if(!document.hidden)showEvent()},3400);
 
-  // ================= DEMO ORIGINALS =================
-  (function(){
-    var arcade=document.getElementById('arcade');if(!arcade)return;
-    var balEl=document.getElementById('gBal'),bal=1000;
-    function r2(n){return Math.round(n*100)/100}
-    function fmt(n){return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
-    function setBal(v){bal=r2(v);balEl.textContent=fmt(bal);if(!reduce)balEl.animate([{color:'#79E5BC'},{color:''}],{duration:600})}
-    function say(id,t,cls){var el=document.getElementById(id);el.textContent=t;el.className='gmsg'+(cls?' '+cls:'')}
-    function rnd(n){return Math.floor(Math.random()*n)}
-
-    // bet fields
-    [].slice.call(arcade.querySelectorAll('.betslot')).forEach(function(slot){
-      var g=slot.dataset.g;
-      slot.innerHTML='<div class="fld"><label for="'+g+'Bet">Bet amount</label><div class="betrow"><input id="'+g+'Bet" type="number" inputmode="decimal" min="0.1" step="0.1" value="10"><button type="button" data-m=".5">½</button><button type="button" data-m="2">2×</button></div></div>';
-      var inp=slot.querySelector('input');
-      slot.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){var v=parseFloat(inp.value)||0;inp.value=Math.max(.1,r2(Math.min(bal,v*parseFloat(b.dataset.m))));inp.dispatchEvent(new Event('input'))})});
-    });
-    function bet(g,msg){
-      var v=r2(parseFloat(document.getElementById(g+'Bet').value));
-      if(!(v>0)){say(msg,'Enter a bet above 0.','lose');return null}
-      if(v>bal){say(msg,'Not enough demo coins. Press Reset balance.','lose');return null}
-      return v;
-    }
-    function lockBet(g,on){var s=arcade.querySelector('.betslot[data-g="'+g+'"]');s.querySelectorAll('input,button').forEach(function(e){e.disabled=on})}
-    document.getElementById('gReset').addEventListener('click',function(){setBal(1000)});
-
-    // tabs
-    var picks=[].slice.call(arcade.querySelectorAll('.pick')),games=[].slice.call(arcade.querySelectorAll('.game'));
-    picks.forEach(function(p){p.addEventListener('click',function(){
-      picks.forEach(function(x){var on=x===p;x.classList.toggle('on',on);x.setAttribute('aria-selected',on)});
-      games.forEach(function(x){x.classList.toggle('on',x.dataset.g===p.dataset.g)});
-      if(p.dataset.g==='pl')plSize();
-    })});
-
-    // cards
-    var SUITS=['♠','♥','♦','♣'],RANKS=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
-    function cardEl(c,hidden){
-      var d=document.createElement('div');d.className='pc'+(hidden?' back':'')+(c.s===1||c.s===2?' red':'');
-      d.innerHTML='<span class="r"></span><span class="c"></span><span class="s"></span>';
-      d.querySelector('.r').textContent=RANKS[c.r-1];d.querySelector('.s').textContent=SUITS[c.s];d.querySelector('.c').textContent=SUITS[c.s];
-      return d;
-    }
-
-    // ---------- Blackjack ----------
-    var bj={deck:[],p:[],d:[],bet:0,live:false};
-    var bjD=document.getElementById('bjD'),bjP=document.getElementById('bjP'),bjDT=document.getElementById('bjDT'),bjPT=document.getElementById('bjPT');
-    var bjDeal=document.getElementById('bjDeal'),bjHit=document.getElementById('bjHit'),bjStand=document.getElementById('bjStand'),bjDouble=document.getElementById('bjDouble');
-    function shoe(){var d=[];for(var k=0;k<6;k++)for(var s=0;s<4;s++)for(var r=1;r<=13;r++)d.push({r:r,s:s});for(var i=d.length-1;i>0;i--){var j=rnd(i+1),t=d[i];d[i]=d[j];d[j]=t}return d}
-    function draw(){if(bj.deck.length<20)bj.deck=shoe();return bj.deck.pop()}
-    function total(h){var t=0,a=0;h.forEach(function(c){var v=c.r>10?10:c.r;if(c.r===1){a++;v=11}t+=v});while(t>21&&a){t-=10;a--}return t}
-    function bjRender(hideHole){
-      bjD.innerHTML='';bjP.innerHTML='';
-      bj.d.forEach(function(c,i){bjD.appendChild(cardEl(c,hideHole&&i===1))});
-      bj.p.forEach(function(c){bjP.appendChild(cardEl(c))});
-      bjDT.textContent=bj.d.length?(hideHole?total([bj.d[0]]):total(bj.d)):'–';
-      bjPT.textContent=bj.p.length?total(bj.p):'–';
-    }
-    function bjButtons(on){bjHit.disabled=!on;bjStand.disabled=!on;bjDouble.disabled=!on||bj.p.length!==2||bal<bj.bet;bjDeal.disabled=on;lockBet('bj',on)}
-    function bjEnd(mult,text,cls){bj.live=false;if(mult>0)setBal(bal+bj.bet*mult);bjRender(false);bjButtons(false);say('bjMsg',text,cls)}
-    bjDeal.addEventListener('click',function(){
-      var b=bet('bj','bjMsg');if(b===null)return;
-      bj.bet=b;setBal(bal-b);bj.p=[draw(),draw()];bj.d=[draw(),draw()];bj.live=true;
-      bjRender(true);bjButtons(true);say('bjMsg','Hit, stand or double.');
-      var pb=total(bj.p)===21,db=total(bj.d)===21;
-      if(pb||db){setTimeout(function(){
-        if(pb&&db)bjEnd(1,'Both blackjack. Push.');
-        else if(pb)bjEnd(2.5,'Blackjack! You win '+fmt(bj.bet*1.5)+'.','win');
-        else bjEnd(0,'Dealer has blackjack.','lose');
-      },500)}
-    });
-    function bjStandFn(){
-      bjButtons(false);bjRender(false);
-      (function step(){
-        if(total(bj.d)<17){bj.d.push(draw());bjRender(false);setTimeout(step,reduce?0:450);return}
-        var p=total(bj.p),d=total(bj.d);
-        if(d>21||p>d)bjEnd(2,'You win '+fmt(bj.bet)+'.','win');
-        else if(p===d)bjEnd(1,'Push. Bet returned.');
-        else bjEnd(0,'Dealer wins with '+d+'.','lose');
-      })();
-    }
-    bjHit.addEventListener('click',function(){bj.p.push(draw());bjRender(true);var t=total(bj.p);bjDouble.disabled=true;if(t>21)bjEnd(0,'Bust with '+t+'.','lose');else if(t===21)bjStandFn()});
-    bjStand.addEventListener('click',bjStandFn);
-    bjDouble.addEventListener('click',function(){setBal(bal-bj.bet);bj.bet*=2;bj.p.push(draw());bjRender(true);var t=total(bj.p);if(t>21)bjEnd(0,'Bust with '+t+'.','lose');else bjStandFn()});
-
-    // ---------- Mines ----------
-    var GEM='<svg viewBox="0 0 24 24" fill="#79E5BC" aria-hidden="true"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M12 21 8 9l4-6 4 6" fill="none" stroke="#0E3A2B" stroke-width="1.3"/></svg>';
-    var BOMB='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="14" r="7" fill="#FF6B42"/><path d="M15 8l3-3" stroke="#FFB199" stroke-width="2" stroke-linecap="round"/><circle cx="19" cy="4" r="1.6" fill="#F2C35B"/><circle cx="8.5" cy="11.5" r="1.6" fill="#FFB199"/></svg>';
-    var mn={live:false,mines:[],found:0,m:3,bet:0,mult:1},mnGrid=document.getElementById('mnGrid'),mnGo=document.getElementById('mnGo'),tiles=[];
-    for(var ti=0;ti<25;ti++){var t=document.createElement('button');t.type='button';t.className='tile';t.disabled=true;t.setAttribute('aria-label','Tile '+(ti+1));t.dataset.i=ti;mnGrid.appendChild(t);tiles.push(t)}
-    function mMult(k,m){var x=.99;for(var i=0;i<k;i++)x*=(25-i)/(25-m-i);return x}
-    function mnStats(){document.getElementById('mnMult').textContent=mn.mult.toFixed(2)+'×';document.getElementById('mnNext').textContent=mn.live?mMult(mn.found+1,mn.m).toFixed(2)+'×':'–'}
-    function mnReveal(){tiles.forEach(function(t,i){if(!t.classList.contains('gem')&&!t.classList.contains('bomb')){t.classList.add(mn.mines.indexOf(i)>-1?'bomb':'gem','dim');t.innerHTML=mn.mines.indexOf(i)>-1?BOMB:GEM}t.disabled=true})}
-    function mnStop(){mn.live=false;mnGo.textContent='Start';mnGo.classList.remove('cash');mnGo.disabled=false;lockBet('mn',false);document.getElementById('mnCount').disabled=false;mnStats()}
-    function mnCash(){if(!mn.found)return;var w=r2(mn.bet*mn.mult);setBal(bal+w);say('mnMsg','Cashed out '+fmt(w)+' at '+mn.mult.toFixed(2)+'×.','win');mnReveal();mnStop()}
-    mnGo.addEventListener('click',function(){
-      if(mn.live){mnCash();return}
-      var b=bet('mn','mnMsg');if(b===null)return;
-      mn.bet=b;setBal(bal-b);mn.m=parseInt(document.getElementById('mnCount').value,10);mn.found=0;mn.mult=1;mn.live=true;mn.mines=[];
-      while(mn.mines.length<mn.m){var x=rnd(25);if(mn.mines.indexOf(x)<0)mn.mines.push(x)}
-      tiles.forEach(function(t){t.className='tile';t.innerHTML='';t.disabled=false});
-      mnGo.textContent='Cash out';mnGo.classList.add('cash');mnGo.disabled=true;lockBet('mn',true);document.getElementById('mnCount').disabled=true;
-      say('mnMsg','Pick a tile.');mnStats();
-    });
-    tiles.forEach(function(t){t.addEventListener('click',function(){
-      if(!mn.live)return;var i=+t.dataset.i;t.disabled=true;
-      if(mn.mines.indexOf(i)>-1){t.classList.add('bomb');t.innerHTML=BOMB;say('mnMsg','Boom. You hit a mine.','lose');mnReveal();mn.mult=1;mnStop();return}
-      t.classList.add('gem');t.innerHTML=GEM;mn.found++;mn.mult=mMult(mn.found,mn.m);mnGo.disabled=false;mnStats();
-      mnGo.textContent='Cash out '+fmt(r2(mn.bet*mn.mult));
-      if(mn.found===25-mn.m)mnCash();else say('mnMsg',mn.found+' gem'+(mn.found>1?'s':'')+' found. Keep going or cash out.');
-    })});
-
-    // ---------- Plinko ----------
-    var ROWS=12,PM=[33,11,4,2,1.1,.6,.3,.6,1.1,2,4,11,33];
-    var cv=document.getElementById('plCv'),cx=cv.getContext('2d'),plB=document.getElementById('plB'),balls=[],W=560,H=475,dprP=1,sp,top0,rowH,pegR,ballR,plRun=false,flash={};
-    function bcol(m){return m>=11?'#FF6B42':m>=4?'#FF9A6B':m>=2?'#F2C35B':m>=1?'#B6E3A0':'#79E5BC'}
-    PM.forEach(function(m){var d=document.createElement('div');d.className='bk';d.textContent=m+'×';d.style.background=bcol(m);plB.appendChild(d)});
-    function plSize(){var w=cv.clientWidth||560;dprP=Math.min(2,window.devicePixelRatio||1);W=w;H=w/1.18;cv.width=W*dprP;cv.height=H*dprP;cx.setTransform(dprP,0,0,dprP,0,0);sp=W/(ROWS+3);top0=sp*.9;rowH=(H-top0-sp*.35)/ROWS;pegR=Math.max(2.2,sp*.09);ballR=Math.max(4,sp*.2);plDraw()}
-    function pegPos(r,j){return{x:W/2+(j-(r+2)/2)*sp,y:top0+r*rowH}}
-    function plDraw(){
-      cx.clearRect(0,0,W,H);
-      for(var r=0;r<ROWS;r++)for(var j=0;j<r+3;j++){var p=pegPos(r,j),k=r+'_'+j,f=flash[k]||0;cx.beginPath();cx.arc(p.x,p.y,pegR+(f>0?1.5:0),0,Math.PI*2);cx.fillStyle=f>0?'#79E5BC':'rgba(239,241,234,.55)';cx.fill();if(f>0)flash[k]=f-1}
-      balls.forEach(function(b){cx.beginPath();cx.arc(b.x,b.y,ballR,0,Math.PI*2);var g=cx.createRadialGradient(b.x-ballR*.35,b.y-ballR*.35,1,b.x,b.y,ballR);g.addColorStop(0,'#FFC2AD');g.addColorStop(1,'#FF6B42');cx.fillStyle=g;cx.fill()});
-    }
-    function plLoop(t){
-      var now=performance.now();
-      balls=balls.filter(function(b){
-        var seg=Math.floor((now-b.t0)/b.dur);
-        if(seg>=ROWS+1){plLand(b);return false}
-        var k=((now-b.t0)%b.dur)/b.dur;
-        var from=b.path[seg],to=b.path[seg+1];
-        b.x=from.x+(to.x-from.x)*k;
-        b.y=from.y+(to.y-from.y)*k-(seg?Math.sin(Math.PI*k)*rowH*.45:0);
-        if(b.seg!==seg){b.seg=seg;if(seg>=1)flash[(seg-1)+'_'+b.pj[seg-1]]=6}
-        return true;
-      });
-      plDraw();
-      if(balls.length)requestAnimationFrame(plLoop);else plRun=false;
-    }
-    function plLand(b){
-      var m=PM[b.slot],w=r2(b.bet*m);setBal(bal+w);
-      document.getElementById('plLast').textContent=m+'× · '+fmt(w);
-      var el=plB.children[b.slot];el.classList.remove('hit');void el.offsetWidth;el.classList.add('hit');
-      say('plMsg',(m>=1?'Landed on ':'Only ')+m+'×. '+(w>=b.bet?'You win '+fmt(w)+'.':'Returned '+fmt(w)+'.'),m>=1?'win':'lose');
-    }
-    document.getElementById('plGo').addEventListener('click',function(){
-      var b=bet('pl','plMsg');if(b===null)return;setBal(bal-b);
-      var R=0,path=[{x:W/2,y:top0-rowH}],pj=[];
-      for(var r=0;r<ROWS;r++){path.push({x:W/2+(R-r/2)*sp,y:top0+r*rowH-pegR-ballR});pj.push(R+1);if(Math.random()<.5)R++}
-      path.push({x:W/2+(R-ROWS/2)*sp,y:H-ballR-2});
-      var ball={path:path,pj:pj,slot:R,bet:b,t0:performance.now(),dur:150,x:path[0].x,y:path[0].y,seg:-1};
-      if(reduce){plLand(ball);plDraw();return}
-      balls.push(ball);
-      if(!plRun){plRun=true;requestAnimationFrame(plLoop)}
-    });
-    addEventListener('resize',function(){if(!balls.length)plSize()});
-
-    // ---------- HiLo ----------
-    var hl={live:false,card:null,mult:1,bet:0},hlCard=document.getElementById('hlCard'),hlHist=document.getElementById('hlHist');
-    var hlGo=document.getElementById('hlGo'),hlHi=document.getElementById('hlHi'),hlLo=document.getElementById('hlLo'),hlCash=document.getElementById('hlCash');
-    function hlDraw(){return{r:1+rnd(13),s:rnd(4)}}
-    function hlShow(c){hlCard.innerHTML='';hlCard.appendChild(cardEl(c))}
-    function hlOdds(){var r=hl.card.r,ph=(14-r)/13,pl=r/13;hlHi.textContent='Higher or same · '+(.99/ph).toFixed(2)+'×';hlLo.textContent='Lower or same · '+(.99/pl).toFixed(2)+'×';return{ph:ph,pl:pl}}
-    function hlSet(on){hlHi.disabled=!on;hlLo.disabled=!on;hlCash.disabled=!on||hl.mult<=1;hlGo.disabled=on;lockBet('hl',on)}
-    function hlMultShow(){document.getElementById('hlMult').textContent=hl.mult.toFixed(2)+'×';hlCash.textContent=hl.live&&hl.mult>1?'Cash out '+fmt(r2(hl.bet*hl.mult)):'Cash out'}
-    function hlAddHist(c,ok){var e=cardEl(c);if(ok)e.classList.add('ok');hlHist.appendChild(e);while(hlHist.children.length>9)hlHist.removeChild(hlHist.firstChild)}
-    hlGo.addEventListener('click',function(){var b=bet('hl','hlMsg');if(b===null)return;setBal(bal-b);hl={live:true,card:hlDraw(),mult:1,bet:b};hlHist.innerHTML='';hlShow(hl.card);hlOdds();hlSet(true);hlMultShow();say('hlMsg','Higher or lower?')});
-    function hlGuess(hi){
-      var o=hlOdds(),next=hlDraw(),ok=hi?next.r>=hl.card.r:next.r<=hl.card.r;
-      hlAddHist(hl.card,ok);hl.card=next;hlShow(next);
-      if(!ok){hl.live=false;hl.mult=1;hlSet(false);hlMultShow();hlHi.textContent='Higher or same';hlLo.textContent='Lower or same';say('hlMsg','Wrong call. Round over.','lose');return}
-      hl.mult*=.99/(hi?o.ph:o.pl);hlOdds();hlSet(true);hlMultShow();say('hlMsg','Correct. Keep going or cash out.','win');
-    }
-    hlHi.addEventListener('click',function(){hlGuess(true)});
-    hlLo.addEventListener('click',function(){hlGuess(false)});
-    hlCash.addEventListener('click',function(){var w=r2(hl.bet*hl.mult);setBal(bal+w);hl.live=false;hlSet(false);say('hlMsg','Cashed out '+fmt(w)+' at '+hl.mult.toFixed(2)+'×.','win');hl.mult=1;hlMultShow();hlHi.textContent='Higher or same';hlLo.textContent='Lower or same'});
-
-    // ---------- Keno ----------
-    var KN=40,KD=10,knSel=[],knBusy=false,knGrid=document.getElementById('knGrid'),knTiles=[],knGo=document.getElementById('knGo');
-    function C(n,k){if(k<0||k>n)return 0;var r=1;for(var i=1;i<=k;i++)r=r*(n-k+i)/i;return r}
-    function knPay(n){
-      if(!n)return[];var raw=[],ev=0,tot=C(KN,KD);
-      for(var k=0;k<=n;k++){var v=n===1?(k===1?1:0):(k>=Math.ceil(n*.4)?Math.pow(2.6,k)-1:0);raw.push(v);ev+=v*C(n,k)*C(KN-n,KD-k)/tot}
-      return raw.map(function(v){return v?Math.max(.1,Math.round(v*.97/ev*100)/100):0});
-    }
-    for(var kk=1;kk<=KN;kk++){var e=document.createElement('button');e.type='button';e.className='kt';e.textContent=kk;e.dataset.n=kk;knGrid.appendChild(e);knTiles.push(e)}
-    function knTable(hits){
-      var tb=document.getElementById('knTable'),pay=knPay(knSel.length);tb.innerHTML='';
-      pay.forEach(function(m,k){var d=document.createElement('div');if(hits===k)d.className='hot';d.innerHTML='<b></b>'+k+' hit'+(k===1?'':'s');d.querySelector('b').textContent=(m?m.toFixed(2):'0')+'×';tb.appendChild(d)});
-    }
-    function knUI(){
-      document.getElementById('knPicked').textContent=knSel.length+' / 10';
-      knGo.disabled=!knSel.length||knBusy;knGo.textContent=knSel.length?'Play':'Pick numbers first';
-      knTiles.forEach(function(t){t.classList.toggle('sel',knSel.indexOf(+t.dataset.n)>-1)});
-      knTable();
-    }
-    function knReset(){knTiles.forEach(function(t){t.classList.remove('drawn','hit')})}
-    knTiles.forEach(function(t){t.addEventListener('click',function(){if(knBusy)return;knReset();var n=+t.dataset.n,i=knSel.indexOf(n);if(i>-1)knSel.splice(i,1);else if(knSel.length<10)knSel.push(n);else{say('knMsg','You can pick up to 10 numbers.','lose');return}say('knMsg','Pick 1 to 10 numbers. 10 are drawn.');knUI()})});
-    document.getElementById('knAuto').addEventListener('click',function(){if(knBusy)return;knReset();knSel=[];while(knSel.length<10){var x=1+rnd(KN);if(knSel.indexOf(x)<0)knSel.push(x)}knUI()});
-    document.getElementById('knClear').addEventListener('click',function(){if(knBusy)return;knReset();knSel=[];knUI()});
-    knGo.addEventListener('click',function(){
-      var b=bet('kn','knMsg');if(b===null)return;setBal(bal-b);knBusy=true;knReset();knUI();lockBet('kn',true);
-      var drawn=[];while(drawn.length<KD){var x=1+rnd(KN);if(drawn.indexOf(x)<0)drawn.push(x)}
-      var i=0,hits=0;
-      (function next(){
-        if(i<KD){var n=drawn[i++],t=knTiles[n-1],h=knSel.indexOf(n)>-1;if(h)hits++;t.classList.add(h?'hit':'drawn');setTimeout(next,reduce?0:110);return}
-        var m=knPay(knSel.length)[hits]||0,w=r2(b*m);if(w)setBal(bal+w);
-        knBusy=false;lockBet('kn',false);knUI();knTable(hits);
-        say('knMsg',hits+' hit'+(hits===1?'':'s')+'. '+(w?'You win '+fmt(w)+' ('+m.toFixed(2)+'×).':'No win this time.'),w>=b?'win':(w?'':'lose'));
-      })();
-    });
-    knUI();
-
-    // ---------- Dice ----------
-    var dc={over:true,busy:false},rg=document.getElementById('dcRange');
-    function dcCalc(){var t=+rg.value,ch=dc.over?100-t:t,m=99/ch;return{t:t,ch:ch,m:m}}
-    function dcUI(){
-      var c=dcCalc();
-      document.getElementById('dcTarget').textContent=c.t;document.getElementById('dcModeL').textContent=dc.over?'over':'under';
-      document.getElementById('dcMult').textContent=c.m.toFixed(4).replace(/0+$/,'').replace(/\.$/,'')+'×';
-      document.getElementById('dcChance').textContent=c.ch+'%';
-      var lo=document.getElementById('dcLo'),hi=document.getElementById('dcHi');
-      lo.style.width=c.t+'%';hi.style.width=(100-c.t)+'%';
-      lo.style.background=dc.over?'var(--coral)':'var(--mint)';hi.style.background=dc.over?'var(--mint)':'var(--coral)';
-      var b=parseFloat(document.getElementById('dcBet').value)||0;document.getElementById('dcProfit').textContent=fmt(r2(b*c.m-b));
-    }
-    rg.addEventListener('input',dcUI);
-    document.getElementById('dcBet').addEventListener('input',dcUI);
-    document.getElementById('dcMode').addEventListener('click',function(){dc.over=!dc.over;dcUI()});
-    document.getElementById('dcGo').addEventListener('click',function(){
-      if(dc.busy)return;var b=bet('dc','dcMsg');if(b===null)return;setBal(bal-b);dc.busy=true;
-      var c=dcCalc(),roll=Math.floor(Math.random()*10001)/100,win=dc.over?roll>c.t:roll<c.t;
-      var out=document.getElementById('dcRoll'),mk=document.getElementById('dcMark');out.className='droll num';
-      var t0=null,start=parseFloat(out.textContent)||50,D=reduce?1:520;
-      mk.style.left=roll+'%';mk.textContent=roll.toFixed(2);
-      (function an(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/D),e=1-Math.pow(1-k,3);out.textContent=(start+(roll-start)*e).toFixed(2);
-        if(k<1){requestAnimationFrame(an);return}
-        out.classList.add(win?'win':'lose');dc.busy=false;
-        if(win){var w=r2(b*c.m);setBal(bal+w);say('dcMsg','Rolled '+roll.toFixed(2)+'. You win '+fmt(w)+'.','win')}
-        else say('dcMsg','Rolled '+roll.toFixed(2)+'. Not this time.','lose');
-      })(performance.now());
-    });
-    dcUI();
-    plSize();
-  })();
 })();
 </script>
 
