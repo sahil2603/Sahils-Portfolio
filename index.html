@@ -6,6 +6,25 @@
 <title>Sahil Builds — websites that turn viewers into regulars</title>
 <meta name="description" content="Rewards platforms and casino originals for streamers: live leaderboards, Discord login, coins and payouts on your own domain.">
 <meta name="theme-color" content="#07060B">
+<link rel="canonical" href="https://sahilbuilds.com/">
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sahil Builds">
+<meta property="og:title" content="Sahil Builds · Websites that turn viewers into regulars">
+<meta property="og:description" content="Live leaderboards, casino APIs, casino originals, automated rank-up rewards, admin panels and the WDK bot, built for casino streamers.">
+<meta property="og:url" content="https://sahilbuilds.com/">
+<meta property="og:image" content="https://sahilbuilds.com/og-v2.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sahil Builds: websites that turn viewers into regulars, with glowing particle rings">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@sahilku36220794">
+<meta name="twitter:title" content="Sahil Builds · Websites that turn viewers into regulars">
+<meta name="twitter:description" content="Leaderboards, casino APIs, casino originals, auto rank-ups, admin panels and the WDK bot for streamers.">
+<meta name="twitter:image" content="https://sahilbuilds.com/og-v2.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -28,6 +47,7 @@ a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;backgroun
 
 /* ---------- nav ---------- */
 .nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;gap:20px;padding:14px var(--gut)}
+.nav::before{content:"";position:absolute;inset:0 0 -24px;z-index:-1;background:linear-gradient(rgba(7,6,11,.85),rgba(7,6,11,.55) 60%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);-webkit-mask:linear-gradient(#000 65%,transparent);mask:linear-gradient(#000 65%,transparent)}
 .logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:.06em;text-transform:uppercase}
 .logo i{position:relative;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-style:normal;color:#14070A;
   background:conic-gradient(from 210deg,var(--gold),var(--ember),var(--violet),var(--cyan),var(--gold));box-shadow:0 0 20px rgba(255,181,71,.45)}
@@ -121,18 +141,65 @@ main{position:relative;z-index:5}
 @media (max-width:760px){.copy::before{inset:-10% -14%;background:radial-gradient(closest-side,rgba(7,6,11,.85),rgba(7,6,11,.5) 65%,transparent)}}
 @media (max-width:480px){.cta{padding:10px 14px;font-size:13px}.logo span{display:none}}
 @media (prefers-reduced-motion:reduce){.grain,.scroll-cue i,.dot::before{animation:none}.big .w{opacity:1;filter:none}}
+
+/* top beam */
+.beam{position:fixed;left:0;right:0;top:0;height:3px;z-index:60;pointer-events:none}
+.beam-line{position:absolute;inset:0;transform-origin:left;transform:scaleX(var(--ps,0));background:linear-gradient(90deg,transparent,var(--violet) 25%,var(--cyan) 55%,var(--gold) 80%,var(--ember));box-shadow:0 0 14px var(--gold),0 0 30px rgba(155,107,255,.5)}
+.beam-head{position:absolute;top:50%;left:calc(var(--ps,0) * 100%);width:160px;height:26px;transform:translate(-100%,-50%);opacity:min(1,calc(var(--ps,0) * 40));
+  background:radial-gradient(closest-side at 100% 50%,#fff,var(--gold) 35%,transparent 72%);filter:blur(.5px)}
+.beam-head::after{content:"";position:absolute;right:-6px;top:50%;width:12px;height:12px;border-radius:50%;transform:translateY(-50%);background:#fff;box-shadow:0 0 12px #fff,0 0 26px var(--gold),0 0 52px var(--ember)}
+/* back to top */
+.totop{position:fixed;right:max(18px,var(--gut));bottom:58px;z-index:60;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:var(--gold);
+  background:rgba(14,11,24,.4);backdrop-filter:blur(16px) saturate(170%);-webkit-backdrop-filter:blur(16px) saturate(170%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 30px rgba(0,0,0,.5),0 0 24px rgba(255,181,71,.2);
+  opacity:0;transform:translateY(20px) scale(.8);pointer-events:none;transition:opacity .4s,transform .5s cubic-bezier(.2,.9,.3,1.4),box-shadow .3s}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 10px 30px rgba(0,0,0,.5),0 0 40px rgba(255,181,71,.6)}
+.totop .ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.tt-bg{fill:none;stroke:rgba(255,255,255,.12);stroke-width:2.5}
+.tt-fg{fill:none;stroke:url(#tg);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:169.6;stroke-dashoffset:calc(169.6 - var(--ps,0) * 169.6);filter:drop-shadow(0 0 4px rgba(255,181,71,.8))}
+.totop .ar{width:22px;height:22px;transition:transform .3s}
+.totop:hover .ar{transform:translateY(-3px)}
+@media (max-width:760px){.totop{width:50px;height:50px;bottom:52px;right:16px}}
+
+/* features */
+.grad{background:linear-gradient(100deg,var(--gold),var(--ember) 40%,var(--violet) 75%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.feat{position:relative;padding:24px;border-radius:22px;overflow:hidden;isolation:isolate;
+  background:linear-gradient(150deg,rgba(255,255,255,.08),rgba(255,255,255,.015) 45%),rgba(14,11,24,.5);border:1px solid rgba(255,255,255,.11);
+  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
+  --mx:50%;--my:50%;transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s}
+.feat::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(320px circle at var(--mx) var(--my),color-mix(in srgb,var(--c) 22%,transparent),transparent 65%);opacity:0;transition:opacity .4s}
+.feat::after{content:"";position:absolute;left:24px;right:24px;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent);opacity:.55}
+.feat:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--c) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 24px 60px rgba(0,0,0,.45),0 0 40px color-mix(in srgb,var(--c) 22%,transparent)}
+.feat:hover::before{opacity:1}
+.fi{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 35%,transparent);box-shadow:0 0 22px color-mix(in srgb,var(--c) 25%,transparent);transition:transform .5s}
+.fi svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.feat:hover .fi{transform:rotate(-8deg) scale(1.08)}
+.fn{position:absolute;right:20px;top:18px;font-family:var(--mono);font-size:12px;color:var(--dim)}
+.feat h3{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:21px;line-height:1.1;margin:18px 0 8px;letter-spacing:.01em}
+.feat p{color:var(--muted);font-size:14.5px;line-height:1.55}
+.more{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px}
+.more-t{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.chips li{padding:8px 13px;border-radius:999px;font-size:13.5px;color:var(--ink);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px);transition:border-color .3s,color .3s,box-shadow .3s}
+.chips li:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 18px rgba(255,181,71,.3)}
+@media (max-width:1000px){.feats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.feats{grid-template-columns:1fr}.feat{padding:20px}.chips li{font-size:12.5px;padding:7px 11px}}
 </style>
 </head>
 <body>
 <canvas id="gl" aria-hidden="true"></canvas>
 <div class="vignette" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
+<div class="beam" aria-hidden="true"><i class="beam-line"></i><i class="beam-head"></i></div>
+<button class="totop" id="toTop" type="button" aria-label="Back to top"><svg class="ring" viewBox="0 0 60 60" aria-hidden="true"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9B6BFF"/><stop offset=".5" stop-color="#3EE6FF"/><stop offset="1" stop-color="#FFB547"/></linearGradient></defs><circle cx="30" cy="30" r="27" class="tt-bg"/><circle cx="30" cy="30" r="27" class="tt-fg"/></svg><svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 <div class="labels" id="labels" aria-hidden="true"></div>
 <div class="readings" id="readings" aria-hidden="true"></div>
 
 <header class="nav">
   <a class="logo" href="#top"><i>S</i><span>Sahil Builds</span></a>
-  <nav class="links" aria-label="Main"><a href="#work">Work</a><a href="#build">Process</a><a href="#orbit">Features</a><a href="#demo">Contact</a></nav>
+  <nav class="links" aria-label="Main"><a href="#work">Work</a><a href="#build">Process</a><a href="#features">Features</a><a href="#demo">Contact</a></nav>
   <a class="cta" href="https://discord.com/users/436003903818170368" target="_blank" rel="noopener">Free demo <span class="n">$0</span></a>
 </header>
 
@@ -204,9 +271,19 @@ main{position:relative;z-index:5}
     </div>
   </section>
 
-  <section class="ch" id="build" data-ch="6" data-name="Build">
+  <section class="ch" id="features" data-ch="6" data-name="Features">
+    <div class="copy" style="max-width:1180px;width:100%">
+      <span class="kick">06 · What I build</span>
+      <h2 class="mid">Everything your stream needs, <span class="grad">under one roof.</span></h2>
+      <p class="lede" style="margin-top:14px">Pick what you need or take the full stack. All of it is already running live on real streamer sites.</p>
+      <div class="feats"><article class="feat" style="--c:var(--gold)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8"/></svg></span><span class="fn">01</span><h3>Live leaderboards</h3><p>Monthly and weekly wager races with countdowns, podiums, prize tables and rollover. Updates itself from your casino partners.</p></article><article class="feat" style="--c:var(--cyan)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span><span class="fn">02</span><h3>Casino API integrations</h3><p>Stake, Thrill and more, connected through a secure server proxy. Your affiliate keys live as secrets and never touch the page.</p></article><article class="feat" style="--c:var(--ember)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM9 9h.01M15 9h.01M9 15h.01M15 15h.01M12 12h.01"/></svg></span><span class="fn">03</span><h3>Casino originals</h3><p>Your own coin games, like blackjack, wheels and slot-style games, with RTP you control and results players can trust.</p></article><article class="feat" style="--c:var(--violet)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><span class="fn">04</span><h3>Wager database</h3><p>Every wager stored in your own database, so history, rank-ups and reports survive casino API limits and resets.</p></article><article class="feat" style="--c:var(--lime)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><span class="fn">05</span><h3>Automated rank-up rewards</h3><p>Players rank up the moment they hit a wager milestone. Rewards pay out and Discord roles update on their own, every 30-day window.</p></article><article class="feat" style="--c:var(--gold)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span><span class="fn">06</span><h3>High-end motion websites</h3><p>WebGL, 3D and scroll-driven animation like this page, built mobile-first and tuned to stay smooth on cheap phones.</p></article><article class="feat" style="--c:var(--cyan)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v4h-7zM13 10h7v10h-7zM4 13h7v7H4z"/></svg></span><span class="fn">07</span><h3>All-in-one admin panel</h3><p>Users, payouts, vault, player files, economy charts, alt and VPN flags and maintenance mode. Run everything from one place.</p></article><article class="feat" style="--c:var(--violet)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h8a4 4 0 0 1 4 4v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-3a4 4 0 0 1 4-4zM12 8V4M9 13h.01M15 13h.01M2 13v2M22 13v2"/></svg></span><span class="fn">08</span><h3>WDK bot</h3><p>Connects your website, Discord and Kick and runs fully on its own: syncs roles, posts rewards and keeps your community in the loop.</p></article><article class="feat" style="--c:var(--ember)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7zM9 12l2 2 4-4"/></svg></span><span class="fn">09</span><h3>Discord login &amp; coin economy</h3><p>Viewers sign in with Discord, earn coins every day, link their casino accounts and cash out in crypto.</p></article></div>
+      <div class="more"><span class="more-t">And much more</span><ul class="chips"><li>Referral programs</li><li>Daily streaks</li><li>Weekly challenges</li><li>Tournaments</li><li>Player profiles</li><li>Hall of fame</li><li>Vouch feed</li><li>Crypto payouts</li><li>Lossback calculators</li><li>Bonus pages</li><li>Alt &amp; VPN detection</li><li>Weekly staff reports</li><li>Economy dashboard</li><li>Maintenance mode</li><li>SEO &amp; link previews</li><li>Staging copy</li><li>Your own domain + SSL</li><li>Kick stream alerts</li></ul></div>
+    </div>
+  </section>
+
+  <section class="ch" id="build" data-ch="7" data-name="Build">
     <div class="copy" style="max-width:1100px;width:100%">
-      <span class="kick">06 · How it gets built</span>
+      <span class="kick">07 · How it gets built</span>
       <h2 class="mid">You see it before you pay anything.</h2>
       <div class="steps">
         <div class="step" style="--c:var(--gold)"><span class="n">01 / Free demo</span><h4>See it first</h4><p>A homepage in your branding with your real casino codes.</p></div>
@@ -219,9 +296,9 @@ main{position:relative;z-index:5}
     </div>
   </section>
 
-  <section class="ch" id="demo" data-ch="7" data-name="Demo">
-    <div class="copy center" style="margin-top:34vh">
-      <span class="kick">07 · Your turn</span>
+  <section class="ch" id="demo" data-ch="8" data-name="Demo">
+    <div class="copy center" style="margin-top:40vh">
+      <span class="kick">08 · Your turn</span>
       <h2 class="big" data-words>Be the next stream with a <span class="hl">home.</span></h2>
       <p class="lede">Send your stream link, logo and casino codes. I'll build your homepage demo for free.</p>
       <div class="btns" style="justify-content:center"><a class="cta lg" href="https://discord.com/users/436003903818170368" target="_blank" rel="noopener">Get a free demo on Discord →</a></div>
@@ -244,7 +321,7 @@ const N=small?14000:42000;
 const rand=(a=1)=>Math.random()*a;
 
 /* ======================= particle shapes (one per chapter) ======================= */
-const S=[];for(let k=0;k<8;k++)S.push(new Float32Array(N*3));
+const NS=9;const S=[];for(let k=0;k<NS;k++)S.push(new Float32Array(N*3));
 const seed=new Float32Array(N),hue=new Float32Array(N);
 function gauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
 // SB monogram sampled from canvas
@@ -257,7 +334,7 @@ function buildShapes(){
   mono=monogram();
   for(let i=0;i<N;i++){
     seed[i]=Math.random();hue[i]=Math.random();
-    const s0=S[0],s1=S[1],s2=S[2],s3=S[3],s4=S[4],s5=S[5],s6=S[6],s7=S[7],j=i*3;
+    const s0=S[0],s1=S[1],s2=S[2],s3=S[3],s4=S[4],s5=S[5],s6=S[6],s7=S[7],s8=S[8],j=i*3;
     // 0 ignite: dense core + soft halo + thin fibres (dandelion-like burst, our own take)
     let r,th,ph;
     if(i%5===0){r=2.2+rand(2.8);th=rand(6.283);ph=Math.acos(2*rand()-1);}            // fibres outward
@@ -282,9 +359,14 @@ function buildShapes(){
     {const side=i%2?1:-1;s5[j]=side*3.2+(rand()-.5)*5.6;s5[j+1]=(rand()-.5)*4.2;s5[j+2]=-3+gauss()*.15;
       if(i%7===0){s5[j]=gauss()*9;s5[j+1]=gauss()*6;s5[j+2]=-8+gauss()*3;}}
     // 6 build: ascending helix (progress)
-    {const t=rand(),a=t*18+(i%2)*3.1416,rr=2.2;s6[j]=Math.cos(a)*rr+gauss()*.05;s6[j+1]=-5+t*10;s6[j+2]=Math.sin(a)*rr+gauss()*.05;}
-    // 7 demo: SB monogram
-    {const p=mono[i%mono.length];s7[j]=p[0]+gauss()*.025;s7[j+1]=p[1]+gauss()*.025;s7[j+2]=gauss()*.12;}
+    {const node=k=>[((k%3)-1)*4.2,(1-Math.floor(k/3))*2.6,0];
+      if(i%10<3){const k=i%9,nd=node(k);const rr=Math.pow(rand(),2)*.45;th=rand(6.283);ph=Math.acos(2*rand()-1);s6[j]=nd[0]+rr*Math.sin(ph)*Math.cos(th);s6[j+1]=nd[1]+rr*Math.cos(ph);s6[j+2]=rr*Math.sin(ph)*Math.sin(th);}
+      else{const E=[[0,1],[1,2],[3,4],[4,5],[6,7],[7,8],[0,3],[3,6],[1,4],[4,7],[2,5],[5,8],[0,4],[4,8],[2,4],[4,6]];const e=E[i%E.length],A=node(e[0]),B=node(e[1]),t=rand();
+        s6[j]=A[0]+(B[0]-A[0])*t+gauss()*.03;s6[j+1]=A[1]+(B[1]-A[1])*t+gauss()*.03;s6[j+2]=Math.sin(t*3.1416)*.4+gauss()*.03;}}
+    // 7 build: ascending helix (progress)
+    {const t=rand(),a=t*18+(i%2)*3.1416,rr=2.2;s7[j]=Math.cos(a)*rr+gauss()*.05;s7[j+1]=-5+t*10;s7[j+2]=Math.sin(a)*rr+gauss()*.05;}
+    // 8 demo: SB monogram
+    {const p=mono[i%mono.length];s8[j]=p[0]+gauss()*.025;s8[j+1]=p[1]+gauss()*.025;s8[j+2]=gauss()*.12;}
   }
 }
 
@@ -297,11 +379,11 @@ function initGL(){
   const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,1,.1,100);cam.position.set(0,0,9);
   const g=new THREE.BufferGeometry();
   g.setAttribute('position',new THREE.BufferAttribute(S[0].slice(),3));
-  for(let k=0;k<8;k++)g.setAttribute('p'+k,new THREE.BufferAttribute(S[k],3));
+  for(let k=0;k<NS;k++)g.setAttribute('p'+k,new THREE.BufferAttribute(S[k],3));
   g.setAttribute('seed',new THREE.BufferAttribute(seed,1));g.setAttribute('hue',new THREE.BufferAttribute(hue,1));
   const U={uT:{value:0},uStage:{value:0},uPx:{value:rd.getPixelRatio()},uMouse:{value:new THREE.Vector3(99,99,0)},uBurst:{value:0},uSize:{value:small?1.25:1}};
   const vs=`
-  attribute vec3 p0;attribute vec3 p1;attribute vec3 p2;attribute vec3 p3;attribute vec3 p4;attribute vec3 p5;attribute vec3 p6;attribute vec3 p7;
+  attribute vec3 p0;attribute vec3 p1;attribute vec3 p2;attribute vec3 p3;attribute vec3 p4;attribute vec3 p5;attribute vec3 p6;attribute vec3 p7;attribute vec3 p8;
   attribute float seed;attribute float hue;
   uniform float uT,uStage,uPx,uBurst,uSize;uniform vec3 uMouse;
   varying vec3 vCol;varying float vA;
@@ -321,9 +403,10 @@ function initGL(){
     vec3 q2=p2;float a2=uT*.12*(1.2-length(p2.xz)/7.);q2.xz=mat2(cos(a2),-sin(a2),sin(a2),cos(a2))*p2.xz;
     vec3 q3=p3;float a3=uT*(.25+.15*mod(seed*3.,1.));if(length(p3)>2.){float c=cos(a3),s=sin(a3);q3=vec3(c*p3.x-s*p3.z,p3.y,s*p3.x+c*p3.z);}
     vec3 q4=p4;q4.y=mod(p4.y+6.-uT*(1.+seed*1.6),12.)-6.;
-    vec3 q6=p6;float a6=uT*.4;q6.xz=mat2(cos(a6),-sin(a6),sin(a6),cos(a6))*p6.xz;
+    vec3 q6=p6+vec3(0.,sin(uT*.8+p6.x*.6)*.12,0.);
+    vec3 q7=p7;float a7=uT*.4;q7.xz=mat2(cos(a7),-sin(a7),sin(a7),cos(a7))*p7.xz;
     vec3 q0=p0*(1.+.04*sin(uT*1.4+seed*6.28))+p0*uBurst*1.4*seed;
-    vec3 p=q0*w(0.)+q1*w(1.)+q2*w(2.)+q3*w(3.)+q4*w(4.)+p5*w(5.)+q6*w(6.)+p7*w(7.);
+    vec3 p=q0*w(0.)+q1*w(1.)+q2*w(2.)+q3*w(3.)+q4*w(4.)+p5*w(5.)+q6*w(6.)+q7*w(7.)+p8*w(8.);
     // in-between turbulence so morphs feel like swirling light, not straight lines
     float mid=1.-abs(fract(uStage)-.5)*2.;mid=pow(mid,1.5);
     p+=vec3(sin(seed*40.+uT),cos(seed*31.+uT*.8),sin(seed*23.-uT*.6))*mid*1.6;
@@ -362,8 +445,8 @@ function computeStage(){
     if(mid>=top&&mid<top+h){const f=(mid-top)/h;
       // hold on the shape for the middle of each chapter, morph near the edges
       const hold=el.classList.contains('tall')?.8:.55;const e=(f-(1-hold)/2)/hold;
-      s=i+(e>1?(e-1)/((1-hold)/2)*.5:0)-(e<0?(-e)/((1-hold)/2)*.5:0);s=Math.max(0,Math.min(7,s));break;}
-    if(mid>=top+h)s=Math.min(7,i+.5);}
+      s=i+(e>1?(e-1)/((1-hold)/2)*.5:0)-(e<0?(-e)/((1-hold)/2)*.5:0);s=Math.max(0,Math.min(NS-1,s));break;}
+    if(mid>=top+h)s=Math.min(NS-1,i+.5);}
   return s;}
 
 /* word reveal */
@@ -382,33 +465,37 @@ function init(){
   if(window.gsap){gsap.registerPlugin(ScrollTrigger);
     if(!reduce&&window.Lenis){lenis=new Lenis({lerp:.075,smoothWheel:true});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
       $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const el=document.querySelector(a.getAttribute('href'));if(el){e.preventDefault();lenis.scrollTo(el,{duration:2.2});}}));}
-    $$('.card,.step').forEach(el=>gsap.from(el,{y:60,opacity:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 92%'}}));
+    $$('.card,.step,.feat').forEach(el=>gsap.from(el,{y:60,opacity:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 92%'}}));
     gsap.from('.ch[data-ch="0"] .copy > *',{y:40,opacity:0,stagger:.08,duration:1.2,ease:'expo.out',delay:.2});
   }
   wordsFor($('.ch[data-ch="0"]'),1);
-  $$('.card').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-r.left+'px');c.style.setProperty('--my',e.clientY-r.top+'px');}));
+  $$('.card,.feat').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-r.left+'px');c.style.setProperty('--my',e.clientY-r.top+'px');}));
   requestAnimationFrame(loop);
 }
 const names=chapters.map(c=>c.dataset.name);
+let pSm=0;const toTop=$('#toTop');
+toTop.addEventListener('click',()=>{burst=1;lenis?lenis.scrollTo(0,{duration:2.4,easing:t=>1-Math.pow(1-t,4)}):scrollTo({top:0,behavior:reduce?'auto':'smooth'});});
 let t0=performance.now(),lastCh=-1,gTarget=[0,0,1];
 function loop(now){
   const t=(now-t0)/1000;
   stageT=computeStage();stage+=(stageT-stage)*(reduce?1:.06);
   const max=document.documentElement.scrollHeight-innerHeight,p=max>0?scrollY/max:0;
   document.documentElement.style.setProperty('--p',p.toFixed(4));
+  pSm+=(p-pSm)*(reduce?1:.18);document.documentElement.style.setProperty('--ps',pSm.toFixed(4));
+  toTop.classList.toggle('show',scrollY>innerHeight*.6);
   const c=Math.round(stage);if(c!==lastCh){lastCh=c;$('#chName').textContent=String(c+1).padStart(2,'0')+' · '+names[c];}
   $('#chPct').textContent=Math.round(p*100)+'%';
   chapters.forEach(sec=>{const h=sec.querySelector('[data-words]');if(!h)return;const r=h.getBoundingClientRect();wordsFor(sec,(innerHeight*.92-r.top)/(innerHeight*.45));});
   // place the shape opposite the copy, bigger in the hero
-  const OFF=innerWidth<760?[[0,1.6,1.05],[0,0,1],[0,-1.2,1],[0,0,.8],[0,0,1],[0,0,1],[0,0,1],[0,1.9,.75]]:[[3.4,0,1.55],[-3.2,0,1.1],[2.6,-.6,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1],[0,1.5,1]];
-  const si=Math.min(7,Math.floor(stage)),sf=stage-si,a=OFF[si],b=OFF[Math.min(7,si+1)];
+  const OFF=innerWidth<760?[[0,1.6,1.05],[0,0,1],[0,-1.2,1],[0,0,.8],[0,0,1],[0,0,1],[0,0,.55],[0,0,1],[0,1.9,.75]]:[[3.4,0,1.55],[-3.2,0,1.1],[2.6,-.6,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1.25],[0,0,1],[0,1.5,1]];
+  const si=Math.min(NS-1,Math.floor(stage)),sf=stage-si,a=OFF[si],b=OFF[Math.min(NS-1,si+1)];
   gTarget=[a[0]+(b[0]-a[0])*sf,a[1]+(b[1]-a[1])*sf,a[2]+(b[2]-a[2])*sf];
   burst*=.94;
   if(gl3){const {rd,scene,cam,U,pts}=gl3;
     U.uT.value=reduce?2:t;U.uStage.value=stage;U.uBurst.value=burst;
     U.uMouse.value.set(mouse.x,mouse.y,mouse.active);
     // one long camera move: drift, dolly and roll through the chapters
-    const cz=9-Math.sin(Math.min(stage,1)*Math.PI)*2-(stage>2&&stage<4?1.2:0)+(stage>6.5?(stage-6.5)*2:0);
+    const cz=9-Math.sin(Math.min(stage,1)*Math.PI)*2-(stage>2&&stage<4?1.2:0)+(stage>7.5?(stage-7.5)*2:0);
     cam.position.z+=(cz-cam.position.z)*.08;
     const ry=stage*.55+(reduce?0:t*.03),rx=Math.sin(stage*.9)*.25;
     pts.rotation.y+=((stage>=4.5?0:ry)-pts.rotation.y)*.06;pts.rotation.x+=((stage>=4.5?0:rx)-pts.rotation.x)*.06;
