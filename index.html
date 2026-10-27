@@ -186,6 +186,14 @@ main{position:relative;z-index:5}
 .chips li:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 18px rgba(255,181,71,.3)}
 @media (max-width:1000px){.feats{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.feats{grid-template-columns:1fr}.feat{padding:20px}.chips li{font-size:12.5px;padding:7px 11px}}
+
+/* site screenshots as card previews */
+.card.has-shot{isolation:isolate;padding-top:calc(clamp(170px,19vw,250px) + 6px)}
+.card .shot{position:absolute;left:0;right:0;top:0;height:clamp(200px,22vw,290px);z-index:-1;background-size:cover;background-position:center top;
+  -webkit-mask:linear-gradient(#000 45%,transparent);mask:linear-gradient(#000 45%,transparent);opacity:.9;transform-origin:center top;
+  transition:transform 1.2s cubic-bezier(.2,.8,.2,1),opacity .6s,filter .6s}
+.card.has-shot:hover .shot{transform:scale(1.06);opacity:1;filter:saturate(1.2) brightness(1.08)}
+.card.has-shot .url,.card.has-shot .dot{position:relative}
 </style>
 </head>
 <body>
@@ -253,14 +261,14 @@ main{position:relative;z-index:5}
       <span class="kick">05 · Selected work</span>
       <h2 class="mid">Running live for real streamers.</h2>
       <div class="cards">
-        <a class="card" href="https://jakerewards.com" target="_blank" rel="noopener">
+        <a class="card has-shot" href="https://jakerewards.com" target="_blank" rel="noopener"><span class="shot" style="background-image:url(work-jake.jpg)" aria-hidden="true"></span>
           <span class="url">jakerewards.com</span><span class="dot">LIVE</span>
           <h3>Jake Rewards</h3>
           <p>Jake had a basic site. I built a better one before he asked, showed it to him, and he switched.</p>
           <ul><li><b>Leaderboard</b>$75K monthly with rollover</li><li><b>Challenges</b>Weekly multiplier podium</li><li><b>Rewards</b>Referral and rank-up tiers</li><li><b>Hosting</b>Cloudflare + staging</li></ul>
           <span class="go">Visit site <span>↗</span></span>
         </a>
-        <a class="card" href="https://jammmyrewards.com" target="_blank" rel="noopener">
+        <a class="card has-shot" href="https://jammmyrewards.com" target="_blank" rel="noopener"><span class="shot" style="background-image:url(work-jammy.jpg)" aria-hidden="true"></span>
           <span class="url">jammmyrewards.com</span><span class="dot">LIVE</span>
           <h3>Jammmy Rewards</h3>
           <p>A full community platform. Viewers log in with Discord, earn coins, link casino accounts and cash out in crypto.</p>
