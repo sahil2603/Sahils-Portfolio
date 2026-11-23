@@ -68,7 +68,7 @@ header.top.sc{border-color:var(--line)}
 @media(max-width:860px){.nav nav{display:none}.nav .btn{margin-left:auto}}@media(max-width:400px){.nav .btn{padding:9px 12px;font-size:.88rem}.brand{font-size:1rem}}
 
 /* hero */
-.hero{padding:76px 0 92px}
+.hero{padding:76px 0 92px;overflow-x:clip}
 .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
 .hero .lede{font-size:1.2rem;max-width:33em;margin:26px 0 34px}
 .hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
@@ -220,10 +220,12 @@ footer .links{display:flex;gap:22px}
 /* hero art */
 .ovwrap{position:relative;padding:34px 18px}
 .ovwrap .ov{position:relative;z-index:1;max-width:440px;margin:0 auto}
-.ring{position:absolute;left:50%;top:50%;width:128%;max-width:none;z-index:0;pointer-events:none;transform:translate(calc(-50% + var(--px,0px)),calc(-50% + var(--py,0px)));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.ring{position:absolute;left:50%;top:50%;width:min(150%,700px);max-width:none;z-index:0;pointer-events:none;transform:translate(calc(-50% + 40px + var(--px,0px)),calc(-50% + var(--py,0px)));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.ovwrap .ov{max-width:380px!important;margin-left:0!important}
 .ring{animation:floaty 7s ease-in-out infinite}
 @keyframes floaty{50%{translate:0 -10px;rotate:1.5deg}}
-@media(max-width:940px){.ovwrap{overflow:hidden;padding:24px 0}.ring{width:112%}}
+@media(max-width:1200px){.ring{transform:translate(calc(-50% + 20px + var(--px,0px)),calc(-50% + var(--py,0px)))}}
+@media(max-width:940px){.ovwrap{overflow:hidden;padding:70px 0}.ring{width:150%;transform:translate(-50%,-50%)}.ovwrap .ov{max-width:330px!important;margin:0 auto!important}}
 /* leaderboard reorder */
 .ov ol{position:relative}
 .ov li{transition:transform .6s cubic-bezier(.2,.8,.2,1),background .4s}
