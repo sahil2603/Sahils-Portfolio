@@ -85,9 +85,9 @@ header.top.sc{border-color:var(--line)}
 @keyframes blink{50%{opacity:.3}}
 .ov-pool{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:18px 20px 14px}
 .ov-pool strong{font-size:2.5rem;line-height:1;font-weight:800;font-stretch:118%;color:#fff;letter-spacing:-.02em}
-.ov-pool span{font-size:.85rem;color:#8C90A0;text-align:right}
+.ov-pool span{font-size:.85rem;color:#8C90A0;text-align:right;white-space:nowrap}
 .ov ol{list-style:none;margin:0;padding:0 8px 8px}
-.ov li{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:10px;padding:11px 12px;border-radius:6px;animation:rowin .55s cubic-bezier(.2,.8,.2,1) both}
+.ov li{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:10px;padding:11px 12px;border-radius:6px;animation:rowin .55s cubic-bezier(.2,.8,.2,1) backwards}
 .ov li+li{border-top:1px solid var(--nline)}
 .ov li .n{font-weight:800;font-stretch:120%;font-size:1.05rem;color:#6E7383}
 .ov li:nth-child(1) .n{color:var(--gold)}.ov li:nth-child(2) .n{color:#B9BECB}.ov li:nth-child(3) .n{color:#C98A5A}
@@ -200,11 +200,88 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
 footer a{text-decoration:none}footer a:hover{color:#fff}
 footer .links{display:flex;gap:22px}
 
+
+/* ===== motion layer ===== */
+.prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:30;background:var(--orange);transform-origin:0 50%;transform:scaleX(0)}
+.nav nav a{position:relative}
+.nav nav a::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.nav nav a:hover::after{transform:scaleX(1)}
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.btn::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .6s}
+.btn:hover::before{transform:translateX(120%)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 22px -10px rgba(240,98,26,.8)}
+/* hero load */
+.split span{display:block;overflow:hidden;padding-bottom:.06em}
+.split i{display:block;font-style:normal;transform:translateY(105%);animation:lineup .9s cubic-bezier(.2,.8,.2,1) forwards}
+.split span:nth-child(2) i{animation-delay:.1s}.split span:nth-child(3) i{animation-delay:.2s}
+@keyframes lineup{to{transform:none}}
+.in{opacity:0;transform:translateY(16px);animation:fadeup .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0s)}
+@keyframes fadeup{to{opacity:1;transform:none}}
+/* hero art */
+.ovwrap{position:relative;padding:34px 18px}
+.ovwrap .ov{position:relative;z-index:1;max-width:440px;margin:0 auto}
+.ring{position:absolute;left:50%;top:50%;width:128%;max-width:none;z-index:0;pointer-events:none;transform:translate(calc(-50% + var(--px,0px)),calc(-50% + var(--py,0px)));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.ring{animation:floaty 7s ease-in-out infinite}
+@keyframes floaty{50%{translate:0 -10px;rotate:1.5deg}}
+@media(max-width:940px){.ovwrap{overflow:hidden;padding:24px 0}.ring{width:112%}}
+/* leaderboard reorder */
+.ov ol{position:relative}
+.ov li{transition:transform .6s cubic-bezier(.2,.8,.2,1),background .4s}
+.ov li.climb{background:rgba(60,203,127,.14)}
+.ov li .n{transition:color .3s}
+.ov-cap{transition:color .3s}
+.ov-cap.ev{color:#9FE3BE}
+/* reveals */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.on{opacity:1;transform:none}
+.games.rv .game,.svc.rv>div,.steps.rv li{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1),border-color .2s,background .2s}
+.games.rv.on .game,.svc.rv.on>div,.steps.rv.on li{opacity:1;transform:none}
+.games.rv.on .game:nth-child(2),.svc.rv.on>div:nth-child(2),.steps.rv.on li:nth-child(2){transition-delay:.06s}
+.games.rv.on .game:nth-child(3),.svc.rv.on>div:nth-child(3),.steps.rv.on li:nth-child(3){transition-delay:.12s}
+.games.rv.on .game:nth-child(4),.svc.rv.on>div:nth-child(4),.steps.rv.on li:nth-child(4){transition-delay:.18s}
+.games.rv.on .game:nth-child(5),.svc.rv.on>div:nth-child(5),.steps.rv.on li:nth-child(5){transition-delay:.24s}
+.games.rv.on .game:nth-child(6),.svc.rv.on>div:nth-child(6),.steps.rv.on li:nth-child(6){transition-delay:.3s}
+.svc.rv.on>div:nth-child(n+7){transition-delay:.34s}
+/* tilt */
+.tilt{transform-style:preserve-3d;will-change:auto}
+.tilt.hov{transition:transform .08s linear!important}
+.glare{position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.22),transparent 45%);opacity:0;transition:opacity .3s;z-index:2}
+.hov>.glare{opacity:1}
+.browser,.game{position:relative}
+/* games */
+.game:hover{box-shadow:0 20px 40px -20px rgba(240,98,26,.55)}
+.game .rtp{transition:transform .3s}
+.game:hover .rtp{transform:scale(1.08)}
+/* services */
+.svc div{display:grid;grid-template-columns:56px 1fr;column-gap:18px;align-items:start;border-radius:10px;transition:background .25s,padding .25s,opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.svc div:hover{background:var(--card);padding-left:14px;padding-right:14px}
+.svc .ic{grid-row:span 2;width:56px;height:56px;transition:transform .45s cubic-bezier(.3,1.6,.5,1)}
+.svc div:hover .ic{transform:rotate(-10deg) scale(1.15)}
+.svc h3{align-self:end}
+.tags span{transition:transform .2s,border-color .2s,color .2s}
+.tags span:hover{transform:translateY(-3px);border-color:var(--orange);color:var(--ink)}
+/* process */
+.steps li{position:relative;border-top-color:var(--line)}
+.steps li::after{content:'';position:absolute;left:0;right:0;top:-2px;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.steps li:first-child::after{background:var(--orange)}
+.steps.rv.on li::after{transform:scaleX(1)}
+.steps.rv.on li:nth-child(2)::after{transition-delay:.15s}.steps.rv.on li:nth-child(3)::after{transition-delay:.3s}.steps.rv.on li:nth-child(4)::after{transition-delay:.45s}.steps.rv.on li:nth-child(5)::after{transition-delay:.6s}.steps.rv.on li:nth-child(6)::after{transition-delay:.75s}
+.steps li:hover h3{color:var(--orange-d)}
+/* contact */
+.side{display:grid;gap:22px}
+.plane{width:100%;border-radius:12px;animation:floaty 6s ease-in-out infinite}
+.send{transition:border-color .3s}
+.send:hover{border-color:var(--orange)}
+.case .facts dd{transition:color .2s}
+.case .facts div:hover dd{color:var(--orange-d)}
+@media(prefers-reduced-motion:reduce){.split i,.in,.rv,.games.rv .game,.svc.rv>div,.steps.rv li{opacity:1!important;transform:none!important}.steps li::after{transform:none}}
+
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
+<div class="prog" id="prog"></div>
 <header class="top" id="top"><div class="wrap nav">
   <a class="brand" href="/"><img src="/logo.webp" alt="" width="38" height="28">Sahil Builds</a>
   <nav aria-label="Main"><a href="#work">Work</a><a href="#originals">Originals</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
@@ -214,14 +291,15 @@ footer .links{display:flex;gap:22px}
 <main>
 <div class="hero"><div class="wrap">
   <div>
-    <h1>Websites that turn viewers into regulars.</h1>
-    <p class="lede">I build rewards websites for casino streamers: live leaderboards, Discord login, coin games and payouts, on your own domain and running by themselves.</p>
-    <div class="ctas">
+    <h1 class="split"><span><i>Websites that</i></span><span><i>turn viewers</i></span><span><i>into regulars.</i></span></h1>
+    <p class="lede in" style="--d:.45s">I build rewards websites for casino streamers: live leaderboards, Discord login, coin games and payouts, on your own domain and running by themselves.</p>
+    <div class="ctas in" style="--d:.55s">
       <a class="btn primary" href="https://discord.com/users/436003903818170368" target="_blank" rel="noopener">Get a free demo</a>
       <a class="btn line" href="#work">See client work</a>
     </div>
-    <p class="note">You see your homepage before you pay anything. <b>Open for new projects.</b></p>
+    <p class="note in" style="--d:.65s">You see your homepage before you pay anything. <b>Open for new projects.</b></p>
   </div>
+  <div class="ovwrap in" style="--d:.3s"><img class="ring" src="/hero-ring.webp" alt="" width="760" height="760" aria-hidden="true">
   <aside class="ov" aria-label="Example of a live leaderboard">
     <div class="ov-top"><b>Monthly race</b><span class="ov-live"><i></i>Live</span></div>
     <div class="ov-pool"><strong class="num">$75,000</strong><span id="cd" class="num">ends in 7d 7h</span></div>
@@ -232,22 +310,22 @@ footer .links{display:flex;gap:22px}
       <li><span class="n">4</span><span class="u">sp****in</span><span class="w num" data-w="190300">$190,300<small>wins $7,500</small></span></li>
       <li><span class="n">5</span><span class="u">kr*****ed</span><span class="w num" data-w="152775">$152,775<small>wins $5,000</small></span></li>
     </ol>
-    <p class="ov-cap">Sample data. On your site, wagers come straight from the casino's API.</p>
-  </aside>
+    <p class="ov-cap" id="ovEvent">Sample data. On your site, wagers come straight from the casino's API.</p>
+  </aside></div>
 </div></div>
 
 <div class="proof"><div class="wrap">
   <span>Live for real streamers:</span>
   <a href="https://jakerewards.com" target="_blank" rel="noopener">jakerewards.com</a>
   <a href="https://jammmyrewards.com" target="_blank" rel="noopener">jammmyrewards.com</a>
-  <span><b>$75K</b> monthly leaderboard</span>
-  <span><b>6</b> casino originals</span>
+  <span><b class="count" data-to="75" data-pre="$" data-suf="K">$75K</b> monthly leaderboard</span>
+  <span><b class="count" data-to="6">6</b> casino originals</span>
 </div></div>
 
 <section id="work"><div class="wrap">
-  <div class="sh"><h2>Client work</h2><p>Both sites are live today. Open them on your phone and try them.</p></div>
+  <div class="rv sh"><h2>Client work</h2><p>Both sites are live today. Open them on your phone and try them.</p></div>
 
-  <article class="case">
+  <article class="rv case">
     <div class="shots">
       <div class="browser"><div class="bar"><i></i><i></i><i></i><span>jakerewards.com</span></div><img src="/jake-desktop.webp" alt="Jake Rewards homepage" width="1200" height="750" loading="lazy"></div>
       <img class="phone" src="/jake-mobile.webp" alt="Jake Rewards on a phone" width="390" height="844" loading="lazy">
@@ -266,7 +344,7 @@ footer .links{display:flex;gap:22px}
     </div>
   </article>
 
-  <article class="case flip">
+  <article class="rv case flip">
     <div class="shots">
       <div class="browser"><div class="bar"><i></i><i></i><i></i><span>jammmyrewards.com</span></div><img src="/jammy-desktop.webp" alt="Jammmy Rewards homepage" width="1200" height="750" loading="lazy"></div>
       <img class="phone" src="/jammy-mobile.webp" alt="Jammmy Rewards on a phone" width="390" height="844" loading="lazy">
@@ -287,11 +365,11 @@ footer .links{display:flex;gap:22px}
 </div></section>
 
 <div class="orig" id="originals"><div class="wrap">
-  <div class="orig-head">
-    <div class="sh"><h2>Casino originals you can play right now</h2><p>Six games I build into streamer sites. Your viewers play with your site's coins, and every result can be checked with provably fair seeds.</p></div>
+  <div class="rv orig-head">
+    <div class="rv sh"><h2>Casino originals you can play right now</h2><p>Six games I build into streamer sites. Your viewers play with your site's coins, and every result can be checked with provably fair seeds.</p></div>
     <a class="btn primary" href="/originals">Play the demo <span class="arrow">→</span></a>
   </div>
-  <div class="games">
+  <div class="rv games">
     <a class="game" href="/originals#blackjack"><img src="/game-blackjack.webp" alt="" width="560" height="365" loading="lazy"><div><span><h3>Blackjack</h3><p>Perfect Pairs and 21+3 side bets</p></span><span class="rtp">RTP up to 99.6%</span></div></a>
     <a class="game" href="/originals#mines"><img src="/game-mines.webp" alt="" width="560" height="365" loading="lazy"><div><span><h3>Mines</h3><p>Collect gems, cash out before a mine</p></span><span class="rtp">RTP 98%</span></div></a>
     <a class="game" href="/originals#plinko"><img src="/game-plinko.webp" alt="" width="560" height="365" loading="lazy"><div><span><h3>Plinko</h3><p>Edge multipliers up to 1,000×</p></span><span class="rtp">RTP 98%</span></div></a>
@@ -303,25 +381,25 @@ footer .links{display:flex;gap:22px}
 </div></div>
 
 <section id="services"><div class="wrap">
-  <div class="sh"><h2>Everything your stream needs, in one place</h2><p>Pick what you need or take the full stack. All of it is already running on real streamer sites.</p></div>
-  <div class="svc">
-    <div class="key"><h3>Live leaderboards</h3><p>Monthly and weekly wager races with countdowns, podiums, prize tables and rollover. Updates itself from your casino partners.</p></div>
-    <div><h3>Casino API integrations</h3><p>Stake, Thrill and more, connected through a secure server proxy. Your affiliate keys stay secret and never touch the page.</p></div>
-    <div><h3>Discord login and coin economy</h3><p>Viewers sign in with Discord, earn coins every day, link their casino accounts and cash out in crypto.</p></div>
-    <div><h3>Casino originals</h3><p>The six games above, running on your own coins, with RTP you control.</p></div>
-    <div><h3>Automated rank-up rewards</h3><p>Players rank up the moment they hit a wager milestone. Rewards pay out and Discord roles update on their own.</p></div>
-    <div><h3>Wager database</h3><p>Every wager stored in your own database, so history and rank-ups survive casino API limits and resets.</p></div>
-    <div><h3>All-in-one admin panel</h3><p>Users, payouts, vault, economy charts, alt and VPN flags and maintenance mode, all from one dashboard.</p></div>
-    <div><h3>WDK bot</h3><p>Connects your website, Discord and Kick and runs by itself: syncs roles, posts rewards and keeps the community in the loop.</p></div>
-    <div><h3>SEO and Google setup</h3><p>Search Console, sitemap, structured data and clean link previews, so people searching your name land on your site. I recently found and fixed a hidden setting that was keeping jammmyrewards.com out of Google.</p></div>
-    <div><h3>Motion websites</h3><p>Animated, mobile-first sites that stay smooth on cheap phones, so the first impression matches your stream.</p></div>
+  <div class="rv sh"><h2>Everything your stream needs, in one place</h2><p>Pick what you need or take the full stack. All of it is already running on real streamer sites.</p></div>
+  <div class="rv svc">
+    <div class="key"><img class="ic" src="/ic-lb.webp" alt="" width="56" height="56" loading="lazy"><h3>Live leaderboards</h3><p>Monthly and weekly wager races with countdowns, podiums, prize tables and rollover. Updates itself from your casino partners.</p></div>
+    <div><img class="ic" src="/ic-api.webp" alt="" width="56" height="56" loading="lazy"><h3>Casino API integrations</h3><p>Stake, Thrill and more, connected through a secure server proxy. Your affiliate keys stay secret and never touch the page.</p></div>
+    <div><img class="ic" src="/ic-discord.webp" alt="" width="56" height="56" loading="lazy"><h3>Discord login and coin economy</h3><p>Viewers sign in with Discord, earn coins every day, link their casino accounts and cash out in crypto.</p></div>
+    <div><img class="ic" src="/ic-originals.webp" alt="" width="56" height="56" loading="lazy"><h3>Casino originals</h3><p>The six games above, running on your own coins, with RTP you control.</p></div>
+    <div><img class="ic" src="/ic-rankup.webp" alt="" width="56" height="56" loading="lazy"><h3>Automated rank-up rewards</h3><p>Players rank up the moment they hit a wager milestone. Rewards pay out and Discord roles update on their own.</p></div>
+    <div><img class="ic" src="/ic-db.webp" alt="" width="56" height="56" loading="lazy"><h3>Wager database</h3><p>Every wager stored in your own database, so history and rank-ups survive casino API limits and resets.</p></div>
+    <div><img class="ic" src="/ic-admin.webp" alt="" width="56" height="56" loading="lazy"><h3>All-in-one admin panel</h3><p>Users, payouts, vault, economy charts, alt and VPN flags and maintenance mode, all from one dashboard.</p></div>
+    <div><img class="ic" src="/ic-bot.webp" alt="" width="56" height="56" loading="lazy"><h3>WDK bot</h3><p>Connects your website, Discord and Kick and runs by itself: syncs roles, posts rewards and keeps the community in the loop.</p></div>
+    <div><img class="ic" src="/ic-seo.webp" alt="" width="56" height="56" loading="lazy"><h3>SEO and Google setup</h3><p>Search Console, sitemap, structured data and clean link previews, so people searching your name land on your site. I recently found and fixed a hidden setting that was keeping jammmyrewards.com out of Google.</p></div>
+    <div><img class="ic" src="/ic-motion.webp" alt="" width="56" height="56" loading="lazy"><h3>Motion websites</h3><p>Animated, mobile-first sites that stay smooth on cheap phones, so the first impression matches your stream.</p></div>
   </div>
-  <div class="more"><h3>Also on the menu</h3><div class="tags">
+  <div class="rv more"><h3>Also on the menu</h3><div class="tags">
     <span>Referral programs</span><span>Daily streaks</span><span>Weekly challenges</span><span>Tournaments</span><span>Player profiles</span><span>Hall of fame</span><span>Vouch feed</span><span>Lossback calculators</span><span>Bonus pages</span><span>Alt and VPN detection</span><span>Weekly staff reports</span><span>Kick stream alerts</span><span>Discord and X link previews</span><span>Your own domain and SSL</span>
   </div></div>
 </div></section>
 
-<section id="about"><div class="wrap about">
+<section id="about"><div class="wrap about rv">
   <h2>Who's building it</h2>
   <div>
     <p class="big">I'm Sahil, a developer from New Delhi. I build every site myself, from the design and the games to the server, the database and the Discord bot.</p>
@@ -335,8 +413,8 @@ footer .links{display:flex;gap:22px}
 </div></section>
 
 <section id="process"><div class="wrap">
-  <div class="sh"><h2>You see it before you pay</h2><p>A fixed price, a private preview the whole way, and changes handled in Discord.</p></div>
-  <ol class="steps">
+  <div class="rv sh"><h2>You see it before you pay</h2><p>A fixed price, a private preview the whole way, and changes handled in Discord.</p></div>
+  <ol class="rv steps">
     <li><h3>Free demo</h3><p>A homepage in your branding with your real casino codes.</p></li>
     <li><h3>Plan and price</h3><p>Every page and feature agreed up front. 50% to start, 50% at launch.</p></li>
     <li><h3>Build</h3><p>A private preview link you can check any time.</p></li>
@@ -353,11 +431,12 @@ footer .links{display:flex;gap:22px}
     <p>Message me on Discord and I'll build your homepage demo for free, usually within a few days.</p>
     <a class="btn primary" href="https://discord.com/users/436003903818170368" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.6 19.6 0 0015.4 3l-.6 1.3a18 18 0 00-5.6 0L8.6 3a19.6 19.6 0 00-4.9 1.4C.6 9 0 13.6.3 18.1a19.8 19.8 0 006 3l1.3-2.1a12.7 12.7 0 01-2-1l.5-.4a14 14 0 0011.9 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.7 19.7 0 006-3c.4-5.2-.7-9.8-3.5-13.7zM8.3 15.4c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4zm7.4 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4z"/></svg>Message sahil2603 on Discord</a>
   </div>
+  <div class="side"><img class="plane" src="/cta-plane.webp" alt="" width="900" height="506" loading="lazy">
   <div class="send">
     <h3>What to send me</h3>
     <ol><li>Your stream link</li><li>Your logo, or I'll make one</li><li>Your casino codes</li></ol>
     <ul><li>The demo is free, with no strings attached</li><li>Fixed price agreed before any work starts</li><li>You own the site, the domain and the code</li></ul>
-  </div>
+  </div></div>
 </div></div>
 
 <footer><div class="wrap">
@@ -367,19 +446,67 @@ footer .links{display:flex;gap:22px}
 
 <script>
 (function(){
-  var top=document.getElementById('top');
-  addEventListener('scroll',function(){top.classList.toggle('sc',scrollY>8)},{passive:true});
+  var RM=matchMedia('(prefers-reduced-motion: reduce)').matches, FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var top=document.getElementById('top'), prog=document.getElementById('prog');
+  addEventListener('scroll',function(){var h=document.documentElement;top.classList.toggle('sc',scrollY>8);prog.style.transform='scaleX('+(h.scrollTop/((h.scrollHeight-h.clientHeight)||1))+')'},{passive:true});
   var cd=document.getElementById('cd');
   function tick(){var n=new Date(),e=new Date(n.getFullYear(),n.getMonth()+1,1),s=Math.max(0,(e-n)/1000);
-    cd.textContent='ends in '+Math.floor(s/86400)+'d '+Math.floor(s%86400/3600)+'h'}
-  tick(); setInterval(tick,60000);
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var ws=[].slice.call(document.querySelectorAll('#lbRows .w'));
+    cd.textContent='ends in '+Math.floor(s/86400)+'d '+Math.floor(s%86400/3600)+'h '+Math.floor(s%3600/60)+'m '+String(Math.floor(s%60)).padStart(2,'0')+'s'}
+  tick(); setInterval(tick,1000);
+
+  /* reveals + counters */
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(!x.isIntersecting)return;var el=x.target;io.unobserve(el);
+    if(el.classList.contains('count')) countUp(el); else el.classList.add('on');})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.rv,.count').forEach(function(el){ if(RM) el.classList.add('on'); else io.observe(el); });
+  function countUp(el){var to=+el.dataset.to,pre=el.dataset.pre||'',suf=el.dataset.suf||'',t0=performance.now();
+    (function f(t){var p=Math.min(1,(t-t0)/1300),e=1-Math.pow(1-p,3);el.textContent=pre+Math.round(to*e)+suf;if(p<1)requestAnimationFrame(f)})(t0)}
+  if(RM) return;
+
+  /* live leaderboard: wagers climb, players overtake, rows slide */
+  var ol=document.getElementById('lbRows'), ev=document.getElementById('ovEvent'), base=ev.textContent, evT;
+  var prizes=['$25,000','$15,000','$10,000','$7,500','$5,000'];
+  function rows(){return [].slice.call(ol.children)}
+  function val(li){return +li.querySelector('.w').dataset.w}
+  function setVal(li,v){var w=li.querySelector('.w');w.dataset.w=v;w.firstChild.nodeValue='$'+v.toLocaleString('en-US');w.classList.remove('tick');void w.offsetWidth;w.classList.add('tick')}
+  function resort(){
+    var rs=rows(), first=rs.map(function(li){return li.getBoundingClientRect().top});
+    var before=rs.slice(), sorted=rs.slice().sort(function(a,b){return val(b)-val(a)});
+    if(sorted.every(function(li,i){return li===before[i]})) return;
+    sorted.forEach(function(li){ol.appendChild(li)});
+    sorted.forEach(function(li,i){
+      li.querySelector('.n').textContent=i+1; li.querySelector('.w small').textContent='wins '+prizes[i];
+      var dy=first[before.indexOf(li)]-li.getBoundingClientRect().top;
+      if(dy){li.style.transition='none';li.style.transform='translateY('+dy+'px)';void li.offsetWidth;li.style.transition='';li.style.transform='';}
+      if(before.indexOf(li)>i){li.classList.add('climb');setTimeout(function(){li.classList.remove('climb')},1400);
+        clearTimeout(evT);ev.textContent='▲ '+li.querySelector('.u').textContent+' just moved up to #'+(i+1);ev.classList.add('ev');
+        evT=setTimeout(function(){ev.textContent=base;ev.classList.remove('ev')},3500);}
+    });
+  }
   setInterval(function(){
-    var w=ws[Math.floor(Math.random()*ws.length)], v=+w.dataset.w+50+Math.round(Math.random()*900);
-    w.dataset.w=v; w.firstChild.nodeValue='$'+v.toLocaleString('en-US');
-    w.classList.remove('tick'); void w.offsetWidth; w.classList.add('tick');
-  },1800);
+    var rs=rows(), i=Math.floor(Math.random()*rs.length), li=rs[i], v=val(li);
+    var boost = i>0 && Math.random()<.35 ? (val(rs[i-1])-v)+200+Math.round(Math.random()*1500) : 60+Math.round(Math.random()*900);
+    if(i>0 && boost>60000) boost=60+Math.round(Math.random()*900);
+    setVal(li,v+boost); setTimeout(resort,350);
+  },1900);
+
+  if(!FINE) return;
+  /* hero art parallax */
+  var ring=document.querySelector('.ring'), hero=document.querySelector('.hero');
+  hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();ring.style.setProperty('--px',((e.clientX-r.left)/r.width-.5)*-24+'px');ring.style.setProperty('--py',((e.clientY-r.top)/r.height-.5)*-18+'px')});
+  hero.addEventListener('pointerleave',function(){ring.style.setProperty('--px','0px');ring.style.setProperty('--py','0px')});
+  /* 3D tilt on screenshots, games and the leaderboard */
+  document.querySelectorAll('.browser,.game,.ov,.send').forEach(function(el){
+    el.classList.add('tilt'); var g=document.createElement('span'); g.className='glare'; el.appendChild(g);
+    var k=el.classList.contains('browser')?5:el.classList.contains('ov')?4:7;
+    el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      el.classList.add('hov');el.style.transform='perspective(1000px) rotateX('+((.5-y)*k)+'deg) rotateY('+((x-.5)*k*1.3)+'deg) translateY(-4px)';el.style.setProperty('--mx',x*100+'%');el.style.setProperty('--my',y*100+'%')});
+    el.addEventListener('pointerleave',function(){el.classList.remove('hov');el.style.transform=''});
+  });
+  /* magnetic primary buttons */
+  document.querySelectorAll('.btn.primary').forEach(function(b){
+    b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left)/r.width-.5)*8+'px,'+(((e.clientY-r.top)/r.height-.5)*6-2)+'px)'});
+    b.addEventListener('pointerleave',function(){b.style.transform=''});
+  });
 })();
 </script>
 </body>
