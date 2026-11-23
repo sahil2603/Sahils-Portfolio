@@ -1,11 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sahil Builds — websites that turn viewers into regulars</title>
-<meta name="description" content="Rewards platforms and casino originals for streamers: live leaderboards, Discord login, coins and payouts on your own domain.">
-<meta name="theme-color" content="#07060B">
+<title>Sahil Builds | Rewards websites for casino streamers</title>
+<meta name="description" content="I build rewards platforms for casino streamers: live leaderboards, casino API integrations, Discord login, coin economies, casino originals, admin panels, SEO and the WDK bot. Free homepage demo before you pay.">
+<meta name="theme-color" content="#F0F1F4">
 <link rel="canonical" href="https://sahilbuilds.com/">
 <link rel="icon" href="/favicon.ico?v=2" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
@@ -13,526 +13,336 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sahil Builds">
-<meta property="og:title" content="Sahil Builds · Websites that turn viewers into regulars">
-<meta property="og:description" content="Live leaderboards, casino APIs, casino originals, automated rank-up rewards, admin panels and the WDK bot, built for casino streamers.">
+<meta property="og:title" content="Sahil Builds | Rewards websites for casino streamers">
+<meta property="og:description" content="Live leaderboards, casino APIs, Discord login, coin economies, casino originals, admin panels, SEO and the WDK bot. Free homepage demo before you pay.">
 <meta property="og:url" content="https://sahilbuilds.com/">
-<meta property="og:image" content="https://sahilbuilds.com/og-v2.jpg">
+<meta property="og:image" content="https://sahilbuilds.com/og-v3.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Sahil Builds: websites that turn viewers into regulars, with glowing particle rings">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@sahilku36220794">
-<meta name="twitter:title" content="Sahil Builds · Websites that turn viewers into regulars">
-<meta name="twitter:description" content="Leaderboards, casino APIs, casino originals, auto rank-ups, admin panels and the WDK bot for streamers.">
-<meta name="twitter:image" content="https://sahilbuilds.com/og-v2.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="twitter:image" content="https://sahilbuilds.com/og-v3.jpg">
+<link rel="preload" href="/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Sahil Builds","url":"https://sahilbuilds.com/","description":"Rewards platforms and casino originals for streamers.","areaServed":"Worldwide","founder":{"@type":"Person","name":"Sahil","sameAs":["https://github.com/sahil2603","https://x.com/sahilku36220794"]}}</script>
 <style>
+@font-face{font-family:Bricolage;src:url(/fonts/bricolage.woff2) format('woff2');font-weight:200 800;font-display:swap}
+@font-face{font-family:Instrument;src:url(/fonts/instrument-400.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Instrument;src:url(/fonts/instrument-500.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:Instrument;src:url(/fonts/instrument-600.woff2) format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:Instrument;src:url(/fonts/instrument-700.woff2) format('woff2');font-weight:700;font-display:swap}
 :root{
-  --bg:#07060B;--ink:#F4F1EA;--muted:#B4ADC2;--dim:#7D7690;--line:rgba(255,255,255,.1);
-  --gold:#FFB547;--ember:#FF6A3D;--violet:#9B6BFF;--cyan:#3EE6FF;--lime:#B6FF3B;
-  --display:'Chakra Petch','Arial Narrow',sans-serif;--body:'Hanken Grotesk',system-ui,sans-serif;--mono:'Geist Mono',ui-monospace,Menlo,monospace;
-  --gut:clamp(18px,4vw,56px);
+  --paper:#F0F1F4; --card:#FFFFFF; --ink:#121318; --body:#2B2E36; --muted:#5A5F6B; --line:#D9DCE3;
+  --orange:#F0621A; --orange-d:#C94C0C; --gold:#B8913A; --live:#1F9D5B; --night:#121318;
+  --r:14px; --max:1160px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--bg);color-scheme:dark;overflow-x:clip}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
-html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
-a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
-#gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
-.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 50%,transparent 55%,rgba(7,6,11,.85))}
-.grain{position:fixed;inset:-50%;z-index:2;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1s steps(4) infinite}
-@keyframes grain{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-4%)}75%{transform:translate(-1%,3%)}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--body);font:400 18px/1.65 Instrument,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:Bricolage,Instrument,sans-serif;color:var(--ink);margin:0;font-weight:700;letter-spacing:-.02em}
+h1{font-size:clamp(2.7rem,6.2vw,5rem);line-height:1;font-variation-settings:'wdth' 85;font-weight:750}
+h2{font-size:clamp(2rem,3.8vw,3rem);line-height:1.05}
+h3{font-size:1.25rem;line-height:1.25}
+p{margin:0}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:6px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;font:600 1rem Instrument,sans-serif;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;white-space:nowrap}
+.btn.primary{background:var(--orange);color:#fff;box-shadow:0 8px 20px -8px rgba(240,98,26,.7)}
+.btn.primary:hover{background:var(--orange-d);transform:translateY(-2px)}
+.btn.ghost{color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.btn svg{width:18px;height:18px}
 
-/* ---------- nav ---------- */
-.nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;gap:20px;padding:14px var(--gut)}
-.nav::before{content:"";position:absolute;inset:0 0 -24px;z-index:-1;background:linear-gradient(rgba(7,6,11,.85),rgba(7,6,11,.55) 60%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);-webkit-mask:linear-gradient(#000 65%,transparent);mask:linear-gradient(#000 65%,transparent)}
-.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:.06em;text-transform:uppercase}
-.logo i{position:relative;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-style:normal;color:#14070A;
-  background:conic-gradient(from 210deg,var(--gold),var(--ember),var(--violet),var(--cyan),var(--gold));box-shadow:0 0 20px rgba(255,181,71,.45)}
-.links{display:flex;gap:4px;margin:0 auto;padding:5px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.links a{padding:8px 15px;border-radius:999px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:color .25s,background .25s}
-.links a:hover{color:var(--ink);background:rgba(255,255,255,.06)}
-.cta{display:inline-flex;align-items:center;gap:10px;padding:11px 18px;border-radius:999px;font-weight:700;font-size:14px;color:#1A0A04;
-  background:linear-gradient(100deg,var(--gold),var(--ember));box-shadow:0 0 0 1px rgba(255,255,255,.15) inset,0 8px 30px rgba(255,106,61,.35);transition:box-shadow .3s,transform .3s}
-.cta:hover{box-shadow:0 0 0 1px rgba(255,255,255,.3) inset,0 10px 44px rgba(255,140,61,.6)}
-.cta .n{font-family:var(--mono);font-size:11px;padding:2px 6px;border-radius:6px;background:rgba(0,0,0,.18)}
-.progress{position:fixed;left:var(--gut);right:var(--gut);bottom:22px;z-index:50;display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;pointer-events:none}
-.progress .track{flex:1;height:1px;background:var(--line);position:relative}
-.progress .track i{position:absolute;left:0;top:-1px;height:3px;width:100%;transform-origin:left;transform:scaleX(var(--p,0));background:linear-gradient(90deg,var(--violet),var(--cyan),var(--gold),var(--ember));box-shadow:0 0 12px var(--gold);border-radius:3px}
-.progress b{color:var(--ink);font-weight:500}
+/* nav */
+header.top{position:sticky;top:0;z-index:20;background:rgba(240,241,244,.9);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+header.top.sc{border-color:var(--line)}
+.nav{display:flex;align-items:center;gap:28px;height:72px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font:700 1.15rem Bricolage,sans-serif;color:var(--ink);letter-spacing:-.01em}
+.brand img{width:40px;height:auto}
+.nav nav{display:flex;gap:26px;margin-left:auto}
+.nav nav a{text-decoration:none;font-weight:500;color:var(--muted);transition:color .2s}
+.nav nav a:hover{color:var(--ink)}
+.nav .btn{padding:10px 18px;font-size:.95rem}
+@media(max-width:820px){.nav nav{display:none}.nav .btn{margin-left:auto}}
 
-/* ---------- scroll chapters ---------- */
-main{position:relative;z-index:5}
-.ch{position:relative;min-height:100svh;display:flex;align-items:center;padding:110px var(--gut) 90px;pointer-events:none}
-.ch *{pointer-events:auto}
-.ch.tall{min-height:170svh;align-items:flex-start}
-.ch.tall .sticky{position:sticky;top:0;min-height:100svh;display:flex;align-items:center;width:100%}
-.copy{position:relative;max-width:min(980px,100%)}
-.copy::before{content:"";position:absolute;inset:-12% -8%;z-index:-1;pointer-events:none;background:radial-gradient(closest-side,rgba(7,6,11,.72),rgba(7,6,11,.35) 60%,transparent);filter:blur(10px)}
-.big,.lede{text-shadow:0 2px 24px rgba(7,6,11,.8)}
-.kick{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
-.kick::before{content:"";width:28px;height:1px;background:currentColor}
-.big{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:clamp(40px,6.6vw,104px);line-height:.95;letter-spacing:-.01em;margin:18px 0 22px;text-wrap:balance}
-.big .w{display:inline-block;opacity:.12;filter:blur(6px);transition:opacity .5s,filter .5s,color .5s}
-.big .w.on{opacity:1;filter:none}
-.big .hl .w{background:linear-gradient(100deg,var(--gold),var(--ember) 45%,var(--violet) 80%,var(--cyan));background-size:100% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+/* hero */
+.hero{padding:72px 0 88px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.avail{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem;color:var(--ink);margin-bottom:26px}
+.avail i{width:9px;height:9px;border-radius:50%;background:var(--live);box-shadow:0 0 0 4px rgba(31,157,91,.18)}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero .lede{font-size:1.2rem;max-width:34em;margin:26px 0 34px;color:var(--body)}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero .note{margin-top:18px;font-size:.92rem;color:var(--muted)}
+@media(max-width:920px){.hero .wrap{grid-template-columns:1fr}.hero{padding:44px 0 64px}}
 
-.mid{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:clamp(30px,4.4vw,64px);line-height:1;letter-spacing:-.005em;text-wrap:balance}
-.lede{color:var(--muted);font-size:clamp(16px,1.35vw,19px);max-width:48ch}
-.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.ghost{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:999px;border:1px solid var(--line);font-weight:700;font-size:15px;background:rgba(255,255,255,.03);backdrop-filter:blur(10px);transition:border-color .3s}
-.ghost:hover{border-color:var(--gold)}
-.cta.lg{padding:15px 24px;font-size:15px}
-.right{margin-left:auto;text-align:right}
-.right .lede{margin-left:auto}
-.center{margin:0 auto;text-align:center}.center .lede{margin:0 auto}
-.scroll-cue{position:absolute;left:50%;bottom:70px;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px}
-.scroll-cue i{width:1px;height:46px;background:linear-gradient(var(--gold),transparent);animation:cue 1.8s ease-in-out infinite;transform-origin:top}
-@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+/* leaderboard widget */
+.lb{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 30px 60px -30px rgba(18,19,24,.35)}
+.lb-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:6px}
+.lb-h b{font:700 1.15rem Bricolage,sans-serif;color:var(--ink)}
+.lb-h span{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.lb-pool{font:750 2.6rem/1 Bricolage,sans-serif;color:var(--ink);letter-spacing:-.03em;margin:8px 0 16px;font-variant-numeric:tabular-nums}
+.lb-pool small{font:500 .95rem Instrument,sans-serif;color:var(--muted);letter-spacing:0;margin-left:6px}
+.lb ol{list-style:none;margin:0;padding:0}
+.lb li{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:11px 4px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+.lb li .n{font:700 1rem Bricolage,sans-serif;color:var(--muted);text-align:center}
+.lb li:nth-child(1) .n{color:var(--gold)}
+.lb li .u{font-weight:600;color:var(--ink)}
+.lb li .w{font-weight:600;color:var(--ink)}
+.lb li .w small{display:block;font-weight:500;font-size:.78rem;color:var(--muted);text-align:right}
+.lb .cap{margin-top:14px;font-size:.82rem;color:var(--muted)}
+.lb li.up{animation:flash 1.2s ease}
+@keyframes flash{0%{background:rgba(240,98,26,.14)}100%{background:transparent}}
+.lb li{opacity:0;transform:translateY(10px);animation:rowin .6s cubic-bezier(.2,.8,.2,1) forwards}
+.lb li:nth-child(1){animation-delay:.25s}.lb li:nth-child(2){animation-delay:.35s}.lb li:nth-child(3){animation-delay:.45s}.lb li:nth-child(4){animation-delay:.55s}.lb li:nth-child(5){animation-delay:.65s}
+@keyframes rowin{to{opacity:1;transform:none}}
 
-/* orbit labels */
-.labels{position:fixed;inset:0;z-index:4;pointer-events:none}
-.lbl{position:absolute;left:0;top:0;padding:7px 12px;border-radius:999px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;white-space:nowrap;
-  background:rgba(12,10,20,.55);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;will-change:transform,opacity}
-.lbl::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c);margin-right:8px;vertical-align:1px}
+/* proof strip */
+.proof{border-block:1px solid var(--line);background:var(--card)}
+.proof .wrap{display:flex;flex-wrap:wrap;gap:12px 30px;align-items:center;padding-block:22px;font-weight:500;color:var(--muted)}
+.proof b{color:var(--ink);font-weight:600}
+.proof a{color:var(--ink);font-weight:600;text-decoration-color:var(--line);text-underline-offset:4px}
+.proof a:hover{text-decoration-color:var(--orange)}
 
-/* flying readings */
-.readings{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden}
-.rd{position:absolute;left:50%;top:50%;font-family:var(--display);font-weight:600;font-size:clamp(22px,3vw,44px);white-space:nowrap;color:var(--ink);opacity:0;will-change:transform,opacity,filter}
-.rd small{font-size:.5em;color:var(--muted);margin-left:.3em;font-family:var(--mono);letter-spacing:.08em}
+/* sections */
+section{padding:104px 0 0}
+.sh{max-width:40em;margin-bottom:48px}
+.sh p{margin-top:16px;font-size:1.15rem;color:var(--muted)}
 
-/* work cards */
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:34px}
-.card{position:relative;border-radius:24px;padding:28px;overflow:hidden;
-  background:linear-gradient(150deg,rgba(255,255,255,.09),rgba(255,255,255,.02) 45%),rgba(14,11,24,.5);border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 30px 80px rgba(0,0,0,.4);
-  --mx:50%;--my:50%;transition:border-color .4s}
-.card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(360px circle at var(--mx) var(--my),rgba(255,181,71,.16),transparent 60%);opacity:0;transition:opacity .4s}
-.card:hover{border-color:rgba(255,181,71,.45)}.card:hover::before{opacity:1}
-.card .url{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--cyan)}
-.card h3{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:clamp(28px,2.6vw,40px);line-height:1;margin:10px 0 12px}
-.card p{color:var(--muted);font-size:15.5px}
-.card ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
-.card li{padding:12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:13.5px;color:var(--muted)}
-.card li b{display:block;color:var(--ink);font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
-.card .go{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-weight:700;color:var(--gold)}
-.card .go span{transition:transform .3s}.card:hover .go span{transform:translate(3px,-3px)}
-.dot{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--lime);margin-left:10px;vertical-align:4px}
-.dot::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime);animation:pulse 1.8s infinite}
-@keyframes pulse{50%{opacity:.35}}
+/* work */
+.case{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center;padding:44px 0;border-top:1px solid var(--line)}
+.case:first-of-type{border-top:0;padding-top:0}
+.case.flip{grid-template-columns:.75fr 1.25fr}
+.case.flip .shots{order:2}
+.shots{position:relative;padding-bottom:36px}
+.browser{border-radius:12px;overflow:hidden;background:#1b1c22;box-shadow:0 30px 60px -28px rgba(18,19,24,.5);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.browser .bar{display:flex;align-items:center;gap:6px;height:30px;padding:0 12px;background:#26272e}
+.browser .bar i{width:9px;height:9px;border-radius:50%;background:#4a4b55}
+.browser .bar span{margin-left:12px;font-size:.75rem;color:#a7a9b4}
+.phone{position:absolute;right:-14px;bottom:0;width:23%;border-radius:20px;overflow:hidden;border:5px solid #1b1c22;box-shadow:0 20px 40px -18px rgba(18,19,24,.6);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.case:hover .browser{transform:translateY(-4px)}
+.case:hover .phone{transform:translateY(-10px)}
+.case .live{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--live)}
+.case .live i{width:8px;height:8px;border-radius:50%;background:var(--live)}
+.case h3{font-size:2rem;margin:10px 0 12px;letter-spacing:-.02em}
+.case p.story{color:var(--body)}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;margin:24px 0 28px;font-size:.98rem}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0;color:var(--ink);font-weight:500}
+.case .btn{padding:12px 20px}
+@media(max-width:920px){.case,.case.flip{grid-template-columns:1fr;gap:30px}.case.flip .shots{order:0}.phone{right:6px}}
 
-/* steps */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}
-.step{padding:22px;border-radius:20px;background:rgba(14,11,24,.45);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.step .n{font-family:var(--mono);font-size:12px;color:var(--c,var(--gold))}
-.step h4{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:22px;margin:6px 0}
-.step p{color:var(--muted);font-size:14.5px}
-.foot{position:relative;z-index:5;padding:30px var(--gut) 70px;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;color:var(--dim);font-size:13px;font-family:var(--mono);letter-spacing:.04em}
+/* services */
+.svc{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+.svc div{padding:26px 0;border-top:1px solid var(--line)}
+.svc h3{margin-bottom:8px}
+.svc p{color:var(--muted)}
+.svc div.key h3::after{content:'Most asked for';display:inline-block;white-space:nowrap;margin-left:10px;vertical-align:3px;font:600 .72rem Instrument,sans-serif;color:var(--orange-d);background:rgba(240,98,26,.1);padding:3px 8px;border-radius:999px;letter-spacing:0}
+.more{margin-top:40px}
+.more h3{font-size:1.05rem;margin-bottom:14px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.92rem;color:var(--body)}
+@media(max-width:760px){.svc{grid-template-columns:1fr}}
 
-@media (max-width:900px){
-  .links{display:none}
-  .cards,.steps{grid-template-columns:1fr}
-  .right{margin-left:0;text-align:left}.right .lede{margin-left:0}
-  .card ul{grid-template-columns:1fr 1fr}
-  .cta .n{display:none}
-}
-@media (max-width:760px){.copy::before{inset:-10% -14%;background:radial-gradient(closest-side,rgba(7,6,11,.85),rgba(7,6,11,.5) 65%,transparent)}}
-@media (max-width:480px){.cta{padding:10px 14px;font-size:13px}.logo span{display:none}}
-@media (prefers-reduced-motion:reduce){.grain,.scroll-cue i,.dot::before{animation:none}.big .w{opacity:1;filter:none}}
+/* process */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;font:700 .95rem Bricolage,sans-serif;margin-bottom:16px}
+.steps li:first-child::before{background:var(--orange)}
+.steps h3{margin-bottom:6px}
+.steps p{color:var(--muted);font-size:1rem}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}@media(max-width:560px){.steps{grid-template-columns:1fr}}
 
-/* top beam */
-.beam{position:fixed;left:0;right:0;top:0;height:3px;z-index:60;pointer-events:none}
-.beam-line{position:absolute;inset:0;transform-origin:left;transform:scaleX(var(--ps,0));background:linear-gradient(90deg,transparent,var(--violet) 25%,var(--cyan) 55%,var(--gold) 80%,var(--ember));box-shadow:0 0 14px var(--gold),0 0 30px rgba(155,107,255,.5)}
-.beam-head{position:absolute;top:50%;left:calc(var(--ps,0) * 100%);width:160px;height:26px;transform:translate(-100%,-50%);opacity:min(1,calc(var(--ps,0) * 40));
-  background:radial-gradient(closest-side at 100% 50%,#fff,var(--gold) 35%,transparent 72%);filter:blur(.5px)}
-.beam-head::after{content:"";position:absolute;right:-6px;top:50%;width:12px;height:12px;border-radius:50%;transform:translateY(-50%);background:#fff;box-shadow:0 0 12px #fff,0 0 26px var(--gold),0 0 52px var(--ember)}
-/* back to top */
-.totop{position:fixed;right:max(18px,var(--gut));bottom:58px;z-index:60;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:var(--gold);
-  background:rgba(14,11,24,.4);backdrop-filter:blur(16px) saturate(170%);-webkit-backdrop-filter:blur(16px) saturate(170%);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 30px rgba(0,0,0,.5),0 0 24px rgba(255,181,71,.2);
-  opacity:0;transform:translateY(20px) scale(.8);pointer-events:none;transition:opacity .4s,transform .5s cubic-bezier(.2,.9,.3,1.4),box-shadow .3s}
-.totop.show{opacity:1;transform:none;pointer-events:auto}
-.totop:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 10px 30px rgba(0,0,0,.5),0 0 40px rgba(255,181,71,.6)}
-.totop .ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
-.tt-bg{fill:none;stroke:rgba(255,255,255,.12);stroke-width:2.5}
-.tt-fg{fill:none;stroke:url(#tg);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:169.6;stroke-dashoffset:calc(169.6 - var(--ps,0) * 169.6);filter:drop-shadow(0 0 4px rgba(255,181,71,.8))}
-.totop .ar{width:22px;height:22px;transition:transform .3s}
-.totop:hover .ar{transform:translateY(-3px)}
-@media (max-width:760px){.totop{width:50px;height:50px;bottom:52px;right:16px}}
+/* cta */
+.cta{margin:120px 0 0;background:var(--night);color:#C9CBD3}
+.cta .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;padding-block:88px}
+.cta h2{color:#fff}
+.cta p{margin-top:16px;font-size:1.15rem;max-width:32em}
+.cta ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.cta li{display:flex;gap:12px;align-items:flex-start}
+.cta li::before{content:'';flex:none;width:8px;height:8px;margin-top:10px;border-radius:50%;background:var(--orange)}
+.cta .btn{margin-top:30px}
+@media(max-width:820px){.cta .wrap{grid-template-columns:1fr}}
+footer{background:var(--night);color:#8C8F9A;border-top:1px solid #24252c}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;padding-block:28px;font-size:.92rem}
+footer a{text-decoration:none}footer a:hover{color:#fff}
+footer .links{display:flex;gap:22px}
 
-/* features */
-.grad{background:linear-gradient(100deg,var(--gold),var(--ember) 40%,var(--violet) 75%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
-.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
-.feat{position:relative;padding:24px;border-radius:22px;overflow:hidden;isolation:isolate;
-  background:linear-gradient(150deg,rgba(255,255,255,.08),rgba(255,255,255,.015) 45%),rgba(14,11,24,.5);border:1px solid rgba(255,255,255,.11);
-  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
-  --mx:50%;--my:50%;transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s}
-.feat::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(320px circle at var(--mx) var(--my),color-mix(in srgb,var(--c) 22%,transparent),transparent 65%);opacity:0;transition:opacity .4s}
-.feat::after{content:"";position:absolute;left:24px;right:24px;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent);opacity:.55}
-.feat:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--c) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 24px 60px rgba(0,0,0,.45),0 0 40px color-mix(in srgb,var(--c) 22%,transparent)}
-.feat:hover::before{opacity:1}
-.fi{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 35%,transparent);box-shadow:0 0 22px color-mix(in srgb,var(--c) 25%,transparent);transition:transform .5s}
-.fi svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.feat:hover .fi{transform:rotate(-8deg) scale(1.08)}
-.fn{position:absolute;right:20px;top:18px;font-family:var(--mono);font-size:12px;color:var(--dim)}
-.feat h3{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:21px;line-height:1.1;margin:18px 0 8px;letter-spacing:.01em}
-.feat p{color:var(--muted);font-size:14.5px;line-height:1.55}
-.more{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px}
-.more-t{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
-.chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
-.chips li{padding:8px 13px;border-radius:999px;font-size:13.5px;color:var(--ink);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px);transition:border-color .3s,color .3s,box-shadow .3s}
-.chips li:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 18px rgba(255,181,71,.3)}
-@media (max-width:1000px){.feats{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:640px){.feats{grid-template-columns:1fr}.feat{padding:20px}.chips li{font-size:12.5px;padding:7px 11px}}
 
-/* site screenshots as card previews */
-.card.has-shot{isolation:isolate;padding-top:calc(clamp(170px,19vw,250px) + 6px)}
-.card .shot{position:absolute;left:0;right:0;top:0;height:clamp(200px,22vw,290px);z-index:-1;background-size:cover;background-position:center top;
-  -webkit-mask:linear-gradient(#000 45%,transparent);mask:linear-gradient(#000 45%,transparent);opacity:.9;transform-origin:center top;
-  transition:transform 1.2s cubic-bezier(.2,.8,.2,1),opacity .6s,filter .6s}
-.card.has-shot:hover .shot{transform:scale(1.06);opacity:1;filter:saturate(1.2) brightness(1.08)}
-.card.has-shot .url,.card.has-shot .dot{position:relative}
+/* art */
+.lbwrap{position:relative;padding:40px 20px}
+.lbwrap .lb{position:relative;z-index:1;max-width:420px;margin:0 auto}
+.ring{position:absolute;left:50%;top:50%;width:132%;max-width:none;transform:translate(-50%,-50%);z-index:0;pointer-events:none;animation:float 7s ease-in-out infinite}
+@keyframes float{50%{transform:translate(-50%,calc(-50% - 10px)) rotate(1.5deg)}}
+@media(max-width:920px){.lbwrap{padding:24px 0;overflow:hidden}.ring{width:118%}}
+.svc div{display:grid;grid-template-columns:64px 1fr;column-gap:18px;align-items:start}
+.svc div img{grid-row:span 2;width:64px;height:64px;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.svc div:hover img{transform:rotate(-6deg) scale(1.08)}
+.svc div h3{align-self:end}
+.cta{background:#0A0B12}
+footer{background:#0A0B12}
+.cta .art{width:100%;height:auto;border-radius:16px}
+img{height:auto}
+.cta ul{margin-top:28px}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.lb li{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<canvas id="gl" aria-hidden="true"></canvas>
-<div class="vignette" aria-hidden="true"></div>
-<div class="grain" aria-hidden="true"></div>
-<div class="beam" aria-hidden="true"><i class="beam-line"></i><i class="beam-head"></i></div>
-<button class="totop" id="toTop" type="button" aria-label="Back to top"><svg class="ring" viewBox="0 0 60 60" aria-hidden="true"><defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9B6BFF"/><stop offset=".5" stop-color="#3EE6FF"/><stop offset="1" stop-color="#FFB547"/></linearGradient></defs><circle cx="30" cy="30" r="27" class="tt-bg"/><circle cx="30" cy="30" r="27" class="tt-fg"/></svg><svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-<div class="labels" id="labels" aria-hidden="true"></div>
-<div class="readings" id="readings" aria-hidden="true"></div>
 
-<header class="nav">
-  <a class="logo" href="#top"><i>S</i><span>Sahil Builds</span></a>
-  <nav class="links" aria-label="Main"><a href="#work">Work</a><a href="#build">Process</a><a href="#features">Features</a><a href="#demo">Contact</a></nav>
-  <a class="cta" href="https://discord.com/users/436003903818170368" target="_blank" rel="noopener">Free demo <span class="n">$0</span></a>
-</header>
+<header class="top" id="top"><div class="wrap nav">
+  <a class="brand" href="#"><img src="/img/logo.webp" alt="" width="40" height="30">Sahil Builds</a>
+  <nav aria-label="Main"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="#contact">Contact</a></nav>
+  <a class="btn primary" href="https://discord.com/users/436003903818170368" target="_blank" rel="noopener">Get a free demo</a>
+</div></header>
 
-<div class="progress" aria-hidden="true"><b id="chName">01 · Ignite</b><span class="track"><i></i></span><span id="chPct">0%</span></div>
-
-<main id="top">
-  <section class="ch" data-ch="0" data-name="Ignite">
-    <div class="copy">
-      <span class="kick">Booking new streamer projects</span>
-      <h1 class="big" data-words>Websites that turn viewers into <span class="hl">regulars.</span></h1>
-      <p class="lede">I design and build rewards platforms and casino originals for streamers: live leaderboards, Discord login, coin games and payouts, all on your own domain.</p>
-      <div class="btns"><a class="cta lg" href="https://discord.com/users/436003903818170368" target="_blank" rel="noopener">Get a free demo →</a><a class="ghost" href="#work">See client work</a></div>
+<main>
+<div class="hero"><div class="wrap">
+  <div>
+    <p class="avail"><i></i>Taking on new streamer projects</p>
+    <h1>Websites that turn viewers into <em>regulars</em>.</h1>
+    <p class="lede">I design and build rewards platforms for casino streamers: live leaderboards, Discord login, coin games and payouts, all on your own domain and running on their own.</p>
+    <div class="ctas">
+      <a class="btn primary" href="https://discord.com/users/436003903818170368" target="_blank" rel="noopener">Get a free demo</a>
+      <a class="btn ghost" href="#work">See client work</a>
     </div>
-    <div class="scroll-cue"><i></i>Scroll</div>
-  </section>
+    <p class="note">You see your homepage before you pay anything.</p>
+  </div>
+  <div class="lbwrap"><img class="ring" src="/img/hero-ring.webp" alt="" width="760" height="760" aria-hidden="true">
+  <aside class="lb" aria-label="Example of a live leaderboard">
+    <div class="lb-h"><b>Monthly race</b><span id="cd">Ends in 6d 14h 22m</span></div>
+    <div class="lb-pool">$75,000<small>prize pool</small></div>
+    <ol id="lbRows">
+      <li><span class="n">1</span><span class="u">dr*****ke</span><span class="w" data-w="412880">$412,880<small>$25,000</small></span></li>
+      <li><span class="n">2</span><span class="u">ja*****ty</span><span class="w" data-w="318450">$318,450<small>$15,000</small></span></li>
+      <li><span class="n">3</span><span class="u">mo*****x7</span><span class="w" data-w="244120">$244,120<small>$10,000</small></span></li>
+      <li><span class="n">4</span><span class="u">sp****in</span><span class="w" data-w="190300">$190,300<small>$7,500</small></span></li>
+      <li><span class="n">5</span><span class="u">kr*****ed</span><span class="w" data-w="152775">$152,775<small>$5,000</small></span></li>
+    </ol>
+    <p class="cap">A leaderboard like the ones I ship. Wagers update live from the casino.</p>
+  </aside></div>
+</div></div>
 
-  <section class="ch" data-ch="1" data-name="Sparks">
-    <div class="copy right">
-      <span class="kick">01 · Your stream</span>
-      <h2 class="big" data-words>Every viewer is a <span class="hl">spark.</span></h2>
-      <p class="lede">Thousands drop into chat every night, then drift off to whatever's next. Most never come back.</p>
+<div class="proof"><div class="wrap">
+  <span>Live for real streamers:</span>
+  <a href="https://jakerewards.com" target="_blank" rel="noopener">jakerewards.com</a>
+  <a href="https://jammmyrewards.com" target="_blank" rel="noopener">jammmyrewards.com</a>
+  <span><b>$75K</b> monthly leaderboard</span>
+  <span><b>Crypto payouts</b> built in</span>
+</div></div>
+
+<section id="work"><div class="wrap">
+  <div class="sh"><h2>Client work</h2><p>Both sites are live today. Open them on your phone and try them.</p></div>
+
+  <article class="case">
+    <div class="shots">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i><span>jakerewards.com</span></div><img src="/img/jake-desktop.webp" alt="Jake Rewards homepage" width="1200" height="750" loading="lazy"></div>
+      <img class="phone" src="/img/jake-mobile.webp" alt="Jake Rewards on a phone" width="390" height="844" loading="lazy">
     </div>
-  </section>
-
-  <section class="ch" data-ch="2" data-name="Pull">
-    <div class="copy">
-      <span class="kick">02 · Your platform</span>
-      <h2 class="big" data-words>I pull them into <span class="hl">one place.</span></h2>
-      <p class="lede">A home on your own domain where your community logs in, competes and earns, every day, even when you're offline.</p>
+    <div>
+      <span class="live"><i></i>Live</span>
+      <h3>Jake Rewards</h3>
+      <p class="story">Jake had a basic site. I built a better one before he asked, showed it to him, and he switched.</p>
+      <dl class="facts">
+        <dt>Leaderboard</dt><dd>$75K monthly, with rollover</dd>
+        <dt>Challenges</dt><dd>Weekly multiplier podium</dd>
+        <dt>Rewards</dt><dd>Referral and rank-up tiers</dd>
+        <dt>Hosting</dt><dd>Cloudflare, with a staging copy</dd>
+      </dl>
+      <a class="btn ghost" href="https://jakerewards.com" target="_blank" rel="noopener">Visit jakerewards.com</a>
     </div>
-  </section>
+  </article>
 
-  <section class="ch tall" id="orbit" data-ch="3" data-name="Orbit">
-    <div class="sticky"><div class="copy center">
-      <span class="kick">03 · Everything connected</span>
-      <h2 class="big" data-words>All of it <span class="hl">orbits your brand.</span></h2>
-      <p class="lede">Leaderboards, Discord login, coins, payouts, casino APIs and your Kick bot, wired together so you run it all from one dashboard.</p>
-    </div></div>
-  </section>
-
-  <section class="ch tall" data-ch="4" data-name="Numbers">
-    <div class="sticky"><div class="copy right">
-      <span class="kick">04 · Live data</span>
-      <h2 class="big" data-words>Real numbers, <span class="hl">flowing in.</span></h2>
-      <p class="lede">Wagers update live from your casino partners. API keys stay as server secrets, so nobody can copy them from your page.</p>
-    </div></div>
-  </section>
-
-  <section class="ch" id="work" data-ch="5" data-name="Work">
-    <div class="copy" style="max-width:1100px;width:100%">
-      <span class="kick">05 · Selected work</span>
-      <h2 class="mid">Running live for real streamers.</h2>
-      <div class="cards">
-        <a class="card has-shot" href="https://jakerewards.com" target="_blank" rel="noopener"><span class="shot" style="background-image:url(work-jake.jpg)" aria-hidden="true"></span>
-          <span class="url">jakerewards.com</span><span class="dot">LIVE</span>
-          <h3>Jake Rewards</h3>
-          <p>Jake had a basic site. I built a better one before he asked, showed it to him, and he switched.</p>
-          <ul><li><b>Leaderboard</b>$75K monthly with rollover</li><li><b>Challenges</b>Weekly multiplier podium</li><li><b>Rewards</b>Referral and rank-up tiers</li><li><b>Hosting</b>Cloudflare + staging</li></ul>
-          <span class="go">Visit site <span>↗</span></span>
-        </a>
-        <a class="card has-shot" href="https://jammmyrewards.com" target="_blank" rel="noopener"><span class="shot" style="background-image:url(work-jammy.jpg)" aria-hidden="true"></span>
-          <span class="url">jammmyrewards.com</span><span class="dot">LIVE</span>
-          <h3>Jammmy Rewards</h3>
-          <p>A full community platform. Viewers log in with Discord, earn coins, link casino accounts and cash out in crypto.</p>
-          <ul><li><b>Accounts</b>Discord login, profiles</li><li><b>Economy</b>Daily coins, crypto payouts</li><li><b>Admin</b>Vault, users, analytics</li><li><b>Data</b>Casino APIs via proxy</li></ul>
-          <span class="go">Visit site <span>↗</span></span>
-        </a>
-      </div>
+  <article class="case flip">
+    <div class="shots">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i><span>jammmyrewards.com</span></div><img src="/img/jammy-desktop.webp" alt="Jammmy Rewards homepage" width="1200" height="750" loading="lazy"></div>
+      <img class="phone" src="/img/jammy-mobile.webp" alt="Jammmy Rewards on a phone" width="390" height="844" loading="lazy">
     </div>
-  </section>
-
-  <section class="ch" id="features" data-ch="6" data-name="Features">
-    <div class="copy" style="max-width:1180px;width:100%">
-      <span class="kick">06 · What I build</span>
-      <h2 class="mid">Everything your stream needs, <span class="grad">under one roof.</span></h2>
-      <p class="lede" style="margin-top:14px">Pick what you need or take the full stack. All of it is already running live on real streamer sites.</p>
-      <div class="feats"><article class="feat" style="--c:var(--gold)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8"/></svg></span><span class="fn">01</span><h3>Live leaderboards</h3><p>Monthly and weekly wager races with countdowns, podiums, prize tables and rollover. Updates itself from your casino partners.</p></article><article class="feat" style="--c:var(--cyan)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span><span class="fn">02</span><h3>Casino API integrations</h3><p>Stake, Thrill and more, connected through a secure server proxy. Your affiliate keys live as secrets and never touch the page.</p></article><article class="feat" style="--c:var(--ember)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM9 9h.01M15 9h.01M9 15h.01M15 15h.01M12 12h.01"/></svg></span><span class="fn">03</span><h3>Casino originals</h3><p>Your own coin games, like blackjack, wheels and slot-style games, with RTP you control and results players can trust.</p></article><article class="feat" style="--c:var(--violet)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><span class="fn">04</span><h3>Wager database</h3><p>Every wager stored in your own database, so history, rank-ups and reports survive casino API limits and resets.</p></article><article class="feat" style="--c:var(--lime)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><span class="fn">05</span><h3>Automated rank-up rewards</h3><p>Players rank up the moment they hit a wager milestone. Rewards pay out and Discord roles update on their own, every 30-day window.</p></article><article class="feat" style="--c:var(--gold)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span><span class="fn">06</span><h3>High-end motion websites</h3><p>WebGL, 3D and scroll-driven animation like this page, built mobile-first and tuned to stay smooth on cheap phones.</p></article><article class="feat" style="--c:var(--cyan)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v4h-7zM13 10h7v10h-7zM4 13h7v7H4z"/></svg></span><span class="fn">07</span><h3>All-in-one admin panel</h3><p>Users, payouts, vault, player files, economy charts, alt and VPN flags and maintenance mode. Run everything from one place.</p></article><article class="feat" style="--c:var(--violet)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h8a4 4 0 0 1 4 4v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-3a4 4 0 0 1 4-4zM12 8V4M9 13h.01M15 13h.01M2 13v2M22 13v2"/></svg></span><span class="fn">08</span><h3>WDK bot</h3><p>Connects your website, Discord and Kick and runs fully on its own: syncs roles, posts rewards and keeps your community in the loop.</p></article><article class="feat" style="--c:var(--ember)"><span class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7zM9 12l2 2 4-4"/></svg></span><span class="fn">09</span><h3>Discord login &amp; coin economy</h3><p>Viewers sign in with Discord, earn coins every day, link their casino accounts and cash out in crypto.</p></article></div>
-      <div class="more"><span class="more-t">And much more</span><ul class="chips"><li>Referral programs</li><li>Daily streaks</li><li>Weekly challenges</li><li>Tournaments</li><li>Player profiles</li><li>Hall of fame</li><li>Vouch feed</li><li>Crypto payouts</li><li>Lossback calculators</li><li>Bonus pages</li><li>Alt &amp; VPN detection</li><li>Weekly staff reports</li><li>Economy dashboard</li><li>Maintenance mode</li><li>SEO &amp; link previews</li><li>Staging copy</li><li>Your own domain + SSL</li><li>Kick stream alerts</li></ul></div>
+    <div>
+      <span class="live"><i></i>Live</span>
+      <h3>Jammmy Rewards</h3>
+      <p class="story">A full community platform. Viewers log in with Discord, earn coins, link their casino accounts and cash out in crypto.</p>
+      <dl class="facts">
+        <dt>Accounts</dt><dd>Discord login and profiles</dd>
+        <dt>Economy</dt><dd>Daily coins, ranks, crypto payouts</dd>
+        <dt>Games</dt><dd>Blackjack, Mines, Plinko, HiLo and a custom slot</dd>
+        <dt>Admin</dt><dd>Vault, users, payouts, analytics</dd>
+      </dl>
+      <a class="btn ghost" href="https://jammmyrewards.com" target="_blank" rel="noopener">Visit jammmyrewards.com</a>
     </div>
-  </section>
+  </article>
+</div></section>
 
-  <section class="ch" id="build" data-ch="7" data-name="Build">
-    <div class="copy" style="max-width:1100px;width:100%">
-      <span class="kick">07 · How it gets built</span>
-      <h2 class="mid">You see it before you pay anything.</h2>
-      <div class="steps">
-        <div class="step" style="--c:var(--gold)"><span class="n">01 / Free demo</span><h4>See it first</h4><p>A homepage in your branding with your real casino codes.</p></div>
-        <div class="step" style="--c:var(--ember)"><span class="n">02 / Plan</span><h4>Fixed price</h4><p>Every page and feature agreed. 50% to start, 50% at launch.</p></div>
-        <div class="step" style="--c:var(--violet)"><span class="n">03 / Build</span><h4>Private preview</h4><p>Check progress any time and send changes in Discord.</p></div>
-        <div class="step" style="--c:var(--cyan)"><span class="n">04 / Connect</span><h4>Live data</h4><p>Casinos, Discord login and database, keys kept secret.</p></div>
-        <div class="step" style="--c:var(--lime)"><span class="n">05 / Launch</span><h4>Your domain</h4><p>SSL, analytics, tested on real phones.</p></div>
-        <div class="step" style="--c:var(--gold)"><span class="n">06 / Care</span><h4>Ongoing</h4><p>Updates without breaking anything.</p></div>
-      </div>
-    </div>
-  </section>
+<section id="services"><div class="wrap">
+  <div class="sh"><h2>Everything your stream needs, in one place</h2><p>Pick what you need or take the full stack. All of it is already running on real streamer sites.</p></div>
+  <div class="svc">
+    <div class="key"><img src="/img/ic-lb.webp" alt="" width="64" height="64" loading="lazy"><h3>Live leaderboards</h3><p>Monthly and weekly wager races with countdowns, podiums, prize tables and rollover. Updates itself from your casino partners.</p></div>
+    <div><img src="/img/ic-api.webp" alt="" width="64" height="64" loading="lazy"><h3>Casino API integrations</h3><p>Stake, Thrill and more, connected through a secure server proxy. Your affiliate keys stay secret and never touch the page.</p></div>
+    <div><img src="/img/ic-discord.webp" alt="" width="64" height="64" loading="lazy"><h3>Discord login and coin economy</h3><p>Viewers sign in with Discord, earn coins every day, link their casino accounts and cash out in crypto.</p></div>
+    <div><img src="/img/ic-originals.webp" alt="" width="64" height="64" loading="lazy"><h3>Casino originals</h3><p>Your own coin games, like blackjack, mines and slots, with RTP you control and results players can check.</p></div>
+    <div><img src="/img/ic-rankup.webp" alt="" width="64" height="64" loading="lazy"><h3>Automated rank-up rewards</h3><p>Players rank up the moment they hit a wager milestone. Rewards pay out and Discord roles update on their own.</p></div>
+    <div><img src="/img/ic-db.webp" alt="" width="64" height="64" loading="lazy"><h3>Wager database</h3><p>Every wager stored in your own database, so history and rank-ups survive casino API limits and resets.</p></div>
+    <div><img src="/img/ic-admin.webp" alt="" width="64" height="64" loading="lazy"><h3>All-in-one admin panel</h3><p>Users, payouts, vault, economy charts, alt and VPN flags and maintenance mode, all from one dashboard.</p></div>
+    <div><img src="/img/ic-bot.webp" alt="" width="64" height="64" loading="lazy"><h3>WDK bot</h3><p>Connects your website, Discord and Kick and runs by itself: syncs roles, posts rewards and keeps the community in the loop.</p></div>
+    <div><img src="/img/ic-seo.webp" alt="" width="64" height="64" loading="lazy"><h3>SEO and Google setup</h3><p>Search Console and Bing set up, sitemap, structured data, fast load times and clean link previews, so people searching your name land on your site. I recently found and fixed a hidden setting that was keeping jammmyrewards.com out of Google.</p></div>
+    <div><img src="/img/ic-motion.webp" alt="" width="64" height="64" loading="lazy"><h3>Motion websites</h3><p>Animated, mobile-first sites that stay smooth on cheap phones, so the first impression matches your stream.</p></div>
+  </div>
+  <div class="more"><h3>Also on the menu</h3><div class="tags">
+    <span>Referral programs</span><span>Daily streaks</span><span>Weekly challenges</span><span>Tournaments</span><span>Player profiles</span><span>Hall of fame</span><span>Vouch feed</span><span>Lossback calculators</span><span>Bonus pages</span><span>Alt and VPN detection</span><span>Weekly staff reports</span><span>Kick stream alerts</span><span>Discord and X link previews</span><span>Your own domain and SSL</span>
+  </div></div>
+</div></section>
 
-  <section class="ch" id="demo" data-ch="8" data-name="Demo">
-    <div class="copy center" style="margin-top:40vh">
-      <span class="kick">08 · Your turn</span>
-      <h2 class="big" data-words>Be the next stream with a <span class="hl">home.</span></h2>
-      <p class="lede">Send your stream link, logo and casino codes. I'll build your homepage demo for free.</p>
-      <div class="btns" style="justify-content:center"><a class="cta lg" href="https://discord.com/users/436003903818170368" target="_blank" rel="noopener">Get a free demo on Discord →</a></div>
-    </div>
-  </section>
+<section id="process"><div class="wrap">
+  <div class="sh"><h2>You see it before you pay</h2><p>A fixed price, a private preview the whole way, and changes handled in Discord.</p></div>
+  <ol class="steps">
+    <li><h3>Free demo</h3><p>A homepage in your branding with your real casino codes.</p></li>
+    <li><h3>Plan and price</h3><p>Every page and feature agreed up front. 50% to start, 50% at launch.</p></li>
+    <li><h3>Build</h3><p>A private preview link you can check any time.</p></li>
+    <li><h3>Connect</h3><p>Casinos, Discord login and database wired in, with keys kept secret.</p></li>
+    <li><h3>Launch</h3><p>Your domain, SSL, analytics and Google setup, tested on real phones.</p></li>
+    <li><h3>Ongoing care</h3><p>Updates and new features without breaking what works.</p></li>
+  </ol>
+</div></section>
 </main>
-<footer class="foot"><span>© Sahil Builds</span><span>Rewards platforms & casino originals for streamers</span></footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<div class="cta" id="contact"><div class="wrap">
+  <div>
+    <h2>Be the next stream with a home.</h2>
+    <p>Send me your stream link, logo and casino codes on Discord. I'll build your homepage demo for free, usually within a few days.</p>
+    <a class="btn primary" href="https://discord.com/users/436003903818170368" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.6 19.6 0 0015.4 3l-.6 1.3a18 18 0 00-5.6 0L8.6 3a19.6 19.6 0 00-4.9 1.4C.6 9 0 13.6.3 18.1a19.8 19.8 0 006 3l1.3-2.1a12.7 12.7 0 01-2-1l.5-.4a14 14 0 0011.9 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.7 19.7 0 006-3c.4-5.2-.7-9.8-3.5-13.7zM8.3 15.4c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4zm7.4 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4z"/></svg>Message me on Discord</a>
+    <ul>
+      <li>Your homepage demo is free, with no strings attached</li>
+      <li>Fixed price agreed before any work starts</li>
+      <li>You own the site, the domain and the code</li>
+    </ul>
+  </div>
+  <img class="art" src="/img/cta-plane.webp" alt="" width="900" height="506" loading="lazy">
+</div></div>
+
+<footer><div class="wrap">
+  <span>© 2026 Sahil Builds. Rewards platforms and casino originals for streamers.</span>
+  <span class="links"><a href="https://discord.com/users/436003903818170368" target="_blank" rel="noopener">Discord</a><a href="https://x.com/sahilku36220794" target="_blank" rel="noopener">X</a><a href="https://github.com/sahil2603" target="_blank" rel="noopener">GitHub</a></span>
+</div></footer>
+
 <script>
-(()=>{
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const small=innerWidth<760||(navigator.hardwareConcurrency||8)<=4;
-const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
-const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>[...c.querySelectorAll(s)];
-const N=small?14000:42000;
-const rand=(a=1)=>Math.random()*a;
-
-/* ======================= particle shapes (one per chapter) ======================= */
-const NS=9;const S=[];for(let k=0;k<NS;k++)S.push(new Float32Array(N*3));
-const seed=new Float32Array(N),hue=new Float32Array(N);
-function gauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
-// SB monogram sampled from canvas
-function monogram(){const c=document.createElement('canvas');c.width=600;c.height=300;const x=c.getContext('2d');
-  x.fillStyle='#fff';x.font='700 260px "Chakra Petch", Arial Black, sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('SB',300,160);
-  const d=x.getImageData(0,0,600,300).data,pts=[];for(let i=0;i<4000*6;i++){const px=rand(600)|0,py=rand(300)|0;if(d[(py*600+px)*4+3]>128)pts.push([(px-300)/60,-(py-150)/60]);}
-  return pts;}
-let mono=null;
-function buildShapes(){
-  mono=monogram();
-  for(let i=0;i<N;i++){
-    seed[i]=Math.random();hue[i]=Math.random();
-    const s0=S[0],s1=S[1],s2=S[2],s3=S[3],s4=S[4],s5=S[5],s6=S[6],s7=S[7],s8=S[8],j=i*3;
-    // 0 ignite: dense core + soft halo + thin fibres (dandelion-like burst, our own take)
-    let r,th,ph;
-    if(i%5===0){r=2.2+rand(2.8);th=rand(6.283);ph=Math.acos(2*rand()-1);}            // fibres outward
-    else if(i%5===1){r=1.6+gauss()*.08;th=rand(6.283);ph=Math.acos(2*rand()-1);}     // shell
-    else {r=Math.pow(rand(),2.2)*1.5;th=rand(6.283);ph=Math.acos(2*rand()-1);}      // core
-    s0[j]=r*Math.sin(ph)*Math.cos(th);s0[j+1]=r*Math.cos(ph);s0[j+2]=r*Math.sin(ph)*Math.sin(th);
-    // 1 sparks: deep starfield tunnel with a few streams
-    if(i%6===0){const lane=(i/6|0)%7;const t=rand();const ax=[-5,4,-2,6,-7,2,0][lane],ay=[3,-2,-4,2,-1,4,-3][lane];
-      s1[j]=ax*(1-t)+(-ax*.6)*t+gauss()*.08;s1[j+1]=ay*(1-t)+(-ay*.4)*t+gauss()*.08;s1[j+2]=-30+t*40;}
-    else{s1[j]=gauss()*7;s1[j+1]=gauss()*4.5;s1[j+2]=-30+rand(40);}
-    // 2 pull: spiral galaxy pulled into a centre
-    {const arm=i%3,t=Math.pow(rand(),.7),a=arm*2.094+t*7.5+gauss()*.25,rr=.3+t*6.2;
-      s2[j]=Math.cos(a)*rr;s2[j+1]=gauss()*.18*(1.2-t);s2[j+2]=Math.sin(a)*rr;}
-    // 3 orbit: core + 3 tilted rings
-    if(i%4===0){const rr=Math.pow(rand(),2)*.9;th=rand(6.283);ph=Math.acos(2*rand()-1);s3[j]=rr*Math.sin(ph)*Math.cos(th);s3[j+1]=rr*Math.cos(ph);s3[j+2]=rr*Math.sin(ph)*Math.sin(th);}
-    else{const ring=i%3,a=rand(6.283),R=[3.2,4.4,5.6][ring]+gauss()*.05,tilt=[.35,-.55,1.15][ring],rot=[0,1.1,2.2][ring];
-      let x=Math.cos(a)*R,y=0,z=Math.sin(a)*R;const y2=y*Math.cos(tilt)-z*Math.sin(tilt),z2=y*Math.sin(tilt)+z*Math.cos(tilt);
-      s3[j]=x*Math.cos(rot)-z2*Math.sin(rot);s3[j+1]=y2;s3[j+2]=x*Math.sin(rot)+z2*Math.cos(rot);}
-    // 4 numbers: data rain columns
-    {const col=(i%40)-19.5;s4[j]=col*.42+gauss()*.03;s4[j+1]=-6+rand(12);s4[j+2]=-4+gauss()*1.5;}
-    // 5 work: two soft glowing panes (behind the cards)
-    {const side=i%2?1:-1;s5[j]=side*3.2+(rand()-.5)*5.6;s5[j+1]=(rand()-.5)*4.2;s5[j+2]=-3+gauss()*.15;
-      if(i%7===0){s5[j]=gauss()*9;s5[j+1]=gauss()*6;s5[j+2]=-8+gauss()*3;}}
-    // 6 build: ascending helix (progress)
-    {const node=k=>[((k%3)-1)*4.2,(1-Math.floor(k/3))*2.6,0];
-      if(i%10<3){const k=i%9,nd=node(k);const rr=Math.pow(rand(),2)*.45;th=rand(6.283);ph=Math.acos(2*rand()-1);s6[j]=nd[0]+rr*Math.sin(ph)*Math.cos(th);s6[j+1]=nd[1]+rr*Math.cos(ph);s6[j+2]=rr*Math.sin(ph)*Math.sin(th);}
-      else{const E=[[0,1],[1,2],[3,4],[4,5],[6,7],[7,8],[0,3],[3,6],[1,4],[4,7],[2,5],[5,8],[0,4],[4,8],[2,4],[4,6]];const e=E[i%E.length],A=node(e[0]),B=node(e[1]),t=rand();
-        s6[j]=A[0]+(B[0]-A[0])*t+gauss()*.03;s6[j+1]=A[1]+(B[1]-A[1])*t+gauss()*.03;s6[j+2]=Math.sin(t*3.1416)*.4+gauss()*.03;}}
-    // 7 build: ascending helix (progress)
-    {const t=rand(),a=t*18+(i%2)*3.1416,rr=2.2;s7[j]=Math.cos(a)*rr+gauss()*.05;s7[j+1]=-5+t*10;s7[j+2]=Math.sin(a)*rr+gauss()*.05;}
-    // 8 demo: SB monogram
-    {const p=mono[i%mono.length];s8[j]=p[0]+gauss()*.025;s8[j+1]=p[1]+gauss()*.025;s8[j+2]=gauss()*.12;}
-  }
-}
-
-/* ======================= renderer ======================= */
-let gl3=null;
-function initGL(){
-  if(!window.THREE)return;
-  const cv=$('#gl');let rd;try{rd=new THREE.WebGLRenderer({canvas:cv,antialias:false,alpha:false,powerPreference:'high-performance'});}catch(e){return;}
-  rd.setPixelRatio(Math.min(devicePixelRatio||1,small?1:1.6));rd.setClearColor(0x07060B,1);
-  const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,1,.1,100);cam.position.set(0,0,9);
-  const g=new THREE.BufferGeometry();
-  g.setAttribute('position',new THREE.BufferAttribute(S[0].slice(),3));
-  for(let k=0;k<NS;k++)g.setAttribute('p'+k,new THREE.BufferAttribute(S[k],3));
-  g.setAttribute('seed',new THREE.BufferAttribute(seed,1));g.setAttribute('hue',new THREE.BufferAttribute(hue,1));
-  const U={uT:{value:0},uStage:{value:0},uPx:{value:rd.getPixelRatio()},uMouse:{value:new THREE.Vector3(99,99,0)},uBurst:{value:0},uSize:{value:small?1.25:1}};
-  const vs=`
-  attribute vec3 p0;attribute vec3 p1;attribute vec3 p2;attribute vec3 p3;attribute vec3 p4;attribute vec3 p5;attribute vec3 p6;attribute vec3 p7;attribute vec3 p8;
-  attribute float seed;attribute float hue;
-  uniform float uT,uStage,uPx,uBurst,uSize;uniform vec3 uMouse;
-  varying vec3 vCol;varying float vA;
-  float w(float k){return clamp(1.-abs(uStage-k),0.,1.);}
-  vec3 pal(float h,float st){
-    vec3 gold=vec3(1.,.71,.28),ember=vec3(1.,.42,.24),violet=vec3(.61,.42,1.),cyan=vec3(.24,.9,1.),lime=vec3(.71,1.,.23),white=vec3(1.,.96,.9);
-    // each chapter leans on a different colour mix
-    float cool=clamp(sin(st*1.1+.6)*.5+.5,0.,1.);
-    vec3 warm=mix(gold,ember,smoothstep(.55,1.,h));
-    vec3 c=mix(warm,mix(violet,cyan,smoothstep(.4,.9,h)),cool*step(.35,h));
-    c=mix(c,white,step(.96,h)*.8);
-    c=mix(c,lime,step(.985,h)*step(5.5,st));
-    return c;}
-  void main(){
-    // flowing starfield in chapter 1
-    vec3 q1=p1;q1.z=mod(p1.z+30.+uT*(3.+seed*5.),40.)-30.;
-    vec3 q2=p2;float a2=uT*.12*(1.2-length(p2.xz)/7.);q2.xz=mat2(cos(a2),-sin(a2),sin(a2),cos(a2))*p2.xz;
-    vec3 q3=p3;float a3=uT*(.25+.15*mod(seed*3.,1.));if(length(p3)>2.){float c=cos(a3),s=sin(a3);q3=vec3(c*p3.x-s*p3.z,p3.y,s*p3.x+c*p3.z);}
-    vec3 q4=p4;q4.y=mod(p4.y+6.-uT*(1.+seed*1.6),12.)-6.;
-    vec3 q6=p6+vec3(0.,sin(uT*.8+p6.x*.6)*.12,0.);
-    vec3 q7=p7;float a7=uT*.4;q7.xz=mat2(cos(a7),-sin(a7),sin(a7),cos(a7))*p7.xz;
-    vec3 q0=p0*(1.+.04*sin(uT*1.4+seed*6.28))+p0*uBurst*1.4*seed;
-    vec3 p=q0*w(0.)+q1*w(1.)+q2*w(2.)+q3*w(3.)+q4*w(4.)+p5*w(5.)+q6*w(6.)+q7*w(7.)+p8*w(8.);
-    // in-between turbulence so morphs feel like swirling light, not straight lines
-    float mid=1.-abs(fract(uStage)-.5)*2.;mid=pow(mid,1.5);
-    p+=vec3(sin(seed*40.+uT),cos(seed*31.+uT*.8),sin(seed*23.-uT*.6))*mid*1.6;
-    // mouse push
-    vec4 mv=modelViewMatrix*vec4(p,1.);
-    vec2 d=mv.xy-uMouse.xy;float md=exp(-dot(d,d)*.9)*uMouse.z;mv.xy+=normalize(d+1e-4)*md*.9;
-    gl_Position=projectionMatrix*mv;
-    float tw=.55+.45*sin(uT*(1.5+seed*3.)+seed*60.);
-    float sz=(hue>.96?4.2:2.3)*(.7+seed*.9)*tw*uSize;
-    gl_PointSize=sz*uPx*(9./-mv.z)*1.6;
-    vCol=pal(hue,uStage);vA=(.55+.75*tw)*smoothstep(34.,5.,-mv.z)*(1.+md)*1.25;
-  }`;
-  const fs=`varying vec3 vCol;varying float vA;
-  void main(){vec2 c=gl_PointCoord-.5;float d=length(c);float a=smoothstep(.5,0.,d);a=a*a;gl_FragColor=vec4(vCol*a*vA,a*vA);}`;
-  const mat=new THREE.ShaderMaterial({uniforms:U,vertexShader:vs,fragmentShader:fs,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});
-  const pts=new THREE.Points(g,mat);pts.frustumCulled=false;scene.add(pts);
-  const size=()=>{rd.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();};size();addEventListener('resize',size);
-  gl3={rd,scene,cam,U,pts};
-}
-
-/* ======================= DOM layers: orbit labels + flying readings ======================= */
-const LBL=[['Live leaderboards','#FFB547'],['Discord login','#9B6BFF'],['Coins & payouts','#B6FF3B'],['Admin dashboard','#3EE6FF'],['Casino APIs','#FF6A3D'],['Kick bot','#53FC18'],['Community vault','#FFB547'],['Your own domain','#3EE6FF']];
-const READ=[['$75,000','monthly pool'],['$2,000','1st place'],['1,204','users'],['$184,220','wagered'],['5','casino APIs'],['24/7','live'],['$0','to see your demo'],['+$750','payout'],['10%','lossback'],['$141,905','wagered'],['3rd','place'],['99.9%','uptime']];
-$('#labels').innerHTML=LBL.map(l=>`<span class="lbl" style="--c:${l[1]}">${l[0]}</span>`).join('');
-$('#readings').innerHTML=READ.map(r=>`<span class="rd">${r[0]}<small>${r[1]}</small></span>`).join('');
-const lblEls=$$('.lbl'),rdEls=$$('.rd');
-const rdData=rdEls.map((e,i)=>({side:i%2?1:-1,y:((i*0.618)%1)*1.6-.8,z:i/rdEls.length}));
-const V3=window.THREE?new THREE.Vector3():null;
-
-/* ======================= scroll → stage ======================= */
-let stage=0,stageT=0,ch=0;
-const chapters=$$('.ch');
-function computeStage(){
-  const mid=scrollY+innerHeight*.5;let s=0;
-  for(let i=0;i<chapters.length;i++){const el=chapters[i],top=el.offsetTop,h=el.offsetHeight;
-    if(mid>=top&&mid<top+h){const f=(mid-top)/h;
-      // hold on the shape for the middle of each chapter, morph near the edges
-      const hold=el.classList.contains('tall')?.8:.55;const e=(f-(1-hold)/2)/hold;
-      s=i+(e>1?(e-1)/((1-hold)/2)*.5:0)-(e<0?(-e)/((1-hold)/2)*.5:0);s=Math.max(0,Math.min(NS-1,s));break;}
-    if(mid>=top+h)s=Math.min(NS-1,i+.5);}
-  return s;}
-
-/* word reveal */
-$$('[data-words]').forEach(h=>{const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t.trim()){f.appendChild(document.createTextNode(t));return;}const s=document.createElement('span');s.className='w';s.textContent=t;f.appendChild(s);});c.replaceWith(f);}else walk(c);});};walk(h);});
-function wordsFor(sec,p){$$('.w',sec).forEach((w,i,a)=>w.classList.toggle('on',reduce||p>i/a.length*.6));}
-
-let burst=0;
-const mouse={x:0,y:0,active:0};
-addEventListener('pointermove',e=>{if(!gl3)return;const {cam}=gl3;const nx=e.clientX/innerWidth*2-1,ny=-(e.clientY/innerHeight)*2+1;
-  const h=Math.tan(cam.fov*Math.PI/360)*9;mouse.x=nx*h*cam.aspect;mouse.y=ny*h;mouse.active=fine?1:0;},{passive:true});
-addEventListener('pointerdown',e=>{if(e.target.closest('a,button'))return;burst=1;},{passive:true});
-
-let lenis=null;
-function init(){
-  buildShapes();initGL();
-  if(window.gsap){gsap.registerPlugin(ScrollTrigger);
-    if(!reduce&&window.Lenis){lenis=new Lenis({lerp:.075,smoothWheel:true});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
-      $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const el=document.querySelector(a.getAttribute('href'));if(el){e.preventDefault();lenis.scrollTo(el,{duration:2.2});}}));}
-    $$('.card,.step,.feat').forEach(el=>gsap.from(el,{y:60,opacity:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 92%'}}));
-    gsap.from('.ch[data-ch="0"] .copy > *',{y:40,opacity:0,stagger:.08,duration:1.2,ease:'expo.out',delay:.2});
-  }
-  wordsFor($('.ch[data-ch="0"]'),1);
-  $$('.card,.feat').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-r.left+'px');c.style.setProperty('--my',e.clientY-r.top+'px');}));
-  requestAnimationFrame(loop);
-}
-const names=chapters.map(c=>c.dataset.name);
-let pSm=0;const toTop=$('#toTop');
-toTop.addEventListener('click',()=>{burst=1;lenis?lenis.scrollTo(0,{duration:2.4,easing:t=>1-Math.pow(1-t,4)}):scrollTo({top:0,behavior:reduce?'auto':'smooth'});});
-let t0=performance.now(),lastCh=-1,gTarget=[0,0,1];
-function loop(now){
-  const t=(now-t0)/1000;
-  stageT=computeStage();stage+=(stageT-stage)*(reduce?1:.06);
-  const max=document.documentElement.scrollHeight-innerHeight,p=max>0?scrollY/max:0;
-  document.documentElement.style.setProperty('--p',p.toFixed(4));
-  pSm+=(p-pSm)*(reduce?1:.18);document.documentElement.style.setProperty('--ps',pSm.toFixed(4));
-  toTop.classList.toggle('show',scrollY>innerHeight*.6);
-  const c=Math.round(stage);if(c!==lastCh){lastCh=c;$('#chName').textContent=String(c+1).padStart(2,'0')+' · '+names[c];}
-  $('#chPct').textContent=Math.round(p*100)+'%';
-  chapters.forEach(sec=>{const h=sec.querySelector('[data-words]');if(!h)return;const r=h.getBoundingClientRect();wordsFor(sec,(innerHeight*.92-r.top)/(innerHeight*.45));});
-  // place the shape opposite the copy, bigger in the hero
-  const OFF=innerWidth<760?[[0,1.6,1.05],[0,0,1],[0,-1.2,1],[0,0,.8],[0,0,1],[0,0,1],[0,0,.55],[0,0,1],[0,1.9,.75]]:[[3.4,0,1.55],[-3.2,0,1.1],[2.6,-.6,1],[0,0,1],[0,0,1],[0,0,1],[0,0,1.25],[0,0,1],[0,1.5,1]];
-  const si=Math.min(NS-1,Math.floor(stage)),sf=stage-si,a=OFF[si],b=OFF[Math.min(NS-1,si+1)];
-  gTarget=[a[0]+(b[0]-a[0])*sf,a[1]+(b[1]-a[1])*sf,a[2]+(b[2]-a[2])*sf];
-  burst*=.94;
-  if(gl3){const {rd,scene,cam,U,pts}=gl3;
-    U.uT.value=reduce?2:t;U.uStage.value=stage;U.uBurst.value=burst;
-    U.uMouse.value.set(mouse.x,mouse.y,mouse.active);
-    // one long camera move: drift, dolly and roll through the chapters
-    const cz=9-Math.sin(Math.min(stage,1)*Math.PI)*2-(stage>2&&stage<4?1.2:0)+(stage>7.5?(stage-7.5)*2:0);
-    cam.position.z+=(cz-cam.position.z)*.08;
-    const ry=stage*.55+(reduce?0:t*.03),rx=Math.sin(stage*.9)*.25;
-    pts.rotation.y+=((stage>=4.5?0:ry)-pts.rotation.y)*.06;pts.rotation.x+=((stage>=4.5?0:rx)-pts.rotation.x)*.06;
-    if(stage>2.5&&stage<3.5)pts.rotation.x+=(.35-pts.rotation.x)*.06;
-    cam.position.x+=((fine?mouse.x*.04:0)-cam.position.x)*.05;cam.position.y+=((fine?mouse.y*.04:0)-cam.position.y)*.05;cam.lookAt(0,0,0);
-    pts.position.x+=(gTarget[0]-pts.position.x)*.06;pts.position.y+=(gTarget[1]-pts.position.y)*.06;const ns=pts.scale.x+(gTarget[2]-pts.scale.x)*.06;pts.scale.setScalar(ns);
-    rd.render(scene,cam);
-    // orbit labels follow ring points
-    const lo=Math.max(0,1-Math.abs(stage-3)*1.6);
-    lblEls.forEach((el,i)=>{if(lo<=0){el.style.opacity=0;return;}
-      const ring=i%3,R=[3.2,4.4,5.6][ring],tilt=[.35,-.55,1.15][ring],rot=[0,1.1,2.2][ring],a=i*.785+t*(.25+.15*((i*.37)%1));
-      let x=Math.cos(a)*R,y=0,z=Math.sin(a)*R;const y2=-z*Math.sin(tilt),z2=z*Math.cos(tilt);
-      V3.set(x*Math.cos(rot)-z2*Math.sin(rot),y2,x*Math.sin(rot)+z2*Math.cos(rot));V3.applyEuler(pts.rotation).multiplyScalar(pts.scale.x).add(pts.position);
-      const depth=V3.z;V3.project(cam);const sx=(V3.x*.5+.5)*innerWidth,sy=(-V3.y*.5+.5)*innerHeight;
-      el.style.opacity=(lo*(.45+.55*Math.max(0,Math.min(1,(depth+5)/10)))).toFixed(3);
-      el.style.transform=`translate(${sx}px,${sy}px) translate(-50%,-50%) scale(${.8+.25*Math.max(0,Math.min(1,(depth+5)/10))})`;});
-  }
-  // flying readings (chapter 4): numbers rush past and blur, like a camera flying through data
-  const ro=Math.max(0,1-Math.abs(stage-4)*1.4);
-  rdEls.forEach((el,i)=>{if(ro<=0){el.style.opacity=0;return;}const d=rdData[i];
-    const z=((d.z+(reduce?0:t*.07)+(stage-4)*.4)%1+1)%1;// 0 far → 1 near
-    const sc=.35+z*z*2.4,spread=(innerWidth<700?.32:.42)*innerWidth*(.25+z*1.1);
-    const x=d.side*spread,y=d.y*innerHeight*.42*(.4+z);
-    el.style.opacity=(ro*Math.min(1,z*3)*Math.min(1,(1-z)*4)).toFixed(3);
-    el.style.filter=`blur(${Math.max(0,(z-.65)*14+(.2-z>0?(.2-z)*14:0)).toFixed(1)}px)`;
-    el.style.transform=`translate(-50%,-50%) translate(${x}px,${y}px) scale(${sc})`;});
-  requestAnimationFrame(loop);
-}
-(document.fonts?document.fonts.ready:Promise.resolve()).then(init);
+(function(){
+  var top=document.getElementById('top');
+  addEventListener('scroll',function(){top.classList.toggle('sc',scrollY>8)},{passive:true});
+  var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* countdown to the 1st of next month */
+  var cd=document.getElementById('cd');
+  function tick(){var n=new Date(),e=new Date(n.getFullYear(),n.getMonth()+1,1),s=Math.max(0,(e-n)/1000);
+    cd.textContent='Ends in '+Math.floor(s/86400)+'d '+Math.floor(s%86400/3600)+'h '+Math.floor(s%3600/60)+'m'}
+  tick(); setInterval(tick,30000);
+  if(RM) return;
+  /* wagers tick up like a live board */
+  var rows=[].slice.call(document.querySelectorAll('#lbRows li'));
+  function fmt(v){return '$'+Math.round(v).toLocaleString('en-US')}
+  setInterval(function(){
+    var li=rows[Math.floor(Math.random()*rows.length)], w=li.querySelector('.w'), v=+w.dataset.w+50+Math.random()*900;
+    w.dataset.w=v; w.firstChild.nodeValue=fmt(v); li.classList.remove('up'); void li.offsetWidth; li.classList.add('up');
+  },1800);
 })();
 </script>
 </body>
